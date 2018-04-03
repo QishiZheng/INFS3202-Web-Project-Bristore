@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bristore - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <!-- This is the code for global nav bar -->
+    <nav class="navbar navbar-light" style="background-color: #2396f3;">
+        <div class="container-fluid">
+            <div class="navbavr-header">
+                <a class="navbar-brand" href="home.html" style="color: white;">Bristore</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="home.html" style="color: white;">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="signUp.php" style="color: white;"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                <li><a href="login.html" style="background-color: white;"><span class="glyphicon glyphicon-login"></span>Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" align="center">
+        <form id="login" action="login.php" method="POST">
+            <fieldset>
+                <legend><b>Login</b></legend>
+                <input type="hidden" name="submitted" id="submitted" value="1" />
+
+                <label for="emailaddress">Email Address: </label>
+                <input type="text" name="emailaddress" id="emailaddress" />
+                <br><br>
+
+                <label for="password" >Password: </label>
+                <input type="password" name="password" id="password"/>
+                <br><br>
+
+                <input type="submit" name="Submit" value="Login" class="btn-primary" />
+            </fieldset>
+        </form>
+        <br>
+        <p>Don't have a account? Sign UP!</p>
+        <button class="btn-primary"><a href="signUp.php" style="color: white;">Sign UP!</a></button>
+    </div>
+</body>
+</html>
