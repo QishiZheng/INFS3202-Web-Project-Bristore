@@ -15,17 +15,18 @@
     <nav class="navbar navbar-light" style="background-color: #2396f3;">
         <div class="container-fluid">
             <div class="navbavr-header">
-                <a class="navbar-brand" href="home.html" style="color: white;">Bristore</a>
+                <a class="navbar-brand" href=<?php echo base_url().'home/goHome' ?> style="color: white;">Bristore</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="application/views/home.html" style="background-color: white;">Home</a></li>
+                <li><a href=<?php echo base_url().'home/goHome' ?> style="background-color: white;">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="signUp.php" style="color: white;"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                <li><a href="login.html" style="color: white;"><span class="glyphicon glyphicon-login"></span>Login</a></li>
+                <li><a href= <?php echo base_url().'auth/signUp' ?> style="color: white;"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                <li><a href= <?php echo base_url().'auth/login' ?> style="color: white;"><span class="glyphicon glyphicon-login"></span>Login</a></li>
             </ul>
         </div>
     </nav>
+    <!-- End of global nav bar -->
 
     <div class="container">
         <h1 align="center">Bristore</h1>
