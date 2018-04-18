@@ -1,8 +1,7 @@
+<br><br>
 <h2><?= $title ?></h2>
 
 <main role="main">
-    <link href="assets/css/itemsIndex.css" rel="stylesheet">
-
     <div class="album py-5 bg-light">
         <div class="container">
 
@@ -13,7 +12,8 @@
                         <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
                         <div class="card-body">
                             <h3><?php echo $item['title']; ?></h3>
-                            <p class="card-text"><?php echo $item['description']; ?></p>
+                            <!--shorten the item description if too long -->
+                            <p class="card-text" ><?php echo substr($item['description'], 0,200).'...'; ?></p>
                             <h4 class="text-primary">Price: $<?php echo $item['price']; ?></h4>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
@@ -31,5 +31,6 @@
             </div>
         </div>
     </div>
-
 </main>
+
+<link href="assets/css/itemsIndex.css" rel="stylesheet">

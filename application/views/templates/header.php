@@ -26,12 +26,15 @@
                         <a href="<?php echo base_url(); ?>items" class="nav-link <?php if($this->uri->segment(1)== "items"){echo 'active';}?>" >All Items</a>
                     </li>
                     <li class="nav-item">
+                        <a href="#" class="nav-link <?php if($this->uri->segment(1)== "items"){echo 'active';}?>" >Deals</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?php echo base_url(); ?>about" class="nav-link <?php if($this->uri->segment(1)== "about"){echo 'active';}?>"  >About</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                    <button class="btn btn-secondary btn-sm my-2 my-sm-0" type="submit">Search</button>
                 </form>
 
                 <!--                    <ul class="nav navbar-nav navbar-right">-->
