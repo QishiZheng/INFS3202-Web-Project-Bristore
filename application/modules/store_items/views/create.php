@@ -36,6 +36,13 @@
                     </div>
 
                     <div class="control-group">
+                        <label class="control-label" for="typeahead">Item Stock</label>
+                        <div class="controls">
+                            <input type="text" class="span6" name="item_stock" value="<?= $item_stock?>">
+                        </div>
+                    </div>
+
+                    <div class="control-group">
                         <label class="control-label" for="typeahead">Item Category </label>
                         <div class="controls">
                             <input type="text" class="span6" name="item_category" value="<?= $item_category?>">

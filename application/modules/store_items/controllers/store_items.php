@@ -17,10 +17,12 @@ class Store_items extends MX_Controller {
             //validate the form
             //$this->load->library('form_validation');
             $this->form_validation->set_rules('item_title', 'Item Title', 'required|max_length[240]|callback_item_check');
-            $this->form_validation->set_rules('item_price', 'Item Price', 'required|numeric');
+            $this->form_validation->set_rules('item_price', 'Item Price', 'required|numeric|callback_check_positive');
+            $this->form_validation->set_rules('item_stock', 'Item Stock', 'required|numeric|callback_check_positive');
             $this->form_validation->set_rules('item_category', 'Item Category', 'required|max_length[240]');
             $this->form_validation->set_rules('item_description', 'Item Description', 'required');
 
+            //update or insert a new item if all user inputs are correct
             if($this->form_validation->run() == TRUE) {
                 //fetch the user input
                 $data=$this->fetch_data_from_post();
@@ -58,12 +60,14 @@ class Store_items extends MX_Controller {
             $data = $this->fetch_data_from_post();
         }
 
+        //change the header depending on whether updating or inserting
         if(!is_numeric($update_id)) {
             $data['headline'] = "Add New Item";
         } else {
             $data['headline'] = "Update Item Details";
         }
 
+        //set $data and load views
         $data['update_id'] = $update_id;
         $data['flash'] = $this->session->flashdata('item');
         $data['view_module'] = "store_items";
@@ -73,8 +77,11 @@ class Store_items extends MX_Controller {
     }
 
 	function manage() {
+	    //load security module and check if is admin
 	    $this ->load->module('site_security');
 	    $this->site_security->_make_sure_is_admin();
+
+	    $data['query'] = $this->get('item_title');
 
 	    $data['view_module'] = "store_items";
 	    $data['view_file'] = "manage";
@@ -85,6 +92,7 @@ class Store_items extends MX_Controller {
     function fetch_data_from_post() {
 	    $data['item_title'] = $this->input->post('item_title', TRUE);
         $data['item_price'] = $this->input->post('item_price', TRUE);
+        $data['item_stock'] = $this->input->post('item_stock', TRUE);
         $data['item_category'] = $this->input->post('item_category', TRUE);
         $data['item_description'] = $this->input->post('item_description', TRUE);
         return $data;
@@ -96,6 +104,7 @@ class Store_items extends MX_Controller {
 	        $data['item_title'] = $row->item_title;
             $data['item_url'] = $row->item_url;
             $data['item_price'] = $row->item_price;
+            $data['item_stock'] = $row->item_stock;
             $data['item_category'] = $row->item_category;
             $data['item_description'] = $row->item_description;
             $data['item_pic'] = $row->item_pic;
@@ -167,6 +176,7 @@ class Store_items extends MX_Controller {
 	}
 
 
+	//check if the item with the title is in the db
 	function item_check($item_title) {
 	    $item_url = url_title($item_title);
         $my_query = "SELECT * FROM items WHERE item_title = '$item_title' AND item_url = '$item_url'";
@@ -188,4 +198,21 @@ class Store_items extends MX_Controller {
             return TRUE;
         }
     }
+
+    //check if the number is greater than 0
+    function check_positive($num)
+    {
+        // Don't run bother checking if we have a form error on check_positive
+        if  (form_error('item_stock')) {
+            return true;
+        }
+
+        $num = intval($num);
+        if ($num < 0) {
+            $this->form_validation->set_message('check_positive', "The stock/price must be more than 0.");
+            return false;
+        }
+        return true;
+    }
+
 }
