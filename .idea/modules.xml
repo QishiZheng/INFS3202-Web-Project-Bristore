@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Bristore.iml" filepath="$PROJECT_DIR$/.idea/Bristore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/bristore.iml" filepath="$PROJECT_DIR$/.idea/bristore.iml" />
     </modules>
   </component>
 </project>
