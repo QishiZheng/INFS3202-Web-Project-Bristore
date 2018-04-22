@@ -2,6 +2,8 @@
 class Store_items extends MX_Controller {
 	function __construct() {
 		parent::__construct();
+		$this->load->library('form_validation');
+		$this->form_validation->CI =& $this;
 	}
 
     function create() {
@@ -13,15 +15,16 @@ class Store_items extends MX_Controller {
 
         if($submit=="Submit") {
             //validate the form
-            $this->load->library('form_validation');
-            $this->form_validation->set_rules('item_title', 'Item Title', 'required|max_length[240]');
+            //$this->load->library('form_validation');
+            $this->form_validation->set_rules('item_title', 'Item Title', 'required|max_length[240]|callback_item_check');
             $this->form_validation->set_rules('item_price', 'Item Price', 'required|numeric');
             $this->form_validation->set_rules('item_category', 'Item Category', 'required|max_length[240]');
             $this->form_validation->set_rules('item_description', 'Item Description', 'required');
 
             if($this->form_validation->run() == TRUE) {
-                //fetch the input
+                //fetch the user input
                 $data=$this->fetch_data_from_post();
+                $data['item_url'] = url_title($data['item_title']);
 
                 if(is_numeric($update_id)) {
                     //update the details of the item with $update_id
@@ -45,6 +48,8 @@ class Store_items extends MX_Controller {
                     redirect('store_items/create/'.$update_id);
                 }
             }
+        } elseif($submit == "Cancel") {
+            redirect('store_items/manage');
         }
 
         if((is_numeric($update_id)) && ($submit != "Submit")) {
@@ -160,4 +165,27 @@ class Store_items extends MX_Controller {
 		$query = $this->mdl_store_items->_custom_query($mysql_query);
 		return $query;
 	}
+
+
+	function item_check($item_title) {
+	    $item_url = url_title($item_title);
+        $my_query = "SELECT * FROM items WHERE item_title = '$item_title' AND item_url = '$item_url'";
+        $update_id = $this->uri->segment(3);
+
+        //add update_id to query if $update_id is numeric
+        if(is_numeric($update_id)){
+            $my_query.=" AND id!=$update_id";
+        }
+
+        //get the number of rows in db that has same item_title and item_url
+        $query = $this->_custom_query($my_query);
+        $num_rows =$query->num_rows();
+        //give error if there is exists a row with the query condition in the db
+	    if($num_rows>0) {
+            $this->form_validation->set_message('item_check', 'The Item Title is already in the database!');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
 }
