@@ -4,9 +4,9 @@
 
     <!-- start: Meta -->
     <meta charset="utf-8">
-    <title>Bootstrap Metro Dashboard by Dennis Ji for ARM demo</title>
-    <meta name="description" content="Bootstrap Metro Dashboard">
-    <meta name="author" content="Dennis Ji">
+    <title>Bristore Admin Dashboard</title>
+    <meta name="description" content="Bristore Admin Dashboard">
+    <meta name="author" content="">
     <meta name="keyword" content="Metro, Metro UI, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <!-- end: Meta -->
 
@@ -403,7 +403,7 @@
 <footer>
 
     <p>
-        <span style="text-align:left;float:left">&copy; 2013 <a href="http://themifycloud.com/downloads/janux-free-responsive-admin-dashboard-template/" alt="Bootstrap_Metro_Dashboard">JANUX Responsive Dashboard</a></span>
+        <span style="text-align:left;float:left">&copy; 2013 <a href="#" alt="Bootstrap_Metro_Dashboard">Bristore Admin Dashboard</a></span>
 
     </p>
 

@@ -7,6 +7,8 @@
     echo $flash;
 } ?>
 
+
+
 <div class="row-fluid sortable">
     <div class="box span12">
         <div class="box-header" data-original-title>
@@ -69,3 +71,35 @@
     </div><!--/span-->
 
 </div><!--/row-->
+
+
+<!--Display the available item operations when in update mode-->
+<?php if(is_numeric($update_id)) { ?>
+    <div class="row-fluid sortable">
+        <div class="box span12">
+            <div class="box-header" data-original-title>
+                <h2>Item Operations</h2>
+            </div>
+            <div class="box-content">
+                <a href="<?= base_url() ?>store_items/upload_img/<?= $update_id ?>"><button type="button" class="btn btn-success">Upload Images</button></a>
+                <a href="#"><button type="button" class="btn btn-danger">Delete Item</button></a>
+            </div>
+
+<!--            //form for upload file-->
+<!--            <div>-->
+<!--                --><?php ////echo $error;?>
+<!---->
+<!--                --><?php //echo form_open_multipart('upload/do_upload');?>
+<!---->
+<!--                <input type="file" name="userfile" size="20" />-->
+<!---->
+<!--                <br /><br />-->
+<!---->
+<!--                <input type="submit" value="upload" />-->
+<!---->
+<!--                </form>-->
+<!--            </div>-->
+        </div><!--/span-->
+
+    </div><!--/row-->
+<?php }?>

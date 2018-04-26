@@ -7,6 +7,7 @@ class Store_items extends MX_Controller {
 	}
 
     function create() {
+	    //check if the user is admin
         $this ->load->module('site_security');
         $this->site_security->_make_sure_is_admin();
 
@@ -70,12 +71,86 @@ class Store_items extends MX_Controller {
         //set $data and load views
         $data['update_id'] = $update_id;
         $data['flash'] = $this->session->flashdata('item');
-        $data['view_module'] = "store_items";
+       // $data['view_module'] = "store_items";
         $data['view_file'] = "create";
         $this->load->module('templates');
         $this->templates->admin($data);
     }
 
+    function upload_img($update_id) {
+        //check if the user is admin
+        $this ->load->module('site_security');
+        $this->site_security->_make_sure_is_admin();
+
+        //check the update_id
+        if(!is_numeric($update_id)) {
+            redirect('site_security/not_allowed');
+        }
+
+        //set $data and load views
+        $data['headline'] = "Upload Images of Item ".$update_id;
+        $data['update_id'] = $update_id;
+        $data['flash'] = $this->session->flashdata('item');
+        // $data['view_module'] = "store_items";
+        $data['view_file'] = "upload_img";
+        $this->load->module('templates');
+        $this->templates->admin($data);
+    }
+
+    //do actual uploading
+    function do_upload($update_id)
+    {
+        //check if the user is admin
+        $this ->load->module('site_security');
+        $this->site_security->_make_sure_is_admin();
+
+        //check the update_id
+        if(!is_numeric($update_id)) {
+            redirect('site_security/not_allowed');
+        }
+
+        $submit = $this->input->post('submit', TRUE);
+        if ($submit == "Cancel") {
+            redirect('store_items/create/'.$update_id);
+        }
+
+        $config['upload_path']          = './item_pics/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 10000;
+        $config['max_width']            = 6000 ;
+        $config['max_height']           = 4000;
+
+        $this->load->library('upload', $config);
+
+        if (! $this->upload->do_upload('userfile'))
+        {
+
+            //set $data and load views
+            $data['error'] = array('error' => $this->upload->display_errors());
+            $data['headline'] = "Upload Error ".$update_id;
+            $data['update_id'] = $update_id;
+            $data['flash'] = $this->session->flashdata('item');
+            // $data['view_module'] = "store_items";
+            $data['view_file'] = "upload_img";
+            $this->load->module('templates');
+            $this->templates->admin($data);
+        }
+        else
+        {
+
+            //set $data and load views
+            $data = array('upload_data' => $this->upload->data());
+            $data['headline'] = "Images uploaded successfully for Item ".$update_id;
+            $data['update_id'] = $update_id;
+            $data['flash'] = $this->session->flashdata('item');
+            $data['view_file'] = "upload_success";
+            $this->load->module('templates');
+            $this->templates->admin($data);
+        }
+    }
+
+
+    //show the item management page
 	function manage() {
 	    //load security module and check if is admin
 	    $this ->load->module('site_security');
@@ -83,7 +158,7 @@ class Store_items extends MX_Controller {
 
 	    $data['query'] = $this->get('item_title');
 
-	    $data['view_module'] = "store_items";
+	    //$data['view_module'] = "store_items";
 	    $data['view_file'] = "manage";
 	    $this->load->module('templates');
 	    $this->templates->admin($data);
