@@ -6,12 +6,15 @@ class Store_items extends MX_Controller {
 		$this->form_validation->CI =& $this;
 	}
 
+	//create a new item or update the item if it already exists
     function create() {
 	    //check if the user is admin
         $this ->load->module('site_security');
         $this->site_security->_make_sure_is_admin();
 
+        //get the id of this item
         $update_id = $this->uri->segment(3);
+        //check if submit is TRUE
         $submit = $this->input->post('submit', TRUE);
 
         if($submit=="Submit") {
@@ -51,7 +54,7 @@ class Store_items extends MX_Controller {
                     redirect('store_items/create/'.$update_id);
                 }
             }
-        } elseif($submit == "Cancel") {
+        } elseif($submit == "Cancel") {     //redirect to manage page if submit is Cancel
             redirect('store_items/manage');
         }
 
@@ -71,12 +74,13 @@ class Store_items extends MX_Controller {
         //set $data and load views
         $data['update_id'] = $update_id;
         $data['flash'] = $this->session->flashdata('item');
-       // $data['view_module'] = "store_items";
+        // $data['view_module'] = "store_items";
         $data['view_file'] = "create";
         $this->load->module('templates');
         $this->templates->admin($data);
     }
 
+    //upload img of item with given id
     function upload_img($update_id) {
         //check if the user is admin
         $this ->load->module('site_security');
@@ -88,7 +92,7 @@ class Store_items extends MX_Controller {
         }
 
         //set $data and load views
-        $data['headline'] = "Upload Images of Item ".$update_id;
+        $data['headline'] = "Upload Images";
         $data['update_id'] = $update_id;
         $data['flash'] = $this->session->flashdata('item');
         // $data['view_module'] = "store_items";
@@ -97,7 +101,7 @@ class Store_items extends MX_Controller {
         $this->templates->admin($data);
     }
 
-    //do actual uploading
+    //Do actual image uploading
     function do_upload($update_id)
     {
         //check if the user is admin
@@ -109,25 +113,27 @@ class Store_items extends MX_Controller {
             redirect('site_security/not_allowed');
         }
 
+        //check submit status
         $submit = $this->input->post('submit', TRUE);
         if ($submit == "Cancel") {
             redirect('store_items/create/'.$update_id);
         }
 
-        $config['upload_path']          = './item_pics/';
-        $config['allowed_types']        = 'gif|jpg|png';
-        $config['max_size']             = 10000;
-        $config['max_width']            = 6000 ;
-        $config['max_height']           = 4000;
+        $config['upload_path'] = './item_pics/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = 10000;
+        $config['max_width'] = 6000 ;
+        $config['max_height'] = 4000;
+        $config['file_name'] = "item".$update_id."_img";
 
         $this->load->library('upload', $config);
 
+        //upload failed
         if (! $this->upload->do_upload('userfile'))
         {
-
             //set $data and load views
             $data['error'] = array('error' => $this->upload->display_errors());
-            $data['headline'] = "Upload Error ".$update_id;
+            $data['headline'] = "Upload Error";
             $data['update_id'] = $update_id;
             $data['flash'] = $this->session->flashdata('item');
             // $data['view_module'] = "store_items";
@@ -135,11 +141,20 @@ class Store_items extends MX_Controller {
             $this->load->module('templates');
             $this->templates->admin($data);
         }
-        else
-        {
+        else {  //upload was successful
+            //get upload data
+            $data = array('upload_data' => $this->upload->data());
+
+            //generate thumbnail for this image
+            $img_data = $data['upload_data'];
+            $img_name = $img_data['file_name'];
+            $this->generate_thumbnail($img_name);
+
+            //update the item_pic in db
+            $update_data['item_pic'] = $img_name;
+            $this->_update($update_id, $update_data);
 
             //set $data and load views
-            $data = array('upload_data' => $this->upload->data());
             $data['headline'] = "Images uploaded successfully for Item ".$update_id;
             $data['update_id'] = $update_id;
             $data['flash'] = $this->session->flashdata('item');
@@ -147,6 +162,21 @@ class Store_items extends MX_Controller {
             $this->load->module('templates');
             $this->templates->admin($data);
         }
+    }
+
+
+    //generate a thumbnail for given image in the same source folder
+    function generate_thumbnail($img_name) {
+
+	    $config['image_library'] = 'gd2';
+        $config['source_image'] = './item_pics/'.$img_name;
+        $config['create_thumb'] = TRUE;
+        $config['maintain_ratio'] = TRUE;
+        $config['width'] = 200;
+        $config['height'] = 200;
+
+        $this->load->library('image_lib', $config);
+        $this->image_lib->resize();
     }
 
 

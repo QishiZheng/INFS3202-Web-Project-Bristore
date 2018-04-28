@@ -1,3 +1,5 @@
+<h1><?= $headline ?></h1>
+<hr />
 <div class="row-fluid sortable">
     <div class="box span12">
         <div class="box-header" data-original-title>
