@@ -86,6 +86,7 @@ if ( ! function_exists('base_url'))
 	{
 		return get_instance()->config->base_url($uri, $protocol);
 	}
+
 }
 
 // ------------------------------------------------------------------------
