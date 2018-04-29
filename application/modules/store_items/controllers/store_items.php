@@ -9,6 +9,7 @@ class Store_items extends MX_Controller {
 	//create a new item or update the item if it already exists
     function create() {
 	    //check if the user is admin
+        $this->load->library('session');
         $this ->load->module('site_security');
         $this->site_security->_make_sure_is_admin();
 
@@ -35,17 +36,34 @@ class Store_items extends MX_Controller {
                 if(is_numeric($update_id)) {
                     //update the details of the item with $update_id
                     $this->_update($update_id, $data);
+                   //set flash data
                     $flash_msg = "This item details were successfully updated!";
                     $value = '<div class="alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>'.$flash_msg.'</strong></div>';
                     $this->session->set_flashdata('item', $value);
+//                    //TODO: testing
+//                    $filename="~/Desktop/test.log";
+//
+//                    $this->session->mark_as_flash("item");
+////                    $_SESSION['item'] = 'value';
+//                    $this->session->set_flashdata('item', "set flashdata testing");
+//                    $content=$this->session->flashdata('item');
+//                    $file = fopen($filename,"w");
+//                    $file.write_file($content);
+//
+//
+//                    fclose($file);
+////                    $this->session->set_flashdata('item', $value);
+//                    echo $this->session;
+
                     redirect('store_items/create/'.$update_id);
                 } else {
                     //insert a new item
                     echo $data['item_title'];
                     $this->_insert($data);
                     $update_id = $this->get_max();//the id of newly added item
+                    //set flash data
                     $flash_msg = "This item was successfully added!";
                     $value = '<div class="alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -83,6 +101,7 @@ class Store_items extends MX_Controller {
     //upload img of item with given id
     function upload_img($update_id) {
         //check if the user is admin
+        $this->load->library('session');
         $this ->load->module('site_security');
         $this->site_security->_make_sure_is_admin();
 
@@ -105,6 +124,7 @@ class Store_items extends MX_Controller {
     function do_upload($update_id)
     {
         //check if the user is admin
+        $this->load->library('session');
         $this ->load->module('site_security');
         $this->site_security->_make_sure_is_admin();
 
@@ -180,15 +200,137 @@ class Store_items extends MX_Controller {
     }
 
 
+    function delete_img($update_id) {
+        //check if the user is admin
+        $this->load->library('session');
+        $this ->load->module('site_security');
+        $this->site_security->_make_sure_is_admin();
+
+        //check the update_id
+        if(!is_numeric($update_id)) {
+            redirect('site_security/not_allowed');
+        }
+
+        //get the data of item from db
+        $data = $this->fetch_data_from_db($update_id);
+        $item_pic_path = "./item_pics/".$data["item_pic"];
+        //get the name of the thumbnail of this item image
+        list($file_name, $file_extension) = explode(".", $data["item_pic"]);
+        $item_thumb_path = "./item_pics/".$file_name."_thumb.".$file_extension;
+
+        //delete the image and its thumbnail
+        if(file_exists($item_pic_path)) {
+            unlink($item_pic_path);
+        }
+        if(file_exists($item_thumb_path)) {
+            unlink($item_thumb_path);
+        }
+        //update the db
+        unset($data);
+        $data["item_pic"] = "";
+        $this->_update($update_id, $data);
+
+        $flash_msg = "This item image was successfully deleted!";
+        $value = '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+        $this->session->set_flashdata('item', $value);
+
+        //redirect to edit item page
+        redirect('store_items/create/'.$update_id);
+    }
+
+
+    //Delete item confirmation
+    function conf_del($update_id) {
+        //load security module and check if is admin
+        $this->load->library('session');
+        $this ->load->module('site_security');
+        $this->site_security->_make_sure_is_admin();
+
+        //check the update_id
+        if(!is_numeric($update_id)) {
+            redirect('site_security/not_allowed');
+        }
+
+        //set $data and load views
+        $data = $this->fetch_data_from_db($update_id);
+        $data['headline'] = "Delete Item?";
+        $data['update_id'] = $update_id;
+        $data['flash'] = $this->session->flashdata('item');
+        // $data['view_module'] = "store_items";
+        $data['view_file'] = "conf_del";
+        $this->load->module('templates');
+        $this->templates->admin($data);
+    }
+
+    //Perform Delete the item with given id if yes is clicked,
+    //otherwise redirect user to update page
+    function delete_item($update_id) {
+        //load security module and check if is admin
+        $this->load->library('session');
+        $this ->load->module('site_security');
+        $this->site_security->_make_sure_is_admin();
+
+        //check the update_id
+        if(!is_numeric($update_id)) {
+            redirect('site_security/not_allowed');
+        }
+
+        //check what the user clicked(yse or no)
+        $submit = $this->input->post('submit', TRUE);
+        if($submit == "No") {
+            redirect('store_items/create/'.$update_id);
+        } elseif($submit== "Yes") {
+            $this->_do_delete_item($update_id);
+
+            //set flash data
+            $flash_msg = "This item was successfully deleted!";
+            $value = '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+
+            redirect('store_items/manage');
+        }
+    }
+
+    //do the actual deleting item task, and delete images related to this item
+    function _do_delete_item($update_id) {
+	    //delete item_pic
+        $data = $this->fetch_data_from_db($update_id);
+        $item_pic_path = "./item_pics/".$data["item_pic"];
+        //get the name of the thumbnail of this item image
+        list($file_name, $file_extension) = explode(".", $data["item_pic"]);
+        $item_thumb_path = "./item_pics/".$file_name."_thumb.".$file_extension;
+        //delete the image and its thumbnail
+        if(file_exists($item_pic_path)) {
+            unlink($item_pic_path);
+        }
+        if(file_exists($item_thumb_path)) {
+            unlink($item_thumb_path);
+        }
+
+        //delete the item record in db
+        $this->_delete($update_id);
+    }
+
+
     //show the item management page
 	function manage() {
 	    //load security module and check if is admin
+        $this->load->library('session');
 	    $this ->load->module('site_security');
 	    $this->site_security->_make_sure_is_admin();
 
-	    $data['query'] = $this->get('item_title');
+        //set flash data
+        $flash_msg = "This item was successfully deleted!";
+        $value = '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+        $this->session->set_flashdata('item', $value);
 
-	    //$data['view_module'] = "store_items";
+	    $data['query'] = $this->get('id');
 	    $data['view_file'] = "manage";
 	    $this->load->module('templates');
 	    $this->templates->admin($data);
@@ -204,6 +346,11 @@ class Store_items extends MX_Controller {
     }
 
     function fetch_data_from_db($update_id) {
+        //check the update_id
+        if(!is_numeric($update_id)) {
+            redirect('site_security/not_allowed');
+        }
+        //execute the query that retrieves the data of item with given id
 	    $query = $this->get_where($update_id);
 	    foreach($query->result() as $row) {
 	        $data['item_title'] = $row->item_title;
@@ -221,6 +368,11 @@ class Store_items extends MX_Controller {
         }
 
         return $data;
+    }
+
+    //view the product
+    function view($update_id) {
+
     }
 
 	function get($order_by) {

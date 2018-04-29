@@ -17,11 +17,8 @@
                 } ?>
 
             <?php echo form_open_multipart('store_items/do_upload/'.$update_id);?>
-
             <input type="file" name="userfile" size="20" />
-
             <br /><br />
-
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary" name="submit" value="Submit">Upload</button>
                 <button type="submit" class="btn" name="submit" value="Cancel">Cancel</button>

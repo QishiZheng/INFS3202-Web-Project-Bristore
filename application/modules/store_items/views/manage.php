@@ -1,5 +1,11 @@
 <h1>Manage Items</h1>
-<?php $create_item_url = base_url()."store_items/create"; ?>
+<?php
+if(isset($flash)) {
+    echo $flash;
+}
+
+$create_item_url = base_url()."store_items/create";
+?>
 <br />
 <a href="<?php echo $create_item_url;?>"><button type="button" class="btn btn-primary">Add New Item</button></a>
 <hr />
@@ -60,7 +66,7 @@
                         <a class="btn btn-info" href="<?= $edit_item_url ?>">
                             <i class="halflings-icon white edit"></i>
                         </a>
-                        <a class="btn btn-danger" href="#">
+                        <a class="btn btn-danger" href="<?= base_url() ?>store_items/conf_del/<?= $row->id?>">
                             <i class="halflings-icon white trash"></i>
                         </a>
                     </td>
