@@ -3,7 +3,12 @@
 
 <?= validation_errors("<h2 style='color: red;'>", "</h2>")?>
 
-<?php if(isset($flash)) {
+<?php
+
+//echo  "before is flash:".$this->session->flashdata("item");
+//echo  "before is flash:".$_SESSION['item'];
+if(isset($flash)) {
+//    echo "testing";
     echo $flash;
 } ?>
 
@@ -81,25 +86,38 @@
                 <h2>Item Operations</h2>
             </div>
             <div class="box-content">
-                <a href="<?= base_url() ?>store_items/upload_img/<?= $update_id ?>"><button type="button" class="btn btn-success">Upload Images</button></a>
-                <a href="#"><button type="button" class="btn btn-danger">Delete Item</button></a>
-            </div>
 
-<!--            //form for upload file-->
-<!--            <div>-->
-<!--                --><?php ////echo $error;?>
-<!---->
-<!--                --><?php //echo form_open_multipart('upload/do_upload');?>
-<!---->
-<!--                <input type="file" name="userfile" size="20" />-->
-<!---->
-<!--                <br /><br />-->
-<!---->
-<!--                <input type="submit" value="upload" />-->
-<!---->
-<!--                </form>-->
-<!--            </div>-->
+<!--                show upload image button if the item does not have images,-->
+<!--                otherwise show delete image button.-->
+                <?php if($item_pic != "") { ?>
+                    <a href="<?= base_url() ?>store_items/delete_img/<?= $update_id ?>">
+                        <button type="button" class="btn btn-danger">Delete Image</button>
+                    </a>
+                <?php } else { ?>
+                        <a href="<?= base_url() ?>store_items/upload_img/<?= $update_id ?>">
+                            <button type="button" class="btn btn-success">Upload Image</button>
+                        </a>
+                <?php } ?>
+                <a href="<?= base_url() ?>store_items/view/<?= $update_id?>"><button type="button" class="btn btn-primary">View Item</button></a>
+                <a href="<?= base_url() ?>store_items/conf_del/<?= $update_id?>"><button type="button" class="btn btn-danger">Delete Item</button></a>
+            </div>
         </div><!--/span-->
 
     </div><!--/row-->
+
+    <?php if($item_pic != "") { ?>
+        <div class="row-fluid sortable">
+            <div class="box span12">
+                <div class="box-header" data-original-title>
+                    <h2>Item Images</h2>
+                </div>
+                <div class="box-content">
+                    <img src="<?= base_url()?>item_pics/<?= $item_pic?>";
+                </div>
+            </div><!--/span-->
+
+        </div><!--/row-->
+    <?php } ?>
 <?php }?>
+
+
