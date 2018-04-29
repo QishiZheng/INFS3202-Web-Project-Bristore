@@ -36,4 +36,13 @@
 
             $this->load->view('admin', $data);
         }
+        //load account manage template from site_security/views/account_manage.php
+        function account_manage(){
+
+            if(!isset($data['view_module'])) {
+                $data['view_module'] = $this->uri->segment(1);
+            }
+
+            $this->load->view('account_manage', $data);
+        }
     }
