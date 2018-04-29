@@ -91,7 +91,7 @@ class Store_items extends MX_Controller {
 
         //set $data and load views
         $data['update_id'] = $update_id;
-        $data['flash'] = $this->session->flashdata('item');
+        //$data['flash'] = $this->session->flashdata('item');
         // $data['view_module'] = "store_items";
         $data['view_file'] = "create";
         $this->load->module('templates');

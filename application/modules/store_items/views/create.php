@@ -7,7 +7,7 @@
 
 //echo  "before is flash:".$this->session->flashdata("item");
 //echo  "before is flash:".$_SESSION['item'];
-if(isset($flash)) {
+if(isset($flash)){
 //    echo "testing";
     echo $flash;
 } ?>
