@@ -1,7 +1,8 @@
 <h1>Manage Items</h1>
 <?php
-if(isset($flash)) {
-    echo $flash;
+$this->load->library('session');
+if($this->session->flashdata('item') != "") {
+    echo $this->session->flashdata('item');
 }
 
 $create_item_url = base_url()."store_items/create";

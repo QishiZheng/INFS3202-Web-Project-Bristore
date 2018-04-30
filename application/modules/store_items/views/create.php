@@ -5,12 +5,16 @@
 
 <?php
 
-//echo  "before is flash:".$this->session->flashdata("item");
-//echo  "before is flash:".$_SESSION['item'];
-if(isset($flash)){
-//    echo "testing";
-    echo $flash;
-} ?>
+$this->load->library('session');
+if($this->session->flashdata('item') != "") {
+    echo $this->session->flashdata('item');
+}
+
+//if(isset($flash)) {
+//    echo $flash;
+//}
+
+?>
 
 
 

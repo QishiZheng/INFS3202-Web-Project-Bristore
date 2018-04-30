@@ -2,6 +2,7 @@
 class Store_items extends MX_Controller {
 	function __construct() {
 		parent::__construct();
+		$this->load->library('session');
 		$this->load->library('form_validation');
 		$this->form_validation->CI =& $this;
 	}
@@ -36,31 +37,17 @@ class Store_items extends MX_Controller {
                 if(is_numeric($update_id)) {
                     //update the details of the item with $update_id
                     $this->_update($update_id, $data);
-                   //set flash data
+                    //set flash data
                     $flash_msg = "This item details were successfully updated!";
                     $value = '<div class="alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>'.$flash_msg.'</strong></div>';
                     $this->session->set_flashdata('item', $value);
-//                    //TODO: testing
-//                    $filename="~/Desktop/test.log";
-//
-//                    $this->session->mark_as_flash("item");
-////                    $_SESSION['item'] = 'value';
-//                    $this->session->set_flashdata('item', "set flashdata testing");
-//                    $content=$this->session->flashdata('item');
-//                    $file = fopen($filename,"w");
-//                    $file.write_file($content);
-//
-//
-//                    fclose($file);
-////                    $this->session->set_flashdata('item', $value);
-//                    echo $this->session;
 
                     redirect('store_items/create/'.$update_id);
                 } else {
                     //insert a new item
-                    echo $data['item_title'];
+                    //echo $data['item_title'];
                     $this->_insert($data);
                     $update_id = $this->get_max();//the id of newly added item
                     //set flash data
@@ -69,6 +56,7 @@ class Store_items extends MX_Controller {
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>'.$flash_msg.'</strong></div>';
                     $this->session->set_flashdata('item', $value);
+
                     redirect('store_items/create/'.$update_id);
                 }
             }
@@ -88,6 +76,7 @@ class Store_items extends MX_Controller {
         } else {
             $data['headline'] = "Update Item Details";
         }
+
 
         //set $data and load views
         $data['update_id'] = $update_id;
@@ -109,11 +98,11 @@ class Store_items extends MX_Controller {
         if(!is_numeric($update_id)) {
             redirect('site_security/not_allowed');
         }
-
+        
         //set $data and load views
         $data['headline'] = "Upload Images";
         $data['update_id'] = $update_id;
-        $data['flash'] = $this->session->flashdata('item');
+        //$data['flash'] = $this->session->flashdata('item');
         // $data['view_module'] = "store_items";
         $data['view_file'] = "upload_img";
         $this->load->module('templates');
@@ -155,7 +144,7 @@ class Store_items extends MX_Controller {
             $data['error'] = array('error' => $this->upload->display_errors());
             $data['headline'] = "Upload Error";
             $data['update_id'] = $update_id;
-            $data['flash'] = $this->session->flashdata('item');
+            //$data['flash'] = $this->session->flashdata('item');
             // $data['view_module'] = "store_items";
             $data['view_file'] = "upload_img";
             $this->load->module('templates');
@@ -177,7 +166,7 @@ class Store_items extends MX_Controller {
             //set $data and load views
             $data['headline'] = "Images uploaded successfully for Item ".$update_id;
             $data['update_id'] = $update_id;
-            $data['flash'] = $this->session->flashdata('item');
+            //$data['flash'] = $this->session->flashdata('item');
             $data['view_file'] = "upload_success";
             $this->load->module('templates');
             $this->templates->admin($data);
@@ -230,7 +219,8 @@ class Store_items extends MX_Controller {
         $data["item_pic"] = "";
         $this->_update($update_id, $data);
 
-        $flash_msg = "This item image was successfully deleted!";
+        //set flash data
+        $flash_msg = "This image was successfully deleted!";
         $value = '<div class="alert alert-dismissible alert-success">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>'.$flash_msg.'</strong></div>';
@@ -257,7 +247,7 @@ class Store_items extends MX_Controller {
         $data = $this->fetch_data_from_db($update_id);
         $data['headline'] = "Delete Item?";
         $data['update_id'] = $update_id;
-        $data['flash'] = $this->session->flashdata('item');
+        //$data['flash'] = $this->session->flashdata('item');
         // $data['view_module'] = "store_items";
         $data['view_file'] = "conf_del";
         $this->load->module('templates');
@@ -322,13 +312,6 @@ class Store_items extends MX_Controller {
         $this->load->library('session');
 	    $this ->load->module('site_security');
 	    $this->site_security->_make_sure_is_admin();
-
-        //set flash data
-        $flash_msg = "This item was successfully deleted!";
-        $value = '<div class="alert alert-dismissible alert-success">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>'.$flash_msg.'</strong></div>';
-        $this->session->set_flashdata('item', $value);
 
 	    $data['query'] = $this->get('id');
 	    $data['view_file'] = "manage";
