@@ -61,12 +61,15 @@ $create_item_url = base_url()."store_items/create";
 
                     </td>
                     <td class="center">
-                        <a class="btn btn-success" href="#">
+                        <!--button for viewing this item on product page-->
+                        <a class="btn btn-success" href="<?= base_url() ?>store_items/view_item/<?= $row->id?>">
                             <i class="halflings-icon white zoom-in"></i>
                         </a>
+                        <!--button for editing this item-->
                         <a class="btn btn-info" href="<?= $edit_item_url ?>">
                             <i class="halflings-icon white edit"></i>
                         </a>
+                        <!--button for deleting this item-->
                         <a class="btn btn-danger" href="<?= base_url() ?>store_items/conf_del/<?= $row->id?>">
                             <i class="halflings-icon white trash"></i>
                         </a>

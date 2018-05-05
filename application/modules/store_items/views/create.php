@@ -9,11 +9,6 @@ $this->load->library('session');
 if($this->session->flashdata('item') != "") {
     echo $this->session->flashdata('item');
 }
-
-//if(isset($flash)) {
-//    echo $flash;
-//}
-
 ?>
 
 
@@ -102,13 +97,14 @@ if($this->session->flashdata('item') != "") {
                             <button type="button" class="btn btn-success">Upload Image</button>
                         </a>
                 <?php } ?>
-                <a href="<?= base_url() ?>store_items/view/<?= $update_id?>"><button type="button" class="btn btn-primary">View Item</button></a>
+                <a href="<?= base_url() ?>store_items/view_item/<?= $update_id?>"><button type="button" class="btn btn-primary">View Item</button></a>
                 <a href="<?= base_url() ?>store_items/conf_del/<?= $update_id?>"><button type="button" class="btn btn-danger">Delete Item</button></a>
             </div>
         </div><!--/span-->
 
     </div><!--/row-->
 
+<!--    show the thumbnails of item images-->
     <?php if($item_pic != "") { ?>
         <div class="row-fluid sortable">
             <div class="box span12">
@@ -116,7 +112,11 @@ if($this->session->flashdata('item') != "") {
                     <h2>Item Images</h2>
                 </div>
                 <div class="box-content">
-                    <img src="<?= base_url()?>item_pics/<?= $item_pic?>";
+                    <?php
+                    list($file_name, $file_extension) = explode(".", $item_pic);
+                    $item_thumb_path = $file_name."_thumb.".$file_extension;
+                    ?>
+                    <img src="<?= base_url()?>item_pics/<?= $item_thumb_path?>" class="img-fluid">;
                 </div>
             </div><!--/span-->
 

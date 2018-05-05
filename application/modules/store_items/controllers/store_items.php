@@ -98,7 +98,7 @@ class Store_items extends MX_Controller {
         if(!is_numeric($update_id)) {
             redirect('site_security/not_allowed');
         }
-        
+
         //set $data and load views
         $data['headline'] = "Upload Images";
         $data['update_id'] = $update_id;
@@ -303,6 +303,23 @@ class Store_items extends MX_Controller {
 
         //delete the item record in db
         $this->_delete($update_id);
+    }
+
+    function view_item($update_id) {
+        //check the update_id
+        if(!is_numeric($update_id)) {
+            redirect('site_security/not_allowed');
+        }
+
+        //fetch the details of the item with given id from db
+        $data = $this->fetch_data_from_db($update_id);
+
+        $data['update_id'] = $update_id;
+        //$data['flash'] = $this->session->flashdata('item');
+        $data['view_file'] = "view_item";
+        $this->load->module('templates');;
+        $this->templates->public_bootstrap($data);
+
     }
 
 
