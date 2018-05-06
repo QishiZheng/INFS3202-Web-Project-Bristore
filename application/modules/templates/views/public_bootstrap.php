@@ -7,19 +7,25 @@
     <meta name="author" content="">
     <link rel="icon" href="<?php echo base_url(); ?>favicon.ico">
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>Bristore</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url(); ?>dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="<?php echo base_url(); ?>dist/css/jumbotron.css" rel="stylesheet">
+<!--    <!-- Custom styles for this template -->-->
+<!--    <link href="--><?php //echo base_url(); ?><!--dist/css/jumbotron.css" rel="stylesheet">-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="<?php echo base_url()."assets/js/jquery-3.3.1.js"; ?>" ></script>
+    <script src="<?php echo base_url(); ?>assets/js/vendor/popper.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="<?= base_url()."store_items/home"?>">Bristore</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?= base_url()."store_items/home"?>">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -48,6 +54,9 @@
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <a href="#" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-shopping-cart"></span>CART
+        </a>
     </div>
 </nav>
 
@@ -69,12 +78,6 @@
     <p>&copy; Company 2018</p>
 </footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="<?php echo base_url(); ?>assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="<?php echo base_url(); ?>assets/js/vendor/popper.min.js"></script>
-<script src="<?php echo base_url(); ?>dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>

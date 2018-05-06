@@ -305,6 +305,25 @@ class Store_items extends MX_Controller {
         $this->_delete($update_id);
     }
 
+    //TODO: test deleting item using AJAX, currently causing response not showing
+    function ajax_do_delete_item() {
+//        if(isset($_POST['id'])) {
+//            $id = $_POST['id'];
+//            //load security module and check if is admin
+//            $this->load->library('session');
+//            $this ->load->module('site_security');
+//            $this->site_security->_make_sure_is_admin();
+//
+//            //check the update_id
+//            if(!is_numeric($id)) {
+//                redirect('site_security/not_allowed');
+//            }
+//
+//            $this->_do_delete_item($id);
+//        }
+        echo json_encode("success");
+    }
+
     function view_item($update_id) {
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -471,5 +490,20 @@ class Store_items extends MX_Controller {
         }
         return true;
     }
+
+
+    //takes the user to home page
+    function home() {
+        $data['view_file'] = "home_page";
+        $this->load->module('templates');
+        $this->templates->public_bootstrap($data);
+    }
+
+    //for AJAX test
+    function test(){
+//	    echo "test";
+    echo json_encode(array("qty"=>$_POST['qty']));
+	}
+
 
 }

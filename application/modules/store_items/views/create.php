@@ -90,7 +90,7 @@ if($this->session->flashdata('item') != "") {
 <!--                otherwise show delete image button.-->
                 <?php if($item_pic != "") { ?>
                     <a href="<?= base_url() ?>store_items/delete_img/<?= $update_id ?>">
-                        <button type="button" class="btn btn-danger">Delete Image</button>
+                        <button type="button" class="btn btn-warning">Delete Image</button>
                     </a>
                 <?php } else { ?>
                         <a href="<?= base_url() ?>store_items/upload_img/<?= $update_id ?>">

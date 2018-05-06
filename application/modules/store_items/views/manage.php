@@ -39,15 +39,21 @@ $create_item_url = base_url()."store_items/create";
                 <?php
                     foreach ($query->result() as $row) {
                         $edit_item_url = base_url()."store_items/create/".$row->id;
+                        $id = $row->id;
+                        $item_title = $row->item_title;
+                        $item_price = $row->item_price;
+                        $item_stock = $row->item_stock;
+                        $item_category = $row->item_category;
+                        $item_description = $row->item_description;
                         ?>
 
                 <tr>
-                    <td><?= $row->id ?></td>
-                    <td class="center"><?= $row->item_title ?></td>
-                    <td class="center"><?= $row->item_price ?></td>
-                    <td class="center"><?= $row->item_stock ?></td>
-                    <td class="center"><?= $row->item_category ?></td>
-                    <td class="center"><?= $row->item_description ?></td>
+                    <td ><?= $id ?></td>
+                    <td class="center"><?= $item_title ?></td>
+                    <td class="center"><?= $item_price ?></td>
+                    <td class="center"><?= $item_stock ?></td>
+                    <td class="center"><?= $item_category ?></td>
+                    <td class="center"><?= $item_description ?></td>
                     <td class="center">
                         <?php
                         //display different color labels depending on the stock of the item
@@ -70,9 +76,9 @@ $create_item_url = base_url()."store_items/create";
                             <i class="halflings-icon white edit"></i>
                         </a>
                         <!--button for deleting this item-->
-                        <a class="btn btn-danger" href="<?= base_url() ?>store_items/conf_del/<?= $row->id?>">
+                        <btn class="btn btn-danger btnDelete" id="del_<?php echo $id; ?>">
                             <i class="halflings-icon white trash"></i>
-                        </a>
+                        </btn>
                     </td>
                 </tr>
                 <?php } ?>
@@ -82,3 +88,32 @@ $create_item_url = base_url()."store_items/create";
     </div><!--/span-->
 
 </div><!--/row-->
+
+<script>
+    // Delete
+    $('.btnDelete').click(function(){
+
+        if (confirm("Are you sure you want to delete this item?")) {
+            var el = this;
+            var id = this.id;
+            //get the id of item that we want to delete
+            var deleteid = id.split("_")[1];
+                // AJAX Request
+                $.ajax({
+                    url: <?= json_encode(base_url().'store_items/ajax_do_delete_item')?>,
+                    type: 'POST',
+                    data: { id:deleteid },
+                    dataType: 'JSON',
+                    success: function(response){
+                        alert(response);
+                        // Removing row from HTML Table
+                        $(el).closest('tr').css('background','tomato');
+                        $(el).closest('tr').fadeOut(800, function(){
+                            $(this).remove();
+                        });
+                    }
+                });
+            }
+
+    });
+</script>

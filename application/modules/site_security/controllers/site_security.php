@@ -27,6 +27,7 @@ class site_security extends MX_controller {
     }
 
     function not_allowed() {
+
 	    echo "You are not allowed to be here";
     }
 }

@@ -27,14 +27,15 @@
               <span class="mr-1">
                   <p class="text-secondary">Price: <h3>$<?= $item_price ?></h3></p>
               </span>
-                <form class="d-flex justify-content-left">
-                    <!-- Default input -->
-                    <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
-                    <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
-                        <i class="fa fa-shopping-cart ml-1"></i>
-                    </button>
-
-                </form>
+                <!-- Default input -->
+                <div>
+                    <label for="qty">Qty:</label>
+                    <input type="number" name="qty" id="qty" value="1" placeholder="1" class="form-control" style="width: 100px; height:35px;">
+                </div>
+                <br/>
+                <button class="btn btn-info btn-lg" id="addToCart">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart
+                </button>
 
             </div>
             <!--Content-->
@@ -62,6 +63,27 @@
         <!--Grid column-->
 
     </div>
+
+    <!-- Modal for showing successful adding item to cart-->
+    <div class="modal fade" id="modalAddToCard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Success</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <?=$item_title ?> has been successfully added to cart!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Grid row-->
 
     <!--Grid row-->
@@ -95,3 +117,28 @@
     <!--Grid row-->
 
 </div>
+
+
+<script>
+    // trigger this function when addToCart button is clicked
+    $("#addToCart").click(function(e) {
+         e.preventDefault();
+        console.log();
+        $.ajax({
+            type: "POST",
+            url: <?= json_encode(base_url().'store_items/test')?>,
+            data: {
+                qty: $("#qty").val(),
+                price:<?= json_encode($item_price) ?>
+            },
+
+            success: function(result) {
+
+                $('#modalAddToCard').modal('show')
+            },
+            error: function(result) {
+                alert('error');
+            }
+        });
+    });
+</script>
