@@ -2,146 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="279cf570-03de-4942-84ce-31dccf282842" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/application/modules/site_security/controllers/site_security.php" afterPath="$PROJECT_DIR$/application/modules/site_security/controllers/site_security.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/application/modules/store_items/controllers/store_items.php" afterPath="$PROJECT_DIR$/application/modules/store_items/controllers/store_items.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/store_items/views/create.php" afterPath="$PROJECT_DIR$/application/modules/store_items/views/create.php" />
       <change beforePath="$PROJECT_DIR$/application/modules/store_items/views/manage.php" afterPath="$PROJECT_DIR$/application/modules/store_items/views/manage.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/store_items/views/view_item.php" afterPath="$PROJECT_DIR$/application/modules/store_items/views/view_item.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/templates/views/admin.php" afterPath="$PROJECT_DIR$/application/modules/templates/views/admin.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/templates/views/public_bootstrap.php" afterPath="$PROJECT_DIR$/application/modules/templates/views/public_bootstrap.php" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/about/brand.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/about/license.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/about/overview.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/about/translations.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/browser-bugs.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/alerts.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/badge.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/breadcrumb.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/button-group.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/buttons.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/card.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/carousel.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/collapse.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/dropdowns.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/forms.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/input-group.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/jumbotron.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/list-group.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/modal.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/navbar.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/navs.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/pagination.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/popovers.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/progress.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/scrollspy.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/components/tooltips.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/content/code.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/content/figures.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/content/images.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/content/reboot.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/content/tables.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/content/typography.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/.eslintrc.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/.stylelintrc" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/album/album.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/album/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/blog/blog.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/blog/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/carousel/carousel.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/carousel/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/checkout/form-validation.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/checkout/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/cover/cover.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/cover/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/dashboard/dashboard.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/dashboard/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/floating-labels/floating-labels.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/floating-labels/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/grid/grid.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/grid/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/jumbotron/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/jumbotron/jumbotron.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/navbar-bottom/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/navbar-fixed/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/navbar-fixed/navbar-top-fixed.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/navbar-static/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/navbar-static/navbar-top.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/navbars/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/navbars/navbar.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/offcanvas/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/offcanvas/offcanvas.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/offcanvas/offcanvas.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/pricing/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/pricing/pricing.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/product/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/product/product.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/album.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/blog.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/carousel.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/checkout.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/cover.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/dashboard.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/floating-labels.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/grid.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/jumbotron.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/navbar-bottom.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/navbar-fixed.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/navbar-static.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/navbars.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/offcanvas.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/pricing.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/product.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/sign-in.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/starter-template.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/sticky-footer-navbar.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/screenshots/sticky-footer.png" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/sign-in/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/sign-in/signin.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/starter-template/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/starter-template/starter-template.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/sticky-footer-navbar/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/sticky-footer-navbar/sticky-footer-navbar.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/sticky-footer/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/sticky-footer/sticky-footer.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/tooltip-viewport/index.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/tooltip-viewport/tooltip-viewport.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/examples/tooltip-viewport/tooltip-viewport.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/extend/approach.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/extend/icons.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/extend/index.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/accessibility.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/best-practices.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/browsers-devices.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/build-tools.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/contents.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/download.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/introduction.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/javascript.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/theming.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/getting-started/webpack.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/layout/grid.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/layout/media-object.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/layout/overview.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/layout/utilities-for-layout.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/migration.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/borders.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/clearfix.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/close-icon.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/colors.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/display.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/embed.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/flex.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/float.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/image-replacement.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/position.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/screenreaders.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/shadows.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/sizing.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/spacing.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/text.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/vertical-align.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/docs/4.1/utilities/visibility.md" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -171,7 +34,7 @@
         <entry file="file://$PROJECT_DIR$/application/modules/templates/views/public_bootstrap.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="134">
-              <caret line="54" column="91" lean-forward="false" selection-start-line="54" selection-start-column="91" selection-end-line="54" selection-end-column="91" />
+              <caret line="54" column="80" lean-forward="false" selection-start-line="54" selection-start-column="80" selection-end-line="54" selection-end-column="80" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -179,32 +42,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="store_items.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="store_items.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/modules/store_items/controllers/store_items.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="313" column="22" lean-forward="false" selection-start-line="313" selection-start-column="22" selection-end-line="313" selection-end-column="22" />
+            <state relative-caret-position="127">
+              <caret line="312" column="39" lean-forward="false" selection-start-line="312" selection-start-column="39" selection-end-line="312" selection-end-column="39" />
               <folding>
-                <element signature="n#create#0;n#Store_items#0;n#!!top" expanded="false" />
-                <marker date="1525577870841" expanded="true" signature="1995:2147" ph="..." />
-                <marker date="1525577870841" expanded="true" signature="2074:2081" ph="×" />
-                <marker date="1525577870841" expanded="true" signature="2705:2857" ph="..." />
-                <marker date="1525577870841" expanded="true" signature="2784:2791" ph="×" />
-                <marker date="1525577870841" expanded="true" signature="8676:8828" ph="..." />
-                <marker date="1525577870841" expanded="true" signature="8755:8762" ph="×" />
-                <marker date="1525577870841" expanded="true" signature="10704:10856" ph="..." />
-                <marker date="1525577870841" expanded="true" signature="10783:10790" ph="×" />
-                <marker date="1525577870841" expanded="true" signature="16350:16429" ph="SELECT * FRO... items" />
+                <marker date="1525582172595" expanded="true" signature="1995:2147" ph="..." />
+                <marker date="1525582172595" expanded="true" signature="2074:2081" ph="×" />
+                <marker date="1525582172595" expanded="true" signature="2705:2857" ph="..." />
+                <marker date="1525582172595" expanded="true" signature="2784:2791" ph="×" />
+                <marker date="1525582172595" expanded="true" signature="8676:8828" ph="..." />
+                <marker date="1525582172595" expanded="true" signature="8755:8762" ph="×" />
+                <marker date="1525582172595" expanded="true" signature="10704:10856" ph="..." />
+                <marker date="1525582172595" expanded="true" signature="10783:10790" ph="×" />
+                <marker date="1525582172595" expanded="true" signature="16520:16599" ph="SELECT * FRO... items" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="manage.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="manage.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/store_items/views/manage.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
-              <caret line="107" column="36" lean-forward="true" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
+            <state relative-caret-position="566">
+              <caret line="119" column="13" lean-forward="false" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -213,8 +75,8 @@
       <file leaf-file-name="view_item.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/store_items/views/view_item.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="491">
-              <caret line="136" column="50" lean-forward="true" selection-start-line="136" selection-start-column="50" selection-end-line="136" selection-end-column="50" />
+            <state relative-caret-position="267">
+              <caret line="121" column="8" lean-forward="true" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
               <folding>
                 <element signature="e#2402#2409#1#HTML" expanded="true" />
                 <marker date="1525519381999" expanded="true" signature="850:955" ph="..." />
@@ -304,7 +166,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="449" />
+    <option name="x" value="372" />
     <option name="y" value="22" />
     <option name="width" value="1048" />
     <option name="height" value="805" />
@@ -374,6 +236,14 @@
               <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="store_items" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bristore" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bristore" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="store_items" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="models" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="bristore" type="b2602c69:ProjectViewProjectNode" />
@@ -461,18 +331,18 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1524138070631</updated>
-      <workItem from="1524138071869" duration="118773000" />
+      <workItem from="1524138071869" duration="122284000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118773000" />
+    <option name="totallyTimeSpent" value="122284000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="449" y="22" width="1048" height="805" extended-state="0" />
+    <frame x="372" y="22" width="1048" height="805" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2528626" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22900763" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -681,14 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/store_items/models/mdl_store_items.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/config/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
@@ -820,10 +682,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/store_items/models/mdl_store_items.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="52" column="17" lean-forward="false" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/templates/views/public_bootstrap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="54" column="80" lean-forward="false" selection-start-line="54" selection-start-column="80" selection-end-line="54" selection-end-column="80" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/store_items/views/view_item.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="136" column="50" lean-forward="true" selection-start-line="136" selection-start-column="50" selection-end-line="136" selection-end-column="50" />
+        <state relative-caret-position="267">
+          <caret line="121" column="8" lean-forward="true" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="8" />
           <folding>
             <element signature="e#2402#2409#1#HTML" expanded="true" />
             <marker date="1525519381999" expanded="true" signature="850:955" ph="..." />
@@ -833,40 +713,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/store_items/controllers/store_items.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="313" column="22" lean-forward="false" selection-start-line="313" selection-start-column="22" selection-end-line="313" selection-end-column="22" />
-          <folding>
-            <element signature="n#create#0;n#Store_items#0;n#!!top" expanded="false" />
-            <marker date="1525577870841" expanded="true" signature="1995:2147" ph="..." />
-            <marker date="1525577870841" expanded="true" signature="2074:2081" ph="×" />
-            <marker date="1525577870841" expanded="true" signature="2705:2857" ph="..." />
-            <marker date="1525577870841" expanded="true" signature="2784:2791" ph="×" />
-            <marker date="1525577870841" expanded="true" signature="8676:8828" ph="..." />
-            <marker date="1525577870841" expanded="true" signature="8755:8762" ph="×" />
-            <marker date="1525577870841" expanded="true" signature="10704:10856" ph="..." />
-            <marker date="1525577870841" expanded="true" signature="10783:10790" ph="×" />
-            <marker date="1525577870841" expanded="true" signature="16350:16429" ph="SELECT * FRO... items" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/templates/views/public_bootstrap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="54" column="91" lean-forward="false" selection-start-line="54" selection-start-column="91" selection-end-line="54" selection-end-column="91" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/store_items/views/manage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="107" column="36" lean-forward="true" selection-start-line="107" selection-start-column="36" selection-end-line="107" selection-end-column="36" />
+        <state relative-caret-position="566">
+          <caret line="119" column="13" lean-forward="false" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/store_items/controllers/store_items.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="312" column="39" lean-forward="false" selection-start-line="312" selection-start-column="39" selection-end-line="312" selection-end-column="39" />
+          <folding>
+            <marker date="1525582172595" expanded="true" signature="1995:2147" ph="..." />
+            <marker date="1525582172595" expanded="true" signature="2074:2081" ph="×" />
+            <marker date="1525582172595" expanded="true" signature="2705:2857" ph="..." />
+            <marker date="1525582172595" expanded="true" signature="2784:2791" ph="×" />
+            <marker date="1525582172595" expanded="true" signature="8676:8828" ph="..." />
+            <marker date="1525582172595" expanded="true" signature="8755:8762" ph="×" />
+            <marker date="1525582172595" expanded="true" signature="10704:10856" ph="..." />
+            <marker date="1525582172595" expanded="true" signature="10783:10790" ph="×" />
+            <marker date="1525582172595" expanded="true" signature="16520:16599" ph="SELECT * FRO... items" />
+          </folding>
         </state>
       </provider>
     </entry>

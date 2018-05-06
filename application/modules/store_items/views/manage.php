@@ -90,6 +90,7 @@ $create_item_url = base_url()."store_items/create";
 </div><!--/row-->
 
 <script>
+    //$.support.cors = true;
     // Delete
     $('.btnDelete').click(function(){
 
@@ -104,16 +105,18 @@ $create_item_url = base_url()."store_items/create";
                     type: 'POST',
                     data: { id:deleteid },
                     dataType: 'JSON',
-                    success: function(response){
-                        alert(response);
+                    success: function(data){
+                        console.log(data);
                         // Removing row from HTML Table
                         $(el).closest('tr').css('background','tomato');
                         $(el).closest('tr').fadeOut(800, function(){
                             $(this).remove();
                         });
+                    },
+                    error: function(error){
+                        console.log(error);
                     }
                 });
             }
-
     });
 </script>

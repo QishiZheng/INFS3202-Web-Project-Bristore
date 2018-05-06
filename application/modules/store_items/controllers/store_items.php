@@ -287,42 +287,48 @@ class Store_items extends MX_Controller {
 
     //do the actual deleting item task, and delete images related to this item
     function _do_delete_item($update_id) {
-	    //delete item_pic
         $data = $this->fetch_data_from_db($update_id);
-        $item_pic_path = "./item_pics/".$data["item_pic"];
-        //get the name of the thumbnail of this item image
-        list($file_name, $file_extension) = explode(".", $data["item_pic"]);
-        $item_thumb_path = "./item_pics/".$file_name."_thumb.".$file_extension;
-        //delete the image and its thumbnail
-        if(file_exists($item_pic_path)) {
-            unlink($item_pic_path);
-        }
-        if(file_exists($item_thumb_path)) {
-            unlink($item_thumb_path);
+        //delete item_pic and thumbnail if it exists
+        if(isset($data['item_pic']) && $data['item_pic'] != "") {
+            $item_pic_path = "./item_pics/".$data["item_pic"];
+            //get the name of the thumbnail of this item image
+            list($file_name, $file_extension) = explode(".", $data["item_pic"]);
+            $item_thumb_path = "./item_pics/".$file_name."_thumb.".$file_extension;
+            //delete the image and its thumbnail
+            if(file_exists($item_pic_path)) {
+                unlink($item_pic_path);
+            }
+            if(file_exists($item_thumb_path)) {
+                unlink($item_thumb_path);
+            }
         }
 
         //delete the item record in db
         $this->_delete($update_id);
     }
 
-    //TODO: test deleting item using AJAX, currently causing response not showing
+    //delete an item using AJAX on manage page
     function ajax_do_delete_item() {
-//        if(isset($_POST['id'])) {
-//            $id = $_POST['id'];
-//            //load security module and check if is admin
-//            $this->load->library('session');
-//            $this ->load->module('site_security');
-//            $this->site_security->_make_sure_is_admin();
-//
-//            //check the update_id
-//            if(!is_numeric($id)) {
-//                redirect('site_security/not_allowed');
-//            }
-//
-//            $this->_do_delete_item($id);
-//        }
-        echo json_encode("success");
-    }
+        if(isset($_POST['id'])) {
+            //get the id from AJAX POST
+            $deleteid = $_POST['id'];
+
+            //load security module and check if is admin
+            $this->load->library('session');
+            $this ->load->module('site_security');
+            $this->site_security->_make_sure_is_admin();
+
+            //check the deleteid
+            if(!is_numeric($deleteid)) {
+                redirect('site_security/not_allowed');
+            }
+
+            //delete the item with deleteid
+            $this->_do_delete_item($deleteid);
+            echo 1;
+        }
+
+	}
 
     function view_item($update_id) {
         //check the update_id
