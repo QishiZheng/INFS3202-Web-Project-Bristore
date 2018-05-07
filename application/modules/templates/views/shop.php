@@ -54,8 +54,8 @@
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <a href="#" class="btn btn-info btn-lg">
-            <span class="glyphicon glyphicon-shopping-cart"></span>CART
+        <a href="#" class="btn btn-info btn-md">
+            <i class="icon-shopping-cart"></i>CART
         </a>
     </div>
 </nav>

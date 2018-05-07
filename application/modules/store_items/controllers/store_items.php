@@ -7,6 +7,13 @@ class Store_items extends MX_Controller {
 		$this->form_validation->CI =& $this;
 	}
 
+    //takes the user to home page
+    function index() {
+        $data['view_file'] = "home_page.php";
+        $this->load->module('templates');
+        $this->templates->shop($data);
+    }
+
 	//create a new item or update the item if it already exists
     function create() {
 	    //check if the user is admin
@@ -343,7 +350,7 @@ class Store_items extends MX_Controller {
         //$data['flash'] = $this->session->flashdata('item');
         $data['view_file'] = "view_item";
         $this->load->module('templates');;
-        $this->templates->public_bootstrap($data);
+        $this->templates->shop($data);
 
     }
 
@@ -498,12 +505,6 @@ class Store_items extends MX_Controller {
     }
 
 
-    //takes the user to home page
-    function home() {
-        $data['view_file'] = "home_page";
-        $this->load->module('templates');
-        $this->templates->public_bootstrap($data);
-    }
 
     //for AJAX test
     function test(){

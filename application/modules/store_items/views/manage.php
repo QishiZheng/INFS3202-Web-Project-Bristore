@@ -90,10 +90,8 @@ $create_item_url = base_url()."store_items/create";
 </div><!--/row-->
 
 <script>
-    //$.support.cors = true;
-    // Delete
+    // Delete the item in the manage table using AJAX
     $('.btnDelete').click(function(){
-
         if (confirm("Are you sure you want to delete this item?")) {
             var el = this;
             var id = this.id;
