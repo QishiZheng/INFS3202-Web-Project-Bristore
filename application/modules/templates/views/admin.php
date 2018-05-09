@@ -312,7 +312,6 @@
                             <i class="halflings-icon white user"></i>
                             <?php
                             $userdata = $this->session->userdata();
-                            //TODO: NO checking needed, but might cause problem later
                             echo $userdata['first_name'];?>
                             <span class="caret"></span>
                         </a>
