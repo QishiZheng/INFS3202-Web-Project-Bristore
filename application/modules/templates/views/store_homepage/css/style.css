@@ -231,7 +231,7 @@ p {
   font-size: 18px;
   padding: 17px;
   width: 27%;
-  background: #ff3a6d;
+  background: #33C4FF;
   color: #ffffff;
   border: none;
   border-top-right-radius: 3px;
@@ -286,7 +286,7 @@ p {
       content: "";
       width: 60px;
       height: 3px;
-      background: #ff3a6d;
+      background: #33C4FF;
       bottom: 0;
       left: 50%;
       -webkit-transform: translateX(-50%);
@@ -332,7 +332,7 @@ p {
   text-align: center;
   margin: -33px 10px 0 0;
   font-size: 23px;
-  background: #ff7474;
+  background: #33C4FF;
   color: #fff;
   padding: 14px;
   border-radius: 50%; }
@@ -397,27 +397,13 @@ p {
     line-height: 1;
     padding: 0 0 0 12px; }
 
-.closed-now {
-  color: #ff3a6d;
-  font-size: 13px;
-  display: block;
-  font-weight: 400;
-  display: inline-block; }
-
-.open-now {
-  color: #46cd38;
-  font-size: 13px;
-  display: block;
-  font-weight: 400;
-  display: inline-block; }
-
 .featured-btn-wrap {
   text-align: center; }
   @media (max-width: 1200px) {
     .featured-btn-wrap {
       margin: 3px 0 0; } }
   .featured-btn-wrap .btn-danger {
-    background: #ff3a6d;
+    background: #33C4FF;
     padding: 16px 50px;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
@@ -427,7 +413,7 @@ p {
       .featured-btn-wrap .btn-danger {
         width: 100%; } }
     .featured-btn-wrap .btn-danger:hover, .featured-btn-wrap .btn-danger:focus {
-      background: #f34e79;
+      background: #33C4FF;
       outline: none;
       -webkit-box-shadow: none;
       box-shadow: none; }
@@ -455,7 +441,7 @@ p {
   text-decoration: none; }
 
 .category-wrap:hover .category-block {
-  background: #f34e79;
+  background: #33C4FF;
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s; }
@@ -838,7 +824,7 @@ footer {
       display: inline-block; } }
 
 .customer-rating-red {
-  background: #ff5a5a !important; }
+  background: #33C4FF !important; }
 
 .customer-description {
   margin: 0 0 0 50px; }
@@ -913,7 +899,7 @@ footer {
       .follow ul li h6 {
         margin: 0; }
   .follow a {
-    color: #ff3a6d;
+    color: #33C4FF;
     text-align: center;
     display: block;
     font-size: 14px;
