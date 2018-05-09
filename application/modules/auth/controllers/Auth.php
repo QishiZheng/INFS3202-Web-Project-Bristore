@@ -33,7 +33,7 @@ class Auth extends MX_controller
 		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
 		{
 			// redirect them to the home page because they must be an administrator to view this
-            redirect('store_items/home', 'refresh');
+            redirect('store_items/index', 'refresh');
 		}
 		else
 		{
@@ -55,6 +55,19 @@ class Auth extends MX_controller
 
         // set the flash data error message if there is one
         $data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+
+        //check if the user is admin
+        if (!$this->ion_auth->is_admin())
+        {
+            //set flash data
+            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            // redirect them to the home page because they must be an administrator to view this
+            redirect('store_items/index', 'refresh');
+        }
 
         //list the users
         $data['users'] = $this->ion_auth->users()->result();
@@ -141,6 +154,122 @@ class Auth extends MX_controller
         $this->templates->shop($data);
 		redirect('auth/login', 'refresh');
 	}
+
+
+    /**
+     * Register a new user
+     */
+	function register(){
+        $data['title'] = $this->lang->line('register_user_heading');
+
+        $tables = $this->config->item('tables', 'ion_auth');
+        $identity_column = $this->config->item('identity', 'ion_auth');
+        $data['identity_column'] = $identity_column;
+
+        // validate form input
+        $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required');
+        $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required');
+        if ($identity_column !== 'email')
+        {
+            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_identity_label'), 'trim|required|is_unique[' . $tables['users'] . '.' . $identity_column . ']');
+            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email');
+        }
+        else
+        {
+            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[' . $tables['users'] . '.email]');
+        }
+        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
+        $this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
+        $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+        $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+
+        if ($this->form_validation->run() === TRUE)
+        {
+            $email = strtolower($this->input->post('email'));
+            $identity = ($identity_column === 'email') ? $email : $this->input->post('identity');
+            $password = $this->input->post('password');
+
+            $additional_data = array(
+                'first_name' => $this->input->post('first_name'),
+                'last_name' => $this->input->post('last_name'),
+                'company' => $this->input->post('company'),
+                'phone' => $this->input->post('phone'),
+            );
+        }
+        if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
+        {
+            // check to see if we are creating the user
+            //set flash data
+            $flash_msg = "Your account has been successfully created! Hello, ".$additional_data['first_name']."!";
+            $value = '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            redirect("store_items/index", 'refresh');
+        }
+        else
+        {
+            // display the create user form
+            // set the flash data error message if there is one
+            $data['message'] = (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message')));
+
+            $data['first_name'] = array(
+                'name' => 'first_name',
+                'id' => 'first_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('first_name'),
+            );
+            $data['last_name'] = array(
+                'name' => 'last_name',
+                'id' => 'last_name',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('last_name'),
+            );
+            $data['identity'] = array(
+                'name' => 'identity',
+                'id' => 'identity',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('identity'),
+            );
+            $data['email'] = array(
+                'name' => 'email',
+                'id' => 'email',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('email'),
+            );
+//            $data['company'] = array(
+//                'name' => 'company',
+//                'id' => 'company',
+//                'type' => 'text',
+//                'value' => $this->form_validation->set_value('company'),
+//            );
+            $data['phone'] = array(
+                'name' => 'phone',
+                'id' => 'phone',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('phone'),
+            );
+            $data['password'] = array(
+                'name' => 'password',
+                'id' => 'password',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password'),
+            );
+            $data['password_confirm'] = array(
+                'name' => 'password_confirm',
+                'id' => 'password_confirm',
+                'type' => 'password',
+                'value' => $this->form_validation->set_value('password_confirm'),
+            );
+
+            //load the page
+            $data['view_file'] = "register";
+            $this->load->module('templates');
+            $this->templates->shop($data);
+//			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $data);
+        }
+    }
+
 
 	/**
 	 * Change password
@@ -919,5 +1048,25 @@ class Auth extends MX_controller
 			return $view_html;
 		}
 	}
+
+
+//	function email() {
+//        $receiver  = 'vincezheng4265@gmail.com';
+//        $subject = 'Did you know...';
+//        $message = "
+//<html>
+//<body>
+//You can use <b>HTML</b> here for formatting the content.<br>Therefore the header has to be set as text/html
+//</body>
+//</html>
+//";
+//
+//        $header  = 'MIME-Version: 1.0' . "\r\n";
+//        $header .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+//        $header .= 'From: Example <noreply@example.com>' . "\r\n";
+//
+//        mail($receiver, $subject, $message, $header);
+//        echo "works";
+//    }
 
 }

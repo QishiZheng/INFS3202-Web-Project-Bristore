@@ -25,7 +25,7 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="<?= base_url()."store_items/home"?>">Bristore</a>
+    <a class="navbar-brand" href="<?= base_url()."store_items/index"?>">Bristore</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="<?= base_url()."store_items/home"?>">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?= base_url()."store_items/index"?>">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -50,13 +50,33 @@
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-        <a href="#" class="btn btn-info btn-md">
-            <i class="icon-shopping-cart"></i>CART
-        </a>
+        <ul class="nav pull-right">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <a href="#" class="btn btn-info btn-md">
+                <i class="icon-shopping-cart"></i>CART
+            </a>
+            <!-- start: User Dropdown -->
+            <li class="dropdown">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="halflings-icon white user"></i>
+                    <?php
+                    $userdata = $this->session->userdata();
+                    echo $userdata['first_name'];?>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-menu-title">
+                        <span>Account Settings</span>
+                    </li>
+                    <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+                    <li><a href="<?php echo base_url()."auth/logout";?>"><i class="halflings-icon off"></i> Logout</a></li>
+                </ul>
+            </li>
+            <!-- end: User Dropdown -->
+        </ul>
     </div>
 </nav>
 
