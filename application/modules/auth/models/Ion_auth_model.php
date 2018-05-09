@@ -2123,6 +2123,7 @@ class Ion_auth_model extends CI_Model
 
 			$this->set_session($user);
 
+
 			// extend the users cookies if the option is enabled
 			if ($this->config->item('user_extend_on_login', 'ion_auth'))
 			{

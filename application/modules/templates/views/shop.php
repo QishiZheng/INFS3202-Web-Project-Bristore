@@ -59,12 +59,20 @@
                 <i class="icon-shopping-cart"></i>CART
             </a>
             <!-- start: User Dropdown -->
+            <?php
+            //show the user dropdown if the user is logged in
+            $userdata = $this->session->userdata();
+            if(isset($userdata['first_name'])) {
+                        ?>
             <li class="dropdown">
                 <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="halflings-icon white user"></i>
                     <?php
-                    $userdata = $this->session->userdata();
-                    echo $userdata['first_name'];?>
+                        echo $userdata['first_name'];
+                    } else {
+                        echo "<a href='".base_url()."auth/login' class='btn btn-primary'>Login</a>";
+                    }
+                    ?>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
