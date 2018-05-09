@@ -25,18 +25,22 @@ class Auth extends MX_controller
 	public function index()
 	{
 
-		if (!$this->ion_auth->logged_in())
-		{
-			// redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
-		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
-		{
-			// redirect them to the home page because they must be an administrator to view this
-            redirect('store_items/index', 'refresh');
-		}
-		else
-		{
+//		if (!$this->ion_auth->logged_in())
+//		{
+//			// redirect them to the login page
+//			redirect('auth/login', 'refresh');
+//		}
+//		else if (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
+//		{
+//			// redirect them to the home page because they must be an administrator to view this
+//            redirect('store_items/index', 'refresh');
+//		}
+//		else
+//		{
+
+        //security check
+        $this->login_check();
+        $this->admin_check();
             $this->manage();
             //set the template name
 //        $data['view_file'] = "account_manage";
@@ -46,28 +50,31 @@ class Auth extends MX_controller
 //        //send info back to super template [admin]
 //        $this->templates->admin($data);
 			//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $data);
-		}
+//		}
 	}
 
     //show the accounts management page
     function manage() {
         $this->load->library('session');
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
         // set the flash data error message if there is one
         $data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-        //check if the user is admin
-        if (!$this->ion_auth->is_admin())
-        {
-            //set flash data
-            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
-            $value = '<div class="alert alert-dismissible alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>'.$flash_msg.'</strong></div>';
-            $this->session->set_flashdata('item', $value);
-            // redirect them to the home page because they must be an administrator to view this
-            redirect('store_items/index', 'refresh');
-        }
+//        //check if the user is admin
+//        if (!$this->ion_auth->is_admin())
+//        {
+//            //set flash data
+//            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
+//            $value = '<div class="alert alert-dismissible alert-warning">
+//                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+//                    <strong>'.$flash_msg.'</strong></div>';
+//            $this->session->set_flashdata('item', $value);
+//            // redirect them to the home page because they must be an administrator to view this
+//            redirect('store_items/index', 'refresh');
+//        }
 
         //list the users
         $data['users'] = $this->ion_auth->users()->result();
@@ -87,6 +94,11 @@ class Auth extends MX_controller
 	 */
 	public function login()
 	{
+
+	    //might need this to check if the user already logged in
+//        //security check
+//        $this->login_check();
+
 		$data['title'] = $this->lang->line('login_heading');
 
 		// validate form input
@@ -1048,6 +1060,36 @@ class Auth extends MX_controller
 			return $view_html;
 		}
 	}
+
+
+    //check if the user is logged in,redirect to login page if no admin
+    private function login_check() {
+        if (!$this->ion_auth->logged_in())
+        {
+            $flash_msg = "You have to log in to view this page";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            // redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+    }
+
+    //check if the user is admin, redirect to home page if no admin
+    private function admin_check() {
+        if (!$this->ion_auth->is_admin())
+        {
+            //set flash data
+            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            // redirect them to the home page because they must be an administrator to view this
+            redirect('store_items/index', 'refresh');
+        }
+    }
 
 
 //	function email() {

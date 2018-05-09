@@ -312,6 +312,10 @@
                             <i class="halflings-icon white user"></i>
                             <?php
                             $userdata = $this->session->userdata();
+                            /**
+                             * No need to check if the userdata is set,
+                             * because admin page only cen be loaded when admin is logged in.
+                            **/
                             echo $userdata['first_name'];?>
                             <span class="caret"></span>
                         </a>
@@ -319,7 +323,7 @@
                             <li class="dropdown-menu-title">
                                 <span>Account Settings</span>
                             </li>
-                            <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+                            <li><a href="<?php echo base_url()."auth/manage";?>"><i class="halflings-icon user"></i> Dashboard</a></li>
                             <li><a href="<?php echo base_url()."auth/logout";?>"><i class="halflings-icon off"></i> Logout</a></li>
                         </ul>
                     </li>

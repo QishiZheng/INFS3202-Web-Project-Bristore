@@ -4,11 +4,11 @@
 <?= validation_errors("<h2 style='color: red;'>", "</h2>")?>
 
 <?php
-$this->load->library('session');
-if($this->session->flashdata('item') != "") {
-    echo $this->session->flashdata('item');
-}
-?>
+//$this->load->library('session');
+//if($this->session->flashdata('item') != "") {
+//    echo $this->session->flashdata('item');
+//}
+//?>
 
 <div class="row-fluid sortable">
     <div class="box span12">

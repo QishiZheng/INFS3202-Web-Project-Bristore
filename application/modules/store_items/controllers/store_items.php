@@ -18,8 +18,10 @@ class Store_items extends MX_Controller {
     function create() {
 	    //check if the user is admin
         $this->load->library('session');
-        $this ->load->module('site_security');
-        $this->site_security->_make_sure_is_admin();
+
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
         //get the id of this item
         $update_id = $this->uri->segment(3);
@@ -98,8 +100,9 @@ class Store_items extends MX_Controller {
     function upload_img($update_id) {
         //check if the user is admin
         $this->load->library('session');
-        $this ->load->module('site_security');
-        $this->site_security->_make_sure_is_admin();
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -121,8 +124,9 @@ class Store_items extends MX_Controller {
     {
         //check if the user is admin
         $this->load->library('session');
-        $this ->load->module('site_security');
-        $this->site_security->_make_sure_is_admin();
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -199,8 +203,9 @@ class Store_items extends MX_Controller {
     function delete_img($update_id) {
         //check if the user is admin
         $this->load->library('session');
-        $this ->load->module('site_security');
-        $this->site_security->_make_sure_is_admin();
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -242,8 +247,9 @@ class Store_items extends MX_Controller {
     function conf_del($update_id) {
         //load security module and check if is admin
         $this->load->library('session');
-        $this ->load->module('site_security');
-        $this->site_security->_make_sure_is_admin();
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -266,8 +272,9 @@ class Store_items extends MX_Controller {
     function delete_item($update_id) {
         //load security module and check if is admin
         $this->load->library('session');
-        $this ->load->module('site_security');
-        $this->site_security->_make_sure_is_admin();
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -316,6 +323,10 @@ class Store_items extends MX_Controller {
 
     //delete an item using AJAX on manage page
     function ajax_do_delete_item() {
+        //security check
+        $this->login_check();
+        $this->admin_check();
+
         if(isset($_POST['id'])) {
             //get the id from AJAX POST
             $deleteid = $_POST['id'];
@@ -337,6 +348,7 @@ class Store_items extends MX_Controller {
 
 	}
 
+	//view the item with the given id on its own product page
     function view_item($update_id) {
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -359,8 +371,9 @@ class Store_items extends MX_Controller {
 	function manage() {
 	    //load security module and check if is admin
         $this->load->library('session');
-	    $this ->load->module('site_security');
-	    $this->site_security->_make_sure_is_admin();
+        //security check
+        $this->login_check();
+        $this->admin_check();
 
 	    $data['query'] = $this->get('id');
 	    $data['view_file'] = "manage";
@@ -402,10 +415,10 @@ class Store_items extends MX_Controller {
         return $data;
     }
 
-    //view the product
-    function view($update_id) {
-
-    }
+//    //view the product
+//    function view($update_id) {
+//
+//    }
 
 	function get($order_by) {
 		$this->load->model('mdl_store_items');
@@ -511,6 +524,40 @@ class Store_items extends MX_Controller {
 //	    echo "test";
     echo json_encode(array("qty"=>$_POST['qty']));
 	}
+
+
+
+	//check if the user is logged in,redirect to login page if no admin
+	private function login_check() {
+        $this ->load->module('auth');
+        if (!$this->ion_auth->logged_in())
+        {
+            $flash_msg = "You have to log in to view this page";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            // redirect them to the login page
+            redirect('auth/login', 'refresh');
+        }
+    }
+
+
+    //check if the user is admin, redirect to home page if no admin
+	private function admin_check() {
+        $this ->load->module('auth');
+        if (!$this->ion_auth->is_admin())
+        {
+            //set flash data
+            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            // redirect them to the home page because they must be an administrator to view this
+            redirect('store_items/index', 'refresh');
+        }
+    }
 
 
 }
