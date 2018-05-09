@@ -37,6 +37,15 @@
             $this->load->view('admin', $data);
         }
 
+        function store($data) {
+            //if view_module is not set, then set it as the first segment of url
+            if(!isset($data['view_module'])) {
+                $data['view_module'] = $this->uri->segment(1);
+            }
+            $this->load->view('store', $data);
+        }
+
+
 //        //load account manage template from site_security/views/account_manage.php
 //        function account_manage(){
 //
