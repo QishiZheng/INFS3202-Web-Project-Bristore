@@ -11,8 +11,13 @@ body {
 
 h1 {
   font-size: 72px;
-  color: #fff;
-  font-weight: 300; }
+  color: #F4F4F4;
+    text-shadow:
+    -1px -1px 0 #BBBBBB,
+    1px -1px 0 #BBBBBB,
+    -1px 1px 0 #BBBBBB,
+    1px 1px 0 #BBBBBB;
+  font-weight: 500; }
   @media (max-width: 1200px) {
     h1 {
       font-size: 52px; } }
@@ -156,7 +161,7 @@ p {
   padding: 0 8px 0 0; }
 
 .slider {
-  background: url(../images/slider.png) no-repeat;
+  background: url(../images/slider.jpg) no-repeat;
   background-size: cover;
   min-height: 800px; }
   @media (max-width: 992px) {
@@ -184,7 +189,7 @@ p {
   text-align: center; }
 
 .slider-content_wrap h5 {
-  color: #909090;
+  color: #2F2F2F;
   font-weight: 400;
   margin: 24px 0; }
 
@@ -249,7 +254,7 @@ p {
   padding-right: 10px; }
 
 .slider-link {
-  color: #909090;
+  color: #FFFFFF;
   margin: 45px 0 0;
   font-size: 19px; }
   @media (max-width: 480px) {
@@ -259,7 +264,7 @@ p {
       .slider-link span {
         display: block; } }
   .slider-link a {
-    color: #909090;
+    color: #FFFFFF;
     text-decoration: underline;
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
@@ -270,7 +275,7 @@ p {
     padding: 0 18px; }
 
 /* ==============================================================
-   FIND PLACES
+   POPULAR CATEGORIES
    ============================================================== */
 .styled-heading {
   text-align: center;
@@ -300,7 +305,7 @@ p {
       padding: 0; } }
 
 /* ==============================================================
-   FEATURED PLACES
+   HOT RIGHT NOW
    ============================================================== */
 .featured-place-wrap {
   background: #fff;
@@ -472,19 +477,6 @@ p {
   height: 64px; }
 
 /* ==============================================================
-   ADD LISTING
-   ============================================================== */
-.add-listing-wrap {
-  text-align: center;
-  margin: 0 0 36px; }
-  .add-listing-wrap h2 {
-    font-weight: 300; }
-  .add-listing-wrap p {
-    font-size: 22px;
-    font-weight: 300;
-    color: #737882; }
-
-/* ==============================================================
    FOOTER
    ============================================================== */
 footer {
@@ -610,14 +602,14 @@ footer {
 .reserve-block {
   padding: 30px 0; }
   .reserve-block h5 {
-    color: #3e434b;
+    color: #F7F7F7;
     font-weight: 400;
     display: inline-block;
     margin: 0; }
   .reserve-block p {
     display: inline-block;
     font-size: 18px;
-    color: #b2b8c3;
+    color: #F7F7F7;
     font-weight: 400;
     padding: 0 0 0 8px;
     margin: 0 0 8px; }
@@ -625,7 +617,7 @@ footer {
       .reserve-block p {
         margin: 0; } }
     .reserve-block p span {
-      color: #ffb006; }
+      color: #F7F7F7; }
 
 .reserve-description {
   font-size: 15px !important;
@@ -666,7 +658,7 @@ footer {
       margin: 3px 0px 0 0px; } }
   .review-btn span {
     display: block;
-    color: #8a8e96;
+    color: #3e434b;
     font-size: 13px;
     margin-top: 3px; }
   .review-btn .btn-outline-danger {
@@ -688,7 +680,7 @@ footer {
       width: 100%; } }
 
 .custom-checkbox {
-  color: #737882;
+  color: #3e434b;
   font-size: 14px;
   line-height: 1.8;
   margin-right: 0; }
@@ -710,7 +702,7 @@ footer {
     font-weight: 400; }
 
 .booking-checkbox {
-  color: #737882;
+  color: #3e434b;
   font-size: 15px; }
   .booking-checkbox p {
     line-height: 1.8; }
