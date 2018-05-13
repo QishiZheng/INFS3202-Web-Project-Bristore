@@ -24,9 +24,23 @@
                     <h1><?= $item_title ?></h1>
                 </div>
                 <hr/>
-              <span class="mr-1">
-                  <p class="text-secondary">Price: <h3>$<?= $item_price ?></h3></p>
-              </span>
+                <span class="mr-1">
+                    <p class="text-secondary">Price: <h3>$<?= $item_price ?></h3></p>
+                </span>
+                <div>
+                    <p class="text-secondary">Stock Level: </p>
+                    <?php
+                    //display different color labels depending on the stock of the item
+                    if($item_stock <= 0 ) {
+                        echo '<span class="label label-important">Out of Stock!</span>';
+                    } elseif($item_stock > 0 && $item_stock <= 10 ) {
+                        echo '<span class="label label-warning">Low Stock!</span>';
+                    } else {
+                        echo '<span class="label label-success">In Stock</span>';
+                    } ?>
+                </div>
+
+
                 <!-- Default input -->
                 <div>
                     <label for="qty">Qty:</label>
@@ -34,7 +48,7 @@
                 </div>
                 <br/>
                 <button class="btn btn-info btn-lg" id="addToCart">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart
+                    <i class="icon icon-shopping-cart"></i>Add to Cart
                 </button>
 
             </div>
@@ -65,17 +79,17 @@
     </div>
 
     <!-- Modal for showing successful adding item to cart-->
-    <div class="modal fade" id="modalAddToCard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modalAddToCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Success</h4>
+                    <h4 class="modal-title" id="myModalLabel">Message</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <?=$item_title ?> has been successfully added to cart!
+                <div class="modal-body" id="rsp">
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
@@ -121,24 +135,30 @@
 
 <script>
     // trigger this function when addToCart button is clicked
-    $("#addToCart").click(function(e) {
-         e.preventDefault();
-        console.log();
-        $.ajax({
-            type: "POST",
-            url: <?= json_encode(base_url().'store_items/test')?>,
-            data: {
-                qty: $("#qty").val(),
-                price:<?= json_encode($item_price) ?>
-            },
+    $(document).ready(function() {
+        $("#addToCart").click(function(e) {
+            e.preventDefault();
+            var item_id = <?php echo(json_encode($update_id));?>;
+            var qty = $('#qty').val();
+            $.ajax({
+                type: "POST",
+                url: <?= json_encode(base_url().'cart/add_to_cart')?>,
+                data: {
+                    item_id: item_id,
+                    item_qty: qty,
+                },
+                dataType: "JSON",
 
-            success: function(result) {
-
-                $('#modalAddToCard').modal('show')
-            },
-            error: function(result) {
-                alert('error');
-            }
+                success: function(result) {
+                    // alert(result);
+                    $('#rsp').html(result);
+                    $('#modalAddToCart').modal('show');
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         });
     });
+
 </script>

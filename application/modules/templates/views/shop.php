@@ -10,7 +10,8 @@
     <title>Bristore</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
+<!--    <link href="--><?php //echo base_url(); ?><!--assets/adminfiles/css/bootstrap.min.css" rel="stylesheet">-->
 
 <!--    <!-- Custom styles for this template -->-->
 <!--    <link href="--><?php //echo base_url(); ?><!--dist/css/jumbotron.css" rel="stylesheet">-->
@@ -55,7 +56,7 @@
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
-            <a href="#" class="btn btn-info btn-md">
+            <a data-toggle="modal" href="#modalCart" id="cart" class="btn btn-info btn-md">
                 <i class="icon-shopping-cart"></i>CART
             </a>
             <!-- start: User Dropdown -->
@@ -113,5 +114,65 @@
 </footer>
 
 
+<!-- Modal for shopping cart-->
+<div class="modal fade" id="cart_modal" >
+    <div class="modal-dialog modal-lg" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Shopping Cart</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-active">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cart_content">
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 </body>
+
+<script>
+    // show the cart modal when cart button is clicked
+    $(document).ready(function() {
+        $("#cart").click(function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: <?= json_encode(base_url().'cart/show_cart')?>,
+                dataType: "JSON",
+
+                success: function(data) {
+                    $('#cart_content').html(data);
+                    $('#cart_modal').modal('show');
+                    //console.log(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+
+</script>
 </html>
+
