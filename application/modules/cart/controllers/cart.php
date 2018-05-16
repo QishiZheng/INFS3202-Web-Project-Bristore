@@ -93,7 +93,7 @@ class Cart extends MX_Controller {
                     <td>'.'$'.$item_details['item_price'].'</td>
                     <td>'.$qty.'</td>
                     <td>'.'$'.$subtotal.'</td>
-                    <td><button type="button" id="'.$item_id.'" class="romove_cart btn btn-danger btn-sm">Delete</button></td>
+                    <td><button type="button" id="'.$item_id.'" class="btn btn-danger btn-sm remove_cart_item_btn">Delete</button></td>
                 </tr>
             ';
         }
@@ -109,14 +109,29 @@ class Cart extends MX_Controller {
 //        echo $this->show_cart();
 //    }
 
-    function delete_cart(){
-        $data = array(
-            'rowid' => $this->input->post('row_id'),
-            'qty' => 0,
-        );
-        $this->cart->update($data);
-        echo $this->show_cart();
+
+    //delete this item in cart
+    function delete_cart_item(){
+        $user_id = $this->ion_auth->get_user_id();
+        $item_id = $this->input->post('item_id');
+
+        //show the uer error message if the item_id is not numeric
+        if(!(is_numeric($item_id))){
+            //set flash data
+            $flash_msg = "Something is wrong about the item id";
+            $value = '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+
+            header('Location: '.$_SERVER['REQUEST_URI']);
+            die();
+        }
+
+        $this->cart_model->_delete($user_id, $item_id);
     }
+
+
 
 
     //fetch the data of shopping cart with given userid

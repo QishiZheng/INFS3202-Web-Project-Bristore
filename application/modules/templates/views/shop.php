@@ -11,6 +11,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Simple line Icon -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/simple-line-icons.css">
+    <!-- Themify Icon -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/themify-icons.css">
+    <!-- Hover Effects -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/set1.css">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 <!--    <link href="--><?php //echo base_url(); ?><!--assets/adminfiles/css/bootstrap.min.css" rel="stylesheet">-->
 
 <!--    <!-- Custom styles for this template -->-->
@@ -37,7 +45,7 @@
                 <a class="nav-link" href="<?= base_url()."store_items/index"?>">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="#"></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
@@ -153,8 +161,8 @@
 <script>
     // show the cart modal when cart button is clicked
     $(document).ready(function() {
-        $("#cart").click(function(e) {
-            e.preventDefault();
+        $("#cart").click(function() {
+            // e.preventDefault();
             $.ajax({
                 type: "POST",
                 url: <?= json_encode(base_url().'cart/show_cart')?>,
@@ -170,9 +178,33 @@
                 }
             });
         });
+
+
+        //TODO: get the id of clicked button then send it to server
+        //TODO: to perform deleting item in cart
+        $(".remove_cart_item_btn").click(function() {
+            $item_id = this.id;
+            console.log($item_id);
+            //$.ajax({
+            //    type: "POST",
+            //    url: <?//= json_encode(base_url().'cart/delete_cart_item')?>//,
+            //    data: {
+            //        item_id: item_id,
+            //    },
+            //    dataType: "JSON",
+            //
+            //    success: function(data) {
+            //        console.log(data);
+            //    },
+            //    error: function(error) {
+            //        console.log(error);
+            //    }
+            //});
+        });
+
+
+
     });
-
-
 </script>
 </html>
 
