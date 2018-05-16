@@ -10,15 +10,8 @@
     <title>Bristore</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
-    <!-- Simple line Icon -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/simple-line-icons.css">
-    <!-- Themify Icon -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/themify-icons.css">
-    <!-- Hover Effects -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/set1.css">
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+    <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet">
+
 <!--    <link href="--><?php //echo base_url(); ?><!--assets/adminfiles/css/bootstrap.min.css" rel="stylesheet">-->
 
 <!--    <!-- Custom styles for this template -->-->
@@ -60,10 +53,10 @@
             </li>
         </ul>
         <ul class="nav pull-right">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+<!--            <form class="form-inline my-2 my-lg-0">-->
+<!--                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--            </form>-->
             <a data-toggle="modal" href="#modalCart" id="cart" class="btn btn-info btn-md">
                 <i class="icon-shopping-cart"></i>CART
             </a>
@@ -118,7 +111,7 @@
 </main>
 
 <footer class="container">
-    <p>&copy; Company 2018</p>
+    <p>&copy; Bristore 2018</p>
 </footer>
 
 
@@ -159,8 +152,9 @@
 </body>
 
 <script>
-    // show the cart modal when cart button is clicked
     $(document).ready(function() {
+
+        //get teh cart data from server and display it with modal when cart is clicked
         $("#cart").click(function() {
             // e.preventDefault();
             $.ajax({
@@ -179,31 +173,31 @@
             });
         });
 
+        //send the item_id to server and delete this item in cart
+        $("table").delegate("button", "click", function() {
+            if (confirm("Are you sure you want to delete this item?")) {
+                var el = this;
+                var id = $(this).attr('id');
+                $.ajax({
+                    url: <?= json_encode(base_url().'cart/delete_cart_item')?>,
+                    type: 'POST',
+                    data: { item_id: id },
+                    dataType: 'JSON',
+                    success: function(data){
+                        //console.log(data);
+                        // Removing row from HTML Table
+                        $(el).closest('tr').css('background','tomato');
+                        $(el).closest('tr').fadeOut(800, function(){
+                            $(this).remove();
+                        });
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+            }
 
-        //TODO: get the id of clicked button then send it to server
-        //TODO: to perform deleting item in cart
-        $(".remove_cart_item_btn").click(function() {
-            $item_id = this.id;
-            console.log($item_id);
-            //$.ajax({
-            //    type: "POST",
-            //    url: <?//= json_encode(base_url().'cart/delete_cart_item')?>//,
-            //    data: {
-            //        item_id: item_id,
-            //    },
-            //    dataType: "JSON",
-            //
-            //    success: function(data) {
-            //        console.log(data);
-            //    },
-            //    error: function(error) {
-            //        console.log(error);
-            //    }
-            //});
         });
-
-
-
     });
 </script>
 </html>

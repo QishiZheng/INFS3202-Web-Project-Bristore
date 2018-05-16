@@ -129,6 +129,7 @@ class Cart extends MX_Controller {
         }
 
         $this->cart_model->_delete($user_id, $item_id);
+        echo 1;
     }
 
 
