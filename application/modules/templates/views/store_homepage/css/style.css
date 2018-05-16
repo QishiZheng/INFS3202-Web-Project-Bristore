@@ -476,6 +476,17 @@ p {
   width: 64px;
   height: 64px; }
 
+#categories {
+    height: 70px;
+    width: 75px;
+}
+
+#categories:hover {
+    background-image: url('car-hover.png');
+    height: 70px;
+    width: 75px;
+}
+
 /* ==============================================================
    FOOTER
    ============================================================== */
