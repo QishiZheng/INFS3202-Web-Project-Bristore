@@ -12,7 +12,7 @@ class Auth extends MX_controller
 		parent::__construct();
 		$this->load->database();
 		$this->load->library(array('ion_auth', 'form_validation'));
-		$this->load->helper(array('url', 'language'));
+		$this->load->helper(array('url', 'language', 'security'));
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
@@ -41,7 +41,7 @@ class Auth extends MX_controller
         //security check
         $this->login_check();
         $this->admin_check();
-            $this->manage();
+        $this->manage();
             //set the template name
 //        $data['view_file'] = "account_manage";
 //        //load template
@@ -185,7 +185,7 @@ class Auth extends MX_controller
         $data['identity_column'] = $identity_column;
 
         // validate form input
-        $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required');
+        $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required|callback_firstname_check');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required');
         if ($identity_column !== 'email')
         {
@@ -287,6 +287,23 @@ class Auth extends MX_controller
 //			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $data);
         }
     }
+
+
+    //check if the first name is "admin" or "Admin"
+    //TODO: Error message is not showing properly
+    public function firstname_check($str)
+    {
+        if ($str == 'admin' | $str == 'Admin')
+        {
+            $this->form_validation->set_message(firstname_check, 'The {First Name} field cannot be the word "admin" or "Admin"');
+            return FALSE;
+        }
+        else
+        {
+            return TRUE;
+        }
+    }
+
 
 
 	/**
@@ -776,7 +793,7 @@ class Auth extends MX_controller
 		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'trim|required');
 		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'trim|required');
 		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'trim|required');
-		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim|required');
+		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'trim');
 
 		if (isset($_POST) && !empty($_POST))
 		{

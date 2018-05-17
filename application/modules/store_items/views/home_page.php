@@ -55,7 +55,7 @@
 <!-- Main CSS -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 
-<section class="slider d-flex align-items-center">
+<div class="slider d-flex align-items-center">
 <!--     <img src="images/Slider.jpeg" class="img-fluid" alt="background.jpg"> -->
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -87,11 +87,11 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 <!--// SLIDER -->
 <!--//END HEADER -->
 <!--============================= FIND PLACES =============================-->
-<section class="main-block">
+<div class="main-block">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5">
@@ -180,10 +180,10 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 <!--//END FIND PLACES -->
 <!--============================= FEATURED PLACES =============================-->
-<section class="main-block light-bg">
+<div class="main-block light-bg">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5">
@@ -274,10 +274,10 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 <!--//END FEATURED PLACES -->
 <!--============================= CATEGORIES =============================-->
-<section class="main-block">
+<div class="main-block">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-5">
@@ -457,21 +457,17 @@
             </div>
         </div>
     </div>
-</section>
+</div>
 <!--//END CATEGORIES -->
 
 
 
 
-    <!-- jQuery, Bootstrap JS. -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="<?php echo base_url()."assets/js/jquery-3.3.1.js"; ?>" ></script>
-    <script src="<?php echo base_url(); ?>assets/js/vendor/popper.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-
-<!--    <script src="js/jquery-3.2.1.min.js"></script>-->
-<!--    <script src="js/popper.min.js"></script>-->
-<!--    <script src="js/bootstrap.min.js"></script>-->
+<!--    <!-- jQuery, Bootstrap JS. -->-->
+<!--    <!-- jQuery first, then Popper.js, then Bootstrap JS -->-->
+<!--    <script src="--><?php //echo base_url()."assets/js/jquery-3.3.1.js"; ?><!--" ></script>-->
+<!--    <script src="--><?php //echo base_url(); ?><!--assets/js/vendor/popper.min.js"></script>-->
+<!--    <script src="--><?php //echo base_url(); ?><!--assets/js/bootstrap.min.js"></script>-->
 
     <script>
         $(window).scroll(function() {

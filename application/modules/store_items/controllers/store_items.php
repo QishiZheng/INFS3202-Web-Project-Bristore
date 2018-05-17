@@ -519,11 +519,11 @@ class Store_items extends MX_Controller {
 
 
 
-    //for AJAX test
-    function test(){
-//	    echo "test";
-    echo json_encode(array("qty"=>$_POST['qty']));
-	}
+//    //for AJAX test
+//    function test(){
+////	    echo "test";
+//    echo json_encode(array("qty"=>$_POST['qty']));
+//	}
 
 
 

@@ -21,7 +21,7 @@
     ================================================== -->
     <script src="<?php echo base_url()."assets/js/jquery-3.3.1.js"; ?>" ></script>
     <script src="<?php echo base_url(); ?>assets/js/vendor/popper.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -37,19 +37,21 @@
             <li class="nav-item active">
                 <a class="nav-link" href="<?= base_url()."store_items/index"?>">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Home & Garden</a>
+                    <a class="dropdown-item" href="#">Books & Magazines</a>
+                    <a class="dropdown-item" href="#">Accessories</a>
+                    <a class="dropdown-item" href="#">Bags & Luggage</a>
+                    <a class="dropdown-item" href="#">Clothes</a>
+                    <a class="dropdown-item" href="#">Appliances</a>
+                    <a class="dropdown-item" href="#">Vehicles</a>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
             </li>
         </ul>
         <ul class="nav pull-right">
@@ -61,28 +63,33 @@
                 <i class="icon-shopping-cart"></i>CART
             </a>
             <!-- start: User Dropdown -->
+
             <?php
-            //show the user dropdown if the user is logged in
             $userdata = $this->session->userdata();
             if(isset($userdata['first_name'])) {
             ?>
             <li class="dropdown">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="halflings-icon white user"></i>
+                <button class="dropdown-toggle btn btn-primary" data-toggle="dropdown">
+                    <i class="halflings-icon white user">
                     <?php
-                    echo $userdata['first_name'];
+                    echo $userdata['first_name']."</i>";
                     } else {
                         echo "<a href='".base_url()."auth/login' class='btn btn-primary'>Login</a>";
                     }
                     ?>
                     <span class="caret"></span>
-                </a>
+                </button>
                 <ul class="dropdown-menu">
-                    <li class="dropdown-menu-title">
-                        <span>Account Settings</span>
-                    </li>
-                    <li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-                    <li><a href="<?php echo base_url()."auth/logout";?>"><i class="halflings-icon off"></i> Logout</a></li>
+                    <?php
+                    //set the first dropdown item to "Dashbaord" if the user is admin, otherwise profile
+                        if($userdata['first_name'] == "Admin" | $userdata['first_name'] == "admin"){
+                            echo "<li><a class='dropdown-item' href='".base_url()."auth/manage'><i class='halflings-icon user'></i>Dashboard</a></li>";
+                            } else {
+                            echo "<li><a class='dropdown-item' href='#'><i class='halflings-icon user'></i> Profile</a></li>";
+                        }
+                    ?>
+
+                    <li><a class="dropdown-item" href="<?php echo base_url()."auth/logout";?>"><i class="halflings-icon off"></i> Logout</a></li>
                 </ul>
             </li>
             <!-- end: User Dropdown -->
@@ -143,7 +150,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">Checkout</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

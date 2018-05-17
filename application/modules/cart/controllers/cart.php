@@ -91,7 +91,7 @@ class Cart extends MX_Controller {
                     <td>'.$item_id.'</td>
                     <td>'.$item_details['item_title'].'</td>
                     <td>'.'$'.$item_details['item_price'].'</td>
-                    <td>'.$qty.'</td>
+                    <td><input type="number" value='.$qty.' style="width: 50px;"></td>
                     <td>'.'$'.$subtotal.'</td>
                     <td><button type="button" id="'.$item_id.'" class="btn btn-danger btn-sm remove_cart_item_btn">Delete</button></td>
                 </tr>
