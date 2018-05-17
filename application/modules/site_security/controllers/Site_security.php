@@ -1,9 +1,9 @@
 <?php
-class site_security extends MX_controller {
+class site_security extends MX_Controller {
 	function __construct() {
 		parent::__construct();
 	}
-//	//link to templates/templates.php in order to load tempalte
+//	//link to templates/Templates.php in order to load tempalte
 //	function account_manage(){
 //	    //TODO: need to check after complete the logic
 ////	    $this->_make_sure_is_admin();

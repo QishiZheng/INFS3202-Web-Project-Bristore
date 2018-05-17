@@ -27,7 +27,7 @@ class Cart extends MX_Controller {
             echo json_encode("You are not logged in! Please login before adding anything to cart.");
         }
 
-        $this->load->model('cart_model');
+        //$this->load->model('cart_model');
 
         $user_id = $this->ion_auth->get_user_id();
         $item_id = $this->input->post('item_id');

@@ -14,7 +14,7 @@
 
 <!--    <link href="--><?php //echo base_url(); ?><!--assets/adminfiles/css/bootstrap.min.css" rel="stylesheet">-->
 
-<!--    <!-- Custom styles for this template -->-->
+<!--    <!-- Custom styles for this template -->
 <!--    <link href="--><?php //echo base_url(); ?><!--dist/css/jumbotron.css" rel="stylesheet">-->
 
     <!-- Bootstrap core JavaScript

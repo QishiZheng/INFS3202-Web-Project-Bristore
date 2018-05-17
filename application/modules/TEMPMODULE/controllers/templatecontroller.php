@@ -1,5 +1,5 @@
 <?php
-class Templatecontroller extends MX_controller {
+class Templatecontroller extends MX_Controller {
 	function __construct() {
 		parent::__construct();
 	}

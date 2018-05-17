@@ -9,7 +9,7 @@ class Store_items extends MX_Controller {
 
     //takes the user to home page
     function index() {
-        $data['view_file'] = "home_page.php";
+        $data['view_file'] = "home_page";
         $this->load->module('templates');
         $this->templates->shop($data);
     }
