@@ -36,14 +36,14 @@
                     <div class="control-group">
                         <label class="control-label" for="typeahead">Item Price $</label>
                         <div class="controls">
-                            <input type="text" class="span6" name="item_price" value="<?= $item_price?>">
+                            <input type="number" step="0.01" class="span6" name="item_price" value="<?= $item_price?>">
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label" for="typeahead">Item Stock</label>
                         <div class="controls">
-                            <input type="text" class="span6" name="item_stock" value="<?= $item_stock?>">
+                            <input type="number" class="span6" name="item_stock" value="<?= $item_stock?>">
                         </div>
                     </div>
 

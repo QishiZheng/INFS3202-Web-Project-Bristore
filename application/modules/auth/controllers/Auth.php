@@ -13,6 +13,7 @@ class Auth extends MX_controller
 		$this->load->database();
 		$this->load->library(array('ion_auth', 'form_validation'));
 		$this->load->helper(array('url', 'language', 'security'));
+//        $this->form_validation->CI =& $this;
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
@@ -185,7 +186,7 @@ class Auth extends MX_controller
         $data['identity_column'] = $identity_column;
 
         // validate form input
-        $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required|callback_firstname_check');
+        $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'trim|required|callback_fname_check');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'trim|required');
         if ($identity_column !== 'email')
         {
@@ -201,7 +202,7 @@ class Auth extends MX_controller
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
-        if ($this->form_validation->run() === TRUE)
+        if ($this->form_validation->run($this) === TRUE)
         {
             $email = strtolower($this->input->post('email'));
             $identity = ($identity_column === 'email') ? $email : $this->input->post('identity');
@@ -214,7 +215,7 @@ class Auth extends MX_controller
                 'phone' => $this->input->post('phone'),
             );
         }
-        if ($this->form_validation->run() === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
+        if ($this->form_validation->run($this) === TRUE && $this->ion_auth->register($identity, $password, $email, $additional_data))
         {
             // check to see if we are creating the user
             //set flash data
@@ -291,11 +292,11 @@ class Auth extends MX_controller
 
     //check if the first name is "admin" or "Admin"
     //TODO: Error message is not showing properly
-    public function firstname_check($str)
+    public function fname_check($str)
     {
         if ($str == 'admin' | $str == 'Admin')
         {
-            $this->form_validation->set_message(firstname_check, 'The {First Name} field cannot be the word "admin" or "Admin"');
+            $this->form_validation->set_message(__FUNCTION__, 'The First Name field cannot be the word "admin" or "Admin"');
             return FALSE;
         }
         else

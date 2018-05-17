@@ -4,7 +4,7 @@ class Store_items extends MX_Controller {
 		parent::__construct();
 		$this->load->library('session');
 		$this->load->library('form_validation');
-		$this->form_validation->CI =& $this;
+//		$this->form_validation->CI =& $this;
 	}
 
     //takes the user to home page
@@ -38,7 +38,7 @@ class Store_items extends MX_Controller {
             $this->form_validation->set_rules('item_description', 'Item Description', 'required');
 
             //update or insert a new item if all user inputs are correct
-            if($this->form_validation->run() == TRUE) {
+            if($this->form_validation->run($this) == TRUE) {
                 //fetch the user input
                 $data=$this->fetch_data_from_post();
                 $data['item_url'] = url_title($data['item_title']);
