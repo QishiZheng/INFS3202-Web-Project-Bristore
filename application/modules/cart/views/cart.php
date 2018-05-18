@@ -1,38 +1,10 @@
-<h2>Shopping Cart Using Ajax and Codeigniter</h2>
-
 <div class="container"><br/>
-<!--    <hr/>-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-8">-->
-<!--            <h4>Product</h4>-->
-<!--            <div class="row">-->
-<!--                --><?php //foreach ($data->result() as $row) : ?>
-<!--                    <div class="col-md-4">-->
-<!--                        <div class="thumbnail">-->
-<!--                            <img width="200" src="--><?php //echo base_url().'assets/images/'.$row->product_image;?><!--">-->
-<!--                            <div class="caption">-->
-<!--                                <h4>--><?php //echo $row->product_name;?><!--</h4>-->
-<!--                                <div class="row">-->
-<!--                                    <div class="col-md-7">-->
-<!--                                        <h4>--><?php //echo number_format($row->product_price);?><!--</h4>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-md-5">-->
-<!--                                        <input type="number" name="quantity" id="--><?php //echo $row->product_id;?><!--" value="1" class="quantity form-control">-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <button class="add_cart btn btn-success btn-block" data-productid="--><?php //echo $row->product_id;?><!--" data-productname="--><?php //echo $row->product_name;?><!--" data-productprice="--><?php //echo $row->product_price;?><!--">Add To Cart</button>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                --><?php //endforeach;?>
-<!---->
-<!--            </div>-->
-<!---->
-<!--        </div>-->
         <div class="col-md-8 container-fluid">
+            <h2>Your Shopping Cart</h2>
             <table class="table table-active">
                 <thead>
                 <tr>
+                    <th>Item ID</th>
                     <th>Items</th>
                     <th>Price</th>
                     <th>Qty</th>
@@ -40,29 +12,72 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody id="detail_cart">
+                <tbody id="cart_details">
 
                 </tbody>
-
             </table>
+            <a class="btn btn-primary pull-right" href="#" >Checkout</a>
         </div>
     </div>
 </div>
 
 <script>
-    $(document).ready(function() {
-        $('#detail_cart').load("<?php echo site_url('cart/load_cart');?>");
 
-        $(document).on('click','.romove_cart',function(){
-            var row_id=$(this).attr("id");
+    //update quantity of item in cart
+    //TODO: NOT working, failed to get the content of user inout
+    function update_qty(item_id){
+        var item_id = item_id;
+        var item_qty_id = item_id + "_qty";
+        var item_qty = document.getElementById("item_qty_id");
+        console.log("Item id is: " +  item_id);
+        console.log("Item qty ID is: " + item_qty_id);
+        console.log(item_qty);
+    }
+
+
+    //show shopping cart
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: <?= json_encode(base_url().'cart/show_cart')?>,
+            dataType: "JSON",
+
+            success: function(data) {
+                $('#cart_details').html(data);
+                //console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+    });
+
+
+    //send the item_id to server and delete this item in cart
+    $("table").delegate("button", "click", function() {
+        if (confirm("Are you sure you want to delete this item?")) {
+            var el = this;
+            var id = $(this).attr('id');
             $.ajax({
-                url : "<?php echo site_url('cart/delete_cart');?>",
-                method : "POST",
-                data : {row_id : row_id},
-                success :function(data){
-                    $('#detail_cart').html(data);
+                url: <?= json_encode(base_url().'cart/delete_cart_item')?>,
+                type: 'POST',
+                data: { item_id: id },
+                dataType: 'JSON',
+                success: function(data){
+                    //console.log(data);
+                    // Removing row from HTML Table
+                    $(el).closest('tr').css('background','tomato');
+                    $(el).closest('tr').fadeOut(800, function(){
+                        $(this).remove();
+                    });
+                },
+                error: function(error){
+                    console.log(error);
                 }
             });
-        });
+        }
     });
+
+
 </script>

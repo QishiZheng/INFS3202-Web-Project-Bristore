@@ -13,7 +13,6 @@ class Cart extends MX_Controller {
     }
 
     function index(){
-//        $data['data']=$this->product_model->get_all_product();
         $data['view_file'] = "cart";
         $this->load->module('templates');;
         $this->templates->shop($data);
@@ -91,7 +90,7 @@ class Cart extends MX_Controller {
                     <td>'.$item_id.'</td>
                     <td>'.$item_details['item_title'].'</td>
                     <td>'.'$'.$item_details['item_price'].'</td>
-                    <td><input type="number" value='.$qty.' style="width: 50px;"></td>
+                    <td><input type="number" id="'.$item_id.'_qty" onchange="update_qty('.$item_id.')" value='.$qty.' style="width: 50px;"></td>
                     <td>'.'$'.$subtotal.'</td>
                     <td><button type="button" id="'.$item_id.'" class="btn btn-danger btn-sm remove_cart_item_btn">Delete</button></td>
                 </tr>

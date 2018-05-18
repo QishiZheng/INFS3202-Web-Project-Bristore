@@ -150,7 +150,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Checkout</button>
+                <a class="btn btn-primary" href="<?= base_url().'cart/' ?>" >Checkout</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -159,8 +159,8 @@
 </body>
 
 <script>
-    $(document).ready(function() {
 
+    $(document).ready(function() {
         //get teh cart data from server and display it with modal when cart is clicked
         $("#cart").click(function() {
             // e.preventDefault();
@@ -203,8 +203,20 @@
                     }
                 });
             }
-
         });
+
+        //update quantity of item in cart
+        //TODO: NOT working, failed to get the content of user inout
+        function update_qty(item_id){
+            var item_id = item_id;
+            var item_qty_id = item_id + "_qty";
+            var item_qty = document.getElementById("item_qty_id");
+            console.log("Item id is: " +  item_id);
+            console.log("Item qty ID is: " + item_qty_id);
+            console.log(item_qty);
+        }
+
+
     });
 </script>
 </html>
