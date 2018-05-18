@@ -27,8 +27,8 @@ if($identity_column!=='email') {
 ?>
 
 <!--<p>-->
-<!--    --><?php //echo lang('create_user_company_label', 'company');?><!-- <br />-->
-<!--    --><?php //echo form_input($company);?>
+<!--    --><?php //echo lang('create_user_address_label', 'address');?><!-- <br />-->
+<!--    --><?php //echo form_input($address);?>
 <!--</p>-->
 
 <p>
@@ -41,6 +41,7 @@ if($identity_column!=='email') {
     <?php echo form_input($phone);?>
 </p>
 
+
 <p>
     <?php echo lang('create_user_password_label', 'password');?> <br />
     <?php echo form_input($password);?>
@@ -51,7 +52,7 @@ if($identity_column!=='email') {
     <?php echo form_input($password_confirm);?>
 </p>
 
-
 <p><?php echo form_submit('submit', 'Create Account');?></p>
 
 <?php echo form_close();?>
+

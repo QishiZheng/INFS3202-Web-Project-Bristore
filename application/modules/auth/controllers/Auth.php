@@ -174,7 +174,6 @@ class Auth extends MX_Controller
 		redirect('auth/login', 'refresh');
 	}
 
-
     /**
      * Register a new user
      */
@@ -198,7 +197,7 @@ class Auth extends MX_Controller
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[' . $tables['users'] . '.email]');
         }
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
-        $this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
+        //$this->form_validation->set_rules('address', $this->lang->line('create_user_validation_address_label'), 'trim|required');
         $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
@@ -211,7 +210,7 @@ class Auth extends MX_Controller
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
                 'last_name' => $this->input->post('last_name'),
-                'company' => $this->input->post('company'),
+//                'address' => $this->input->post('address'),
                 'phone' => $this->input->post('phone'),
             );
         }
@@ -256,11 +255,11 @@ class Auth extends MX_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('email'),
             );
-//            $data['company'] = array(
-//                'name' => 'company',
-//                'id' => 'company',
+//            $data['address'] = array(
+//                'name' => 'address',
+//                'id' => 'address',
 //                'type' => 'text',
-//                'value' => $this->form_validation->set_value('company'),
+//                'value' => $this->form_validation->set_value('address'),
 //            );
             $data['phone'] = array(
                 'name' => 'phone',
@@ -291,7 +290,6 @@ class Auth extends MX_Controller
 
 
     //check if the first name is "admin" or "Admin"
-    //TODO: Error message is not showing properly
     public function fname_check($str)
     {
         if ($str == 'admin' | $str == 'Admin')
@@ -762,6 +760,7 @@ class Auth extends MX_Controller
 //			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'create_user', $data);
 		}
 	}
+
 	/**
 	* Redirect a user checking if is admin
 	*/
