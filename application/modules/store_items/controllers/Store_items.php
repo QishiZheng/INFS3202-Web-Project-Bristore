@@ -559,5 +559,27 @@ class Store_items extends MX_Controller {
         }
     }
 
+    //test email server(working XD)
+    //TODO: implenment fully working email service
+    public function email_test(){
+        $this->load->library('email');
+
+        $config['protocol'] = 'sendmail';
+        $config['mailpath'] = '/usr/sbin/sendmail';
+        $config['charset'] = 'iso-8859-1';
+        $config['wordwrap'] = TRUE;
+
+        $this->email->initialize($config);
+
+        $this->email->from('customer_service@bristore.com', 'Bristore');
+        $this->email->to('vincezheng4265@gmail.com');
+
+        $this->email->subject('Bristore Email Test(Please do not respond)');
+        $this->email->message('Testing the email class.');
+
+        $this->email->send();
+        echo "sent!";
+    }
+
 
 }

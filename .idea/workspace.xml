@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="279cf570-03de-4942-84ce-31dccf282842" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/application/config/config.php" afterPath="$PROJECT_DIR$/application/config/config.php" />
-      <change beforePath="$PROJECT_DIR$/application/controllers/Welcome.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/application/modules/TEMPMODULE/controllers/templatecontroller.php" afterPath="$PROJECT_DIR$/application/modules/TEMPMODULE/controllers/templatecontroller.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/auth/controllers/Auth.php" afterPath="$PROJECT_DIR$/application/modules/auth/controllers/Auth.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/cart/controllers/cart.php" afterPath="$PROJECT_DIR$/application/modules/cart/controllers/Cart.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/cart/models/cart_model.php" afterPath="$PROJECT_DIR$/application/modules/cart/models/Cart_model.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/site_security/controllers/site_security.php" afterPath="$PROJECT_DIR$/application/modules/site_security/controllers/Site_security.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/store_items/controllers/store_items.php" afterPath="$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/store_items/models/mdl_store_items.php" afterPath="$PROJECT_DIR$/application/modules/store_items/models/Mdl_store_items.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/templates/controllers/templates.php" afterPath="$PROJECT_DIR$/application/modules/templates/controllers/Templates.php" />
-      <change beforePath="$PROJECT_DIR$/application/modules/templates/views/shop.php" afterPath="$PROJECT_DIR$/application/modules/templates/views/shop.php" />
+      <change beforePath="$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php" afterPath="$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,25 +37,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Store_items.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Store_items.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+            <state relative-caret-position="3034">
+              <caret line="562" column="50" lean-forward="false" selection-start-line="562" selection-start-column="50" selection-end-line="562" selection-end-column="50" />
               <folding>
-                <marker date="1526556515482" expanded="true" signature="2175:2327" ph="..." />
-                <marker date="1526556515482" expanded="true" signature="2254:2261" ph="×" />
-                <marker date="1526556515482" expanded="true" signature="2885:3037" ph="..." />
-                <marker date="1526556515482" expanded="true" signature="2964:2971" ph="×" />
-                <marker date="1526556515482" expanded="true" signature="8811:8963" ph="..." />
-                <marker date="1526556515482" expanded="true" signature="8890:8897" ph="×" />
-                <marker date="1526556515482" expanded="true" signature="10809:10961" ph="..." />
-                <marker date="1526556515482" expanded="true" signature="10888:10895" ph="×" />
-                <marker date="1526556515482" expanded="true" signature="16757:16836" ph="SELECT * FRO... items" />
-                <marker date="1526556515482" expanded="true" signature="18425:18577" ph="..." />
-                <marker date="1526556515482" expanded="true" signature="18504:18511" ph="×" />
-                <marker date="1526556515482" expanded="true" signature="19142:19294" ph="..." />
-                <marker date="1526556515482" expanded="true" signature="19221:19228" ph="×" />
+                <marker date="1526606558850" expanded="true" signature="2175:2327" ph="..." />
+                <marker date="1526606558850" expanded="true" signature="2254:2261" ph="×" />
+                <marker date="1526606558850" expanded="true" signature="2885:3037" ph="..." />
+                <marker date="1526606558850" expanded="true" signature="2964:2971" ph="×" />
+                <marker date="1526606558850" expanded="true" signature="8811:8963" ph="..." />
+                <marker date="1526606558850" expanded="true" signature="8890:8897" ph="×" />
+                <marker date="1526606558850" expanded="true" signature="10809:10961" ph="..." />
+                <marker date="1526606558850" expanded="true" signature="10888:10895" ph="×" />
+                <marker date="1526606558850" expanded="true" signature="16757:16836" ph="SELECT * FRO... items" />
+                <marker date="1526606558850" expanded="true" signature="18425:18577" ph="..." />
+                <marker date="1526606558850" expanded="true" signature="18504:18511" ph="×" />
+                <marker date="1526606558850" expanded="true" signature="19142:19294" ph="..." />
+                <marker date="1526606558850" expanded="true" signature="19221:19228" ph="×" />
               </folding>
             </state>
           </provider>
@@ -83,7 +71,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cart.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Cart.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/modules/cart/controllers/Cart.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="165">
@@ -212,13 +200,13 @@
         <option value="$PROJECT_DIR$/application/modules/templates/views/shop.php" />
         <option value="$PROJECT_DIR$/application/modules/welcome/controllers/Welcome.php" />
         <option value="$PROJECT_DIR$/application/modules/store_items/config/routes.php" />
-        <option value="$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/application/modules/site_security/controllers/Site_security.php" />
         <option value="$PROJECT_DIR$/application/modules/auth/controllers/Auth.php" />
         <option value="$PROJECT_DIR$/application/modules/TEMPMODULE/controllers/templatecontroller.php" />
         <option value="$PROJECT_DIR$/application/config/config.php" />
         <option value="$PROJECT_DIR$/application/modules/cart/controllers/Cart.php" />
+        <option value="$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php" />
       </list>
     </option>
   </component>
@@ -230,10 +218,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="624" />
+    <option name="x" value="107" />
     <option name="y" value="22" />
-    <option name="width" value="1366" />
-    <option name="height" value="984" />
+    <option name="width" value="1302" />
+    <option name="height" value="805" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -460,18 +448,18 @@
       <updated>1524138070631</updated>
       <workItem from="1524138071869" duration="150187000" />
       <workItem from="1526035493833" duration="35349000" />
-      <workItem from="1526434038512" duration="26572000" />
+      <workItem from="1526434038512" duration="27544000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="226849000" />
+    <option name="totallyTimeSpent" value="227821000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="624" y="22" width="1366" height="984" extended-state="0" />
+    <frame x="107" y="22" width="1302" height="805" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19912152" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20890938" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -825,28 +813,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="34" lean-forward="true" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-          <folding>
-            <marker date="1526556515482" expanded="true" signature="2175:2327" ph="..." />
-            <marker date="1526556515482" expanded="true" signature="2254:2261" ph="×" />
-            <marker date="1526556515482" expanded="true" signature="2885:3037" ph="..." />
-            <marker date="1526556515482" expanded="true" signature="2964:2971" ph="×" />
-            <marker date="1526556515482" expanded="true" signature="8811:8963" ph="..." />
-            <marker date="1526556515482" expanded="true" signature="8890:8897" ph="×" />
-            <marker date="1526556515482" expanded="true" signature="10809:10961" ph="..." />
-            <marker date="1526556515482" expanded="true" signature="10888:10895" ph="×" />
-            <marker date="1526556515482" expanded="true" signature="16757:16836" ph="SELECT * FRO... items" />
-            <marker date="1526556515482" expanded="true" signature="18425:18577" ph="..." />
-            <marker date="1526556515482" expanded="true" signature="18504:18511" ph="×" />
-            <marker date="1526556515482" expanded="true" signature="19142:19294" ph="..." />
-            <marker date="1526556515482" expanded="true" signature="19221:19228" ph="×" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/modules/TEMPMODULE/controllers/templatecontroller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -964,6 +930,28 @@
             <marker date="1526564137729" expanded="true" signature="3691:3804" ph="..." />
             <marker date="1526564137729" expanded="true" signature="4359:4511" ph="..." />
             <marker date="1526564137729" expanded="true" signature="4438:4445" ph="×" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/store_items/controllers/Store_items.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3034">
+          <caret line="562" column="50" lean-forward="false" selection-start-line="562" selection-start-column="50" selection-end-line="562" selection-end-column="50" />
+          <folding>
+            <marker date="1526606558850" expanded="true" signature="2175:2327" ph="..." />
+            <marker date="1526606558850" expanded="true" signature="2254:2261" ph="×" />
+            <marker date="1526606558850" expanded="true" signature="2885:3037" ph="..." />
+            <marker date="1526606558850" expanded="true" signature="2964:2971" ph="×" />
+            <marker date="1526606558850" expanded="true" signature="8811:8963" ph="..." />
+            <marker date="1526606558850" expanded="true" signature="8890:8897" ph="×" />
+            <marker date="1526606558850" expanded="true" signature="10809:10961" ph="..." />
+            <marker date="1526606558850" expanded="true" signature="10888:10895" ph="×" />
+            <marker date="1526606558850" expanded="true" signature="16757:16836" ph="SELECT * FRO... items" />
+            <marker date="1526606558850" expanded="true" signature="18425:18577" ph="..." />
+            <marker date="1526606558850" expanded="true" signature="18504:18511" ph="×" />
+            <marker date="1526606558850" expanded="true" signature="19142:19294" ph="..." />
+            <marker date="1526606558850" expanded="true" signature="19221:19228" ph="×" />
           </folding>
         </state>
       </provider>
