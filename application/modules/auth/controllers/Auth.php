@@ -1086,7 +1086,7 @@ class Auth extends MX_Controller
 
 
     //check if the user is logged in,redirect to login page if no admin
-    private function login_check() {
+    function login_check() {
         if (!$this->ion_auth->logged_in())
         {
             $flash_msg = "You have to log in to view this page";
@@ -1100,7 +1100,7 @@ class Auth extends MX_Controller
     }
 
     //check if the user is admin, redirect to home page if no admin
-    private function admin_check() {
+    function admin_check() {
         if (!$this->ion_auth->is_admin())
         {
             //set flash data

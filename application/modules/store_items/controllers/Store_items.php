@@ -2,6 +2,7 @@
 class Store_items extends MX_Controller {
 	function __construct() {
 		parent::__construct();
+		$this->load->module('auth');
 		$this->load->library('session');
 		$this->load->library('form_validation');
 //		$this->form_validation->CI =& $this;
@@ -20,8 +21,8 @@ class Store_items extends MX_Controller {
         $this->load->library('session');
 
         //security check
-        $this->login_check();
-        $this->admin_check();
+        $this->auth->login_check();
+        $this->auth->admin_check();
 
         //get the id of this item
         $update_id = $this->uri->segment(3);
@@ -101,8 +102,8 @@ class Store_items extends MX_Controller {
         //check if the user is admin
         $this->load->library('session');
         //security check
-        $this->login_check();
-        $this->admin_check();
+       $this->auth->login_check();
+       $this->auth->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -125,8 +126,8 @@ class Store_items extends MX_Controller {
         //check if the user is admin
         $this->load->library('session');
         //security check
-        $this->login_check();
-        $this->admin_check();
+       $this->auth->login_check();
+       $this->auth->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -204,8 +205,8 @@ class Store_items extends MX_Controller {
         //check if the user is admin
         $this->load->library('session');
         //security check
-        $this->login_check();
-        $this->admin_check();
+       $this->auth->login_check();
+       $this->auth->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -248,8 +249,8 @@ class Store_items extends MX_Controller {
         //load security module and check if is admin
         $this->load->library('session');
         //security check
-        $this->login_check();
-        $this->admin_check();
+       $this->auth->login_check();
+       $this->auth->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -273,8 +274,8 @@ class Store_items extends MX_Controller {
         //load security module and check if is admin
         $this->load->library('session');
         //security check
-        $this->login_check();
-        $this->admin_check();
+       $this->auth->login_check();
+       $this->auth->admin_check();
 
         //check the update_id
         if(!is_numeric($update_id)) {
@@ -324,8 +325,8 @@ class Store_items extends MX_Controller {
     //delete an item using AJAX on manage page
     function ajax_do_delete_item() {
         //security check
-        $this->login_check();
-        $this->admin_check();
+       $this->auth->login_check();
+       $this->auth->admin_check();
 
         if(isset($_POST['id'])) {
             //get the id from AJAX POST
@@ -372,8 +373,8 @@ class Store_items extends MX_Controller {
 	    //load security module and check if is admin
         $this->load->library('session');
         //security check
-        $this->login_check();
-        $this->admin_check();
+       $this->auth->login_check();
+       $this->auth->admin_check();
 
 	    $data['query'] = $this->get('id');
 	    $data['view_file'] = "manage";
@@ -527,37 +528,37 @@ class Store_items extends MX_Controller {
 
 
 
-	//check if the user is logged in,redirect to login page if no admin
-	private function login_check() {
-        $this ->load->module('auth');
-        if (!$this->ion_auth->logged_in())
-        {
-            $flash_msg = "You have to log in to view this page";
-            $value = '<div class="alert alert-dismissible alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>'.$flash_msg.'</strong></div>';
-            $this->session->set_flashdata('item', $value);
-            // redirect them to the login page
-            redirect('auth/login', 'refresh');
-        }
-    }
-
-
-    //check if the user is admin, redirect to home page if no admin
-	private function admin_check() {
-        $this ->load->module('auth');
-        if (!$this->ion_auth->is_admin())
-        {
-            //set flash data
-            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
-            $value = '<div class="alert alert-dismissible alert-warning">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>'.$flash_msg.'</strong></div>';
-            $this->session->set_flashdata('item', $value);
-            // redirect them to the home page because they must be an administrator to view this
-            redirect('store_items/index', 'refresh');
-        }
-    }
+//	//check if the user is logged in,redirect to login page if no admin
+//	private function login_check() {
+//        $this ->load->module('auth');
+//        if (!$this->ion_auth->logged_in())
+//        {
+//            $flash_msg = "You have to log in to view this page";
+//            $value = '<div class="alert alert-dismissible alert-warning">
+//                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+//                    <strong>'.$flash_msg.'</strong></div>';
+//            $this->session->set_flashdata('item', $value);
+//            // redirect them to the login page
+//            redirect('auth/login', 'refresh');
+//        }
+//    }
+//
+//
+//    //check if the user is admin, redirect to home page if no admin
+//	private function admin_check() {
+//        $this ->load->module('auth');
+//        if (!$this->ion_auth->is_admin())
+//        {
+//            //set flash data
+//            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
+//            $value = '<div class="alert alert-dismissible alert-warning">
+//                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+//                    <strong>'.$flash_msg.'</strong></div>';
+//            $this->session->set_flashdata('item', $value);
+//            // redirect them to the home page because they must be an administrator to view this
+//            redirect('store_items/index', 'refresh');
+//        }
+//    }
 
     //test email server(working XD)
     //TODO: implenment fully working email service
