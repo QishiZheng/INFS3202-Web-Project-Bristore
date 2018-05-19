@@ -46,10 +46,10 @@ class Cart_model extends CI_Model {
         $this->db->insert($table, $data);
     }
 
-    function _update_item($user_id, $item_id, $data) {
+    function _update_item($data) {
         $table = $this->get_table();
-        $this->db->where('user_id', $user_id);
-        $this->db->where('item_id', $item_id);
+        $this->db->where('user_id', $data['user_id']);
+        $this->db->where('item_id', $data['item_id']);
         $this->db->update($table, $data);
     }
 

@@ -125,10 +125,21 @@ class Cart extends MX_Controller {
         echo 1;
     }
 
+    //update the item qty with ajax
+    function update_cart_item_qty(){
+        $this->auth->login_check();
+        $user_id = $this->ion_auth->get_user_id();
+        $item_id = $this->input->post('item_id');
+        $qty = $this->input->post('qty');
 
-
-
-
+        $data = array(
+            'user_id' => $user_id,
+            'item_id' => $item_id,
+            'qty' => $qty
+        );
+        $this->cart_model->_update_item($data);
+        echo 1;
+    }
 
     //fetch the data of shopping cart with given userid
     function fetch_cart_item_from_db($user_id) {

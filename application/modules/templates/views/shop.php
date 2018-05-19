@@ -160,6 +160,31 @@
 
 <script>
 
+
+    //update quantity of item in cart with ajax
+    function update_qty(item_id){
+        var item_id = item_id;
+        var item_qty_id = item_id + "_qty";
+        var item_qty = document.getElementById(item_qty_id).value;
+        $.ajax({
+            url: <?= json_encode(base_url().'cart/update_cart_item_qty')?>,
+            type: 'POST',
+            data: { item_id: item_id,
+                    qty: item_qty,
+            },
+            dataType: 'JSON',
+            success: function(data){
+                console.log(data);
+                //Removing row from HTML Table
+                //$('#cart_modal').modal('show');
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+
+    }
+
     $(document).ready(function() {
         //get teh cart data from server and display it with modal when cart is clicked
         $("#cart").click(function() {
@@ -205,16 +230,6 @@
             }
         });
 
-        //update quantity of item in cart
-        //TODO: NOT working, failed to get the content of user inout
-        function update_qty(item_id){
-            var item_id = item_id;
-            var item_qty_id = item_id + "_qty";
-            var item_qty = document.getElementById("item_qty_id");
-            console.log("Item id is: " +  item_id);
-            console.log("Item qty ID is: " + item_qty_id);
-            console.log(item_qty);
-        }
 
 
     });
