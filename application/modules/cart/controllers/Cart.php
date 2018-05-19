@@ -12,7 +12,7 @@ class Cart extends MX_Controller {
     }
 
     function index(){
-        $data['view_file'] = "cart";
+        $data['view_file'] = "check_out";
         $this->templates->shop($data);
     }
 
@@ -142,6 +142,12 @@ class Cart extends MX_Controller {
         );
         $this->cart_model->_update_item($data);
         echo 1;
+    }
+
+    //go to check out page
+    function check_out(){
+        $data['view_file'] = "check_out";
+        $this->templates->shop($data);
     }
 
     //fetch the data of shopping cart with given userid

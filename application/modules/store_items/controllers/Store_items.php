@@ -408,7 +408,6 @@ class Store_items extends MX_Controller {
             $data['item_pic'] = $row->item_pic;
             $data['item_created_at'] = $row->item_created_at;
         }
-
         if(!isset($data)) {
 	        $data = "";
         }
@@ -416,10 +415,15 @@ class Store_items extends MX_Controller {
         return $data;
     }
 
-//    //view the product
-//    function view($update_id) {
-//
-//    }
+    //check if the item with given id has stock
+    function stock_check($id) {
+	    $data = $this->fetch_data_from_db($id);
+	    if($data['item_stock'] > 0) {
+	        return true;
+        }
+        return false;
+    }
+
 
 	function get($order_by) {
 		$this->load->model('mdl_store_items');

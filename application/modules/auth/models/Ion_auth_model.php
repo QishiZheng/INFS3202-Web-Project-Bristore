@@ -2632,4 +2632,26 @@ class Ion_auth_model extends CI_Model
 			$this->session->sess_regenerate(FALSE);
 		}
 	}
+
+//    function fetch_user_from_db($user_id) {
+//        $table = "users";
+//        $this->db->where('id', $user_id);
+//        $query = $this->db->get($table);
+//        //execute the query that retrieves the data of user with given id
+//        foreach($query->result() as $row) {
+//            $data['email'] = $row->email;
+//            $data['address'] = $row->address;
+////            $data['item_price'] = $row->item_price;
+////            $data['item_stock'] = $row->item_stock;
+////            $data['item_category'] = $row->item_category;
+////            $data['item_description'] = $row->item_description;
+////            $data['item_pic'] = $row->item_pic;
+////            $data['item_created_at'] = $row->item_created_at;
+//        }
+//        if(!isset($data)) {
+//            $data = "";
+//        }
+//
+//        return $data;
+//    }
 }

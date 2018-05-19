@@ -150,7 +150,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <a class="btn btn-primary" href="<?= base_url().'cart/' ?>" >Checkout</a>
+                <a class="btn btn-primary" href="<?= base_url().'cart/check_out' ?>" >Checkout</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

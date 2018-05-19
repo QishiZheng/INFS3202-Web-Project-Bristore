@@ -1115,6 +1115,12 @@ class Auth extends MX_Controller
     }
 
 
+//    function user_test() {
+//        $user_id = $this->ion_auth->get_user_id();
+//        $user = $this->ion_auth->user($user_id)->row();
+//        echo $user->address;
+//    }
+
 //	function email() {
 //        $receiver  = 'vincezheng4265@gmail.com';
 //        $subject = 'Did you know...';
