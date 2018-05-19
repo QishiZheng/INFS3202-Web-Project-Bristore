@@ -6,15 +6,13 @@ class Cart extends MX_Controller {
         parent::__construct();
         //$this->load->library('cart');
 
-        $this->load->module('store_items');
-        $this->load->module('auth');
+        $this->load->module(array('store_items', 'auth', 'templates'));
         $this->load->library(array('ion_auth'));
         $this->load->model('cart_model');
     }
 
     function index(){
         $data['view_file'] = "cart";
-        $this->load->module('templates');;
         $this->templates->shop($data);
     }
 
@@ -104,10 +102,6 @@ class Cart extends MX_Controller {
         echo json_encode($result);
     }
 
-//    function load_cart(){
-//        echo $this->show_cart();
-//    }
-
 
     //delete this item in cart
     function delete_cart_item(){
@@ -130,6 +124,8 @@ class Cart extends MX_Controller {
         $this->cart_model->_delete($user_id, $item_id);
         echo 1;
     }
+
+
 
 
 

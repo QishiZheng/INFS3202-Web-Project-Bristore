@@ -28,7 +28,7 @@
     function update_qty(item_id){
         var item_id = item_id;
         var item_qty_id = item_id + "_qty";
-        var item_qty = document.getElementById("item_qty_id");
+        var item_qty = document.getElementById(item_qty_id).value;
         console.log("Item id is: " +  item_id);
         console.log("Item qty ID is: " + item_qty_id);
         console.log(item_qty);
