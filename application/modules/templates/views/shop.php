@@ -159,8 +159,6 @@
 </body>
 
 <script>
-
-
     //update quantity of item in cart with ajax
     function update_qty(item_id){
         var item_id = item_id;
@@ -200,7 +198,7 @@
                     //console.log(data);
                 },
                 error: function(error) {
-                    console.log(error);
+                    alert(error);
                 }
             });
         });

@@ -22,7 +22,9 @@ class Cart extends MX_Controller {
         if (!$this->ion_auth->logged_in())
         {
             echo json_encode("You are not logged in! Please login before adding anything to cart.");
+            die();
         }
+        //$this->auth->login_check();
 
         //$this->load->model('cart_model');
 
@@ -105,6 +107,7 @@ class Cart extends MX_Controller {
 
     //delete this item in cart
     function delete_cart_item(){
+        $this->auth->login_check();
         $user_id = $this->ion_auth->get_user_id();
         $item_id = $this->input->post('item_id');
 
