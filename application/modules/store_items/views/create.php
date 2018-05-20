@@ -50,7 +50,13 @@
                     <div class="control-group">
                         <label class="control-label" for="typeahead">Item Category </label>
                         <div class="controls">
-                            <input type="text" class="span6" name="item_category" value="<?= $item_category?>">
+<!--                            <select name="item_category" class="span6">-->
+<!--                                <option value="--><?//= $item_category?><!--">1</option>-->
+<!--                                <option value="--><?//= $item_category?><!--">2</option>-->
+<!--                                <option value="--><?//= $item_category?><!--" >3</option>-->
+<!--                                <option value="--><?//= $item_category?><!--">4</option>-->
+<!--                            </select>-->
+                          <input type="text" class="span6" name="item_category" value="<?= $item_category?>">
                         </div>
                     </div>
 

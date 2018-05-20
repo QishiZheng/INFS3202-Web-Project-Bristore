@@ -35,12 +35,12 @@ class Store_items extends MX_Controller {
             $this->form_validation->set_rules('item_title', 'Item Title', 'required|max_length[240]|callback_item_check');
             $this->form_validation->set_rules('item_price', 'Item Price', 'required|numeric|callback_check_positive');
             $this->form_validation->set_rules('item_stock', 'Item Stock', 'required|numeric|callback_check_positive');
-            $this->form_validation->set_rules('item_category', 'Item Category', 'required|max_length[240]');
+            $this->form_validation->set_rules('item_category', 'Item Category', 'required|numeric|callback_check_positive');
             $this->form_validation->set_rules('item_description', 'Item Description', 'required');
 
             //update or insert a new item if all user inputs are correct
             if($this->form_validation->run($this) == TRUE) {
-                //fetch the user input
+                //fetch the user input to update item data
                 $data=$this->fetch_data_from_post();
                 $data['item_url'] = url_title($data['item_title']);
 
@@ -370,23 +370,72 @@ class Store_items extends MX_Controller {
 
     //show the item management page
 	function manage() {
-	    //load security module and check if is admin
         $this->load->library('session');
         //security check
        $this->auth->login_check();
        $this->auth->admin_check();
 
-	    $data['query'] = $this->get('id');
+	    //$data['query'] = $this->get('id');
 	    $data['view_file'] = "manage";
 	    $this->load->module('templates');
 	    $this->templates->admin($data);
+    }
+
+
+    //populate item table on item manage page with all item data in db
+    function show_items() {
+        $this->load->model('mdl_store_items');
+        $output = '';
+
+        //$user_id = $this->ion_auth->get_user_id();
+        $query = $this->mdl_store_items->get('id');
+
+        //get all items that are in the cart of current user
+        foreach($query->result() as $row) {
+            $item_id = $row->id;
+            $title = $row->item_title;
+            $price = $row->item_price;
+            $stock = $row->item_stock;
+            $stock_status = $this->get_stock_status($stock);
+            $desc = $row->item_description;
+            $category = $this->get_item_cat_name($item_id);
+            $edit_item_url = base_url()."store_items/create/".$row->id;
+
+            $output .=
+                '
+                <tr>
+                    <td >'.$item_id.'</td>
+                    <td class="center">'.$title.'</td>
+                    <td class="center">'.$price.'</td>
+                    <td class="center">'.$stock.'</td>
+                    <td class="center">'.$category.'</td>
+                    <td class="center">'.$desc.'</td>
+                    <td class="center">'.$stock_status.'</td>
+                    <td class="center">
+                        <!--button for viewing this item on product page-->
+                        <a class="btn btn-success" href="'.base_url().'store_items/view_item/'.$item_id.'">
+                            <i class="halflings-icon white zoom-in"></i>
+                        </a>
+                        <!--button for editing this item-->
+                        <a class="btn btn-info" href="'.$edit_item_url.'">
+                            <i class="halflings-icon white edit"></i>
+                        </a>
+                        <!--button for deleting this item-->
+                        <button class="btn btn-danger btnDelete" id="del_'.$item_id.'">
+                            <i class="halflings-icon white trash"></i>
+                        </button>
+                    </td>
+                </tr>
+                ';
+        }
+        echo json_encode($output);
     }
 
     function fetch_data_from_post() {
 	    $data['item_title'] = $this->input->post('item_title', TRUE);
         $data['item_price'] = $this->input->post('item_price', TRUE);
         $data['item_stock'] = $this->input->post('item_stock', TRUE);
-        $data['item_category'] = $this->input->post('item_category', TRUE);
+        $data['item_category'] = $this->input->post('item_category', TRUE);;
         $data['item_description'] = $this->input->post('item_description', TRUE);
         return $data;
     }
@@ -422,6 +471,18 @@ class Store_items extends MX_Controller {
 	        return true;
         }
         return false;
+    }
+
+
+    //get the icon of stock status
+    private function get_stock_status($stock) {
+        if($stock <= 0 ) {
+            return '<span class="label label-important">Out of Stock!</span>';
+        } elseif($stock > 0 && $stock <= 10 ) {
+            return '<span class="label label-warning">Low Stock!</span>';
+        } else {
+            return '<span class="label label-success">In Stock</span>';
+        }
     }
 
 
@@ -524,11 +585,19 @@ class Store_items extends MX_Controller {
 
 
 
-//    //for AJAX test
-//    function test(){
-////	    echo "test";
-//    echo json_encode(array("qty"=>$_POST['qty']));
-//	}
+    //return the category name of the item with given item_id
+    function get_item_cat_name($item_id){
+	    $this->load->model('item_category_model');
+	    $item_data = $this->get_where($item_id)->row();
+	    if(isset($item_data)) {
+	        $cat_id = $item_data->item_category;
+        }
+        $query = $this->item_category_model->get_where($cat_id);
+        $row = $query->row();
+        if(isset($row)) {
+            return $row->cat_name;
+        }
+	}
 
 
 
