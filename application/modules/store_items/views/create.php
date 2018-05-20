@@ -50,6 +50,7 @@
                     <div class="control-group">
                         <label class="control-label" for="typeahead">Item Category </label>
                         <div class="controls">
+<!--                                TODO: Create a dropdown list for selecting category of item-->
 <!--                            <select name="item_category" class="span6">-->
 <!--                                <option value="--><?//= $item_category?><!--">1</option>-->
 <!--                                <option value="--><?//= $item_category?><!--">2</option>-->

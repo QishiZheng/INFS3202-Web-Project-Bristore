@@ -1,24 +1,50 @@
 <div class="container"><br/>
         <div class="col-md-8 container-fluid">
-            <h2>Confirm Your Shopping Cart Items</h2>
-            <table class="table table-active">
-                <thead>
-                <tr>
-                    <th>Item ID</th>
-                    <th>Items</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>Subtotal</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody id="cart_details">
+            <div>
+                <h2>Confirm Your Shopping Cart Items</h2>
+                <table class="table table-active">
+                    <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Items</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="cart_details">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container" >
+                <form action="/action_page.php">
+
+                    <div class="row">
+                        <div class="col-50">
+                            <h3>Billing Address</h3>
+                            <label for="fullName"><i class="fa fa-user"></i> Full Name: </label>
+                            <input type="text" id="fullName" name="fullName" size="40" value="<?php echo $user->first_name.' '.$user->last_name; ?>"><br/>
+                            <label for="email"><i class="fa fa-envelope"></i> Email: </label>
+                            <input type="text" id="email" name="email" size="40" placeholder="john@example.com" value="<?php echo $user->email; ?>"><br/>
+                            <label for="phone"><i class="fa fa-envelope"></i> Phone Number: </label>
+                            <input type="text" id="phone" name="phone" size="40" placeholder="0123456789" value="<?php echo $user->phone; ?>"><br/>
+                            <label for="adr"><i class="fa fa-address-card-o"></i> Address: </label>
+                            <input type="text" id="adr" name="address" size="50" placeholder="1 Queen Street, " value="<?php echo $user->address; ?>">
+                        </div>
+                </form>
+            </div>
+
             <a class="btn btn-primary pull-right" href="<?= base_url().'order/place_order' ?>" >Checkout</a>
         </div>
+
+
+    <div class="container">
+
     </div>
+
 </div>
 
 <script>

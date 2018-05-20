@@ -172,7 +172,12 @@
             },
             dataType: 'JSON',
             success: function(data){
-                console.log(data);
+                var total = data.total;
+                var subtotal = data.subtotal;
+                var item_subtotal_id = item_id + "_subtotal";
+                $('#total_amount').text("$ " + total);
+                $('#'+item_subtotal_id).text("$"+subtotal);
+
                 //Removing row from HTML Table
                 //$('#cart_modal').modal('show');
             },
@@ -214,12 +219,15 @@
                     data: { item_id: id },
                     dataType: 'JSON',
                     success: function(data){
+                        var total = data;
                         //console.log(data);
                         // Removing row from HTML Table
                         $(el).closest('tr').css('background','tomato');
                         $(el).closest('tr').fadeOut(800, function(){
                             $(this).remove();
                         });
+
+                        $('#total_amount').text("$ " + total);
                     },
                     error: function(error){
                         console.log(error);
