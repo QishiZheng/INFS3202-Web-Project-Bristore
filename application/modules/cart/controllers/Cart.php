@@ -30,6 +30,7 @@ class Cart extends MX_Controller {
 
         $user_id = $this->ion_auth->get_user_id();
         $item_id = $this->input->post('item_id');
+
         //fetch item data from items table in db
         $item = $this->store_items->fetch_data_from_db($item_id);
 
@@ -42,7 +43,7 @@ class Cart extends MX_Controller {
         if($item['item_stock'] > 0 ) {
             $rsp = $item['item_title']." was added to cart successfully!";
             //add a row of data to cart in db if there is no such item in cart
-            if($num < 1) {
+            if($num == 0) {
                 $data = array(
                     'user_id' => $user_id,
                     'item_id' => $item_id,
@@ -62,7 +63,7 @@ class Cart extends MX_Controller {
 //            'price' => $item['item_price'],
                     'qty' => $new_qty,
                 );
-                $this->cart_model->_update_item($user_id, $item_id, $data);
+                $this->cart_model->_update_item($data);
             }
         }
         echo json_encode($rsp);
@@ -91,7 +92,7 @@ class Cart extends MX_Controller {
                     <td>'.$item_details['item_title'].'</td>
                     <td>'.'$'.$item_details['item_price'].'</td>
                     <td><input type="number" id="'.$item_id.'_qty" onchange="update_qty('.$item_id.')" value='.$qty.' style="width: 50px;"></td>
-                    <td>'.'$'.$subtotal.'</td>
+                    <td id="'.$item_id.'_subtotal">'.'$'.$subtotal.'</td>
                     <td><button type="button" id="'.$item_id.'" class="btn btn-danger btn-sm remove_cart_item_btn">Delete</button></td>
                 </tr>
             ';
@@ -99,13 +100,13 @@ class Cart extends MX_Controller {
         $result .= '
             <tr>
                 <th colspan="3">Total</th>
-                <th colspan="2">'.'$'.$total.'</th>
+                <th colspan="2" id="total_amount">'.'$ '.$total.'</th>
             </tr>';
         echo json_encode($result);
     }
 
 
-    //delete this item in cart
+    //delete this item in cart send back updated subtotal and total back to client
     function delete_cart_item(){
         $this->auth->login_check();
         $user_id = $this->ion_auth->get_user_id();
@@ -125,10 +126,13 @@ class Cart extends MX_Controller {
         }
 
         $this->cart_model->_delete($user_id, $item_id);
-        echo 1;
+
+        //recalculate total, send back to client
+        $total = $this->get_total();
+        echo json_encode($total);
     }
 
-    //update the item qty with ajax
+    //update the item qty and send back updated subtotal and total back to client using ajax
     function update_cart_item_qty(){
         $this->auth->login_check();
         $user_id = $this->ion_auth->get_user_id();
@@ -141,34 +145,70 @@ class Cart extends MX_Controller {
             'qty' => $qty
         );
         $this->cart_model->_update_item($data);
-        echo 1;
+
+        $this->recalculate_amount($user_id, $item_id);
     }
 
     //go to check out page
     function check_out(){
+        $this->auth->login_check();
+        $user_id = $this->ion_auth->get_user_id();
+        $data['user'] = $this->ion_auth->user($user_id)->row();
+
         $data['view_file'] = "check_out";
         $this->templates->shop($data);
     }
 
     //fetch the data of shopping cart with given userid
-    function fetch_cart_item_from_db($user_id) {
-        //check the update_id
-        if(!is_numeric($user_id)) {
-            redirect('site_security/not_allowed');
-        }
+    function get_total() {
+        $this->auth->login_check();
+        $user_id = $this->ion_auth->get_user_id();
+        $total=0;
         //execute the query that retrieves the data of item with given id
         $query = $this->cart_model->get_where($user_id);
         foreach($query->result() as $row) {
-            $data['user_id'] = $row->user_id;
-            $data['item_id'] = $row->item_id;
-            $data['qty'] = $row->qty;
+            $item_id = $row->item_id;
+            $total += $this->cart_model->get_item_subtotal($user_id, $item_id);
         }
 
-        if(!isset($data)) {
-            $data = "";
-        }
+        return $total;
+    }
 
-        return $data;
+//    //fetch the data of shopping cart with given userid
+//    function fetch_cart_item_from_db($user_id) {
+//        //execute the query that retrieves the data of item with given id
+//        $query = $this->cart_model->get_where($user_id);
+//        foreach($query->result() as $row) {
+//            $data['user_id'] = $row->user_id;
+//            $data['item_id'] = $row->item_id;
+//            $data['qty'] = $row->qty;
+//        }
+//
+//        if(!isset($data)) {
+//            $data = "";
+//        }
+//
+//        return $data;
+//    }
+
+    //clear this user's cart
+    function clear_cart() {
+        $user_id = $this->ion_auth->get_user_id();
+        $query = $this->cart_model->_clear_cart($user_id);
+    }
+
+
+    //recalculate subtotal and total, send back to client
+    private function recalculate_amount($user_id, $item_id){
+        $subtotal = $this->cart_model->get_item_subtotal($user_id, $item_id);
+        $total = $this->get_total();
+
+        $cart_data = array(
+            'subtotal' => $subtotal,
+            'total' => $total,
+        );
+
+        echo json_encode($cart_data);
     }
 }
 

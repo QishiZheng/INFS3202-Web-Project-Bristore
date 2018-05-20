@@ -54,11 +54,19 @@ class Cart_model extends CI_Model {
     }
 
 
-    //delete this item from the cart of user with given user_id
+    //remove this item from the cart of user with given user_id
     function _delete($user_id, $item_id) {
         $table = $this->get_table();
         $this->db->where('user_id', $user_id);
         $this->db->where('item_id', $item_id);
+        $this->db->delete($table);
+    }
+
+
+    // clear this user's cart
+    function _clear_cart($user_id) {
+        $table = $this->get_table();
+        $this->db->where('user_id', $user_id);
         $this->db->delete($table);
     }
 
@@ -81,7 +89,7 @@ class Cart_model extends CI_Model {
         return $num;
     }
 
-    //get the qty of the item with given item_id in the cart of teh user with given user_id
+    //get the qty of the item with given item_id in the cart of the user with given user_id
     function get_item_qty($user_id, $item_id) {
         $table = $this->get_table();
         $this->db->where('user_id', $user_id);
@@ -93,6 +101,16 @@ class Cart_model extends CI_Model {
         }
         return $qty;
     }
+
+    //get the subtotal of the item with given item_id in the cart of the user with given user_id
+    function get_item_subtotal($user_id, $item_id) {
+        $qty = $this->get_item_qty($user_id, $item_id);
+        $item_data = $this->store_items->fetch_data_from_db($item_id);
+        $price = $item_data['item_price'];
+        $subtotal = $qty*$price;
+        return $subtotal;
+    }
+
 
     function count_all() {
         $table = $this->get_table();
