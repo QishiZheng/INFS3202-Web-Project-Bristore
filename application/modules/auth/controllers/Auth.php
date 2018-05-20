@@ -118,7 +118,7 @@ class Auth extends MX_Controller
 				//redirect them back to the home page
                 if($this->ion_auth->is_admin()) {
                     $this->session->set_flashdata('message', $this->ion_auth->messages());
-                    redirect('auth', 'refresh');
+                    redirect('store_items/manage', 'refresh');
                 } else {
                     $this->session->set_flashdata('message', $this->ion_auth->messages());
                     redirect('store_items', 'refresh');
