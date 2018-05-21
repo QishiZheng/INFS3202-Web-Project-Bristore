@@ -197,6 +197,12 @@ class Cart extends MX_Controller {
     }
 
 
+    function count_where($col, $value) {
+        $this->load->model('cart_model');
+        $count = $this->cart_model->count_where($col, $value);
+        return $count;
+    }
+
     //recalculate subtotal and total, send back to client
     private function recalculate_amount($user_id, $item_id){
         $subtotal = $this->cart_model->get_item_subtotal($user_id, $item_id);

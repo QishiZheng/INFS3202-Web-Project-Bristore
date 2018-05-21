@@ -22,9 +22,12 @@ class Order extends MX_Controller {
 	    $this->auth->login_check();
 	    //check if all items in cart are in stock
 	    $this->all_stock_check();
+	    //check if the cart is empty
+	    $this->cart_item_number_check();
 
 	    //get user_id
         $user_id = $this->ion_auth->get_user_id();
+
         $user = $this->ion_auth->user($user_id)->row();
         $s_address = $user->address;
         $b_address = $user->address;
@@ -38,11 +41,9 @@ class Order extends MX_Controller {
         $this->_insert_order($order_data);
         //get this order's id
         $order_id = $this->get_latest_order_id($user_id);
-        //echo $order_id;
-
         //get all items that are in the cart of current user
-        //populate order_item table
         $query = $this->cart_model->get_where($user_id);
+        //populate order_item table
         foreach($query->result() as $row) {
             $item_id = $row->item_id;
             $qty = $row->qty;
@@ -97,6 +98,24 @@ class Order extends MX_Controller {
 	        return true;
         }
         return false;
+    }
+
+    //check if the user's cart is empty
+    function cart_item_number_check() {
+        //get user_id
+        $user_id = $this->ion_auth->get_user_id();
+        //get number of items in this user's cart
+        $num_of_items = $this->cart_model->count_where('user_id', $user_id);
+        if($num_of_items == 0) {
+            //set flash data
+            $flash_msg = "You shopping cart is empty!";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            // redirect them to the home page because they must be an administrator to view this
+            redirect('cart/check_out', 'refresh');
+        }
     }
 
 
