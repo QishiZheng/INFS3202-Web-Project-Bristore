@@ -62,7 +62,8 @@ class Order extends MX_Controller {
         }
         //clear this user's shopping cart
         $this->cart->clear_cart();
-        //TODO: redirect user to order success page or order details page
+        //redirect user to order success page or order details page
+        $this->order_success($order_id);
         //TODO: pdf file generation for receipt of this order
         //TODO: send user an email that contains receipt and pdf receipt
     }
@@ -131,6 +132,15 @@ class Order extends MX_Controller {
         $data['view_file'] = "manage";
         $this->load->module('templates');
         $this->templates->admin($data);
+    }
+
+
+    //take the user to order_success page
+    private function order_success($order_id) {
+	    $data['order_id'] = $order_id;
+        $data['view_file'] = "order_success";
+        $this->load->module('templates');
+        $this->templates->shop($data);
     }
 
     //insert data to order table
