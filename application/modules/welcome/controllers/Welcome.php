@@ -20,8 +20,8 @@ class Welcome extends MX_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		//$this->load->view('welcome_message');
         //redirect to store home page
-        //redirect('store_items', 'refresh');
+        redirect('store_items', 'refresh');
 	}
 }
