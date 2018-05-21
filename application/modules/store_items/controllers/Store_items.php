@@ -516,7 +516,7 @@ class Store_items extends MX_Controller {
             $output .='
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <div style="width: 280px; height: 280px;">
+                        <div style="width: 100%; height:250px ;">
                             <img class="card-img-top img-thumbnail" src="'.base_url().'item_pics/'.$item_pic.'" alt="Card image cap" style="width: 100%; height: 100%;">
                         </div>
                         
@@ -528,12 +528,9 @@ class Store_items extends MX_Controller {
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-secondary">
                                         <a href="'.base_url().'store_items/view_item/'.$item_id.'">View</a>
-                                    </button>
-                                    
-                                </div>
-                                
+                                    </button>                                   
+                                </div>                            
                             </div>
-
                         </div>
                     </div>
                 </div>
