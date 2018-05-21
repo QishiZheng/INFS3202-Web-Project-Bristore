@@ -55,9 +55,12 @@ class Order extends MX_Controller {
             );
             $this->_insert_order_items($order_items_data);
 
-            //TODO: reduce the stock of each item that were ordered
+            //reduce the stock of each item that were ordered
+            $update_item_data['item_stock'] = $item_data['item_stock'] - $qty;
+            $this->store_items->_update($item_id, $update_item_data);
         }
-        //TODO: clear user's shopping cart
+        //clear this user's shopping cart
+        $this->cart->clear_cart();
         //TODO: redirect user to order success page or order details page
         //TODO: pdf file generation for receipt of this order
         //TODO: send user an email that contains receipt and pdf receipt

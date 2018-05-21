@@ -27,7 +27,6 @@ class Cart extends MX_Controller {
         //$this->auth->login_check();
 
         //$this->load->model('cart_model');
-
         $user_id = $this->ion_auth->get_user_id();
         $item_id = $this->input->post('item_id');
 
