@@ -51,6 +51,9 @@
                 </div>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?= base_url()."store_items/all_items"?>">All Items</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">About</a>
             </li>
         </ul>
@@ -85,7 +88,7 @@
                         if($userdata['first_name'] == "Admin" | $userdata['first_name'] == "admin"){
                             echo "<li><a class='dropdown-item' href='".base_url()."auth/manage'><i class='halflings-icon user'></i>Dashboard</a></li>";
                             } else {
-                            echo "<li><a class='dropdown-item' href='#'><i class='halflings-icon user'></i> Profile</a></li>";
+                            echo "<li><a class='dropdown-item' href='".base_url()."user'><i class='halflings-icon user'></i> Profile</a></li>";
                         }
                     ?>
 

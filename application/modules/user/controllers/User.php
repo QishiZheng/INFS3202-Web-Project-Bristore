@@ -2,7 +2,25 @@
 class User extends MX_Controller {
 	function __construct() {
 		parent::__construct();
+
+        $this->load->module(array('store_items', 'auth', 'templates'));
+        $this->load->library(array('ion_auth'));
 	}
+
+	//show the user profile page
+    function index(){
+        $this->auth->login_check();
+        $data['view_file'] = "profile";
+        $this->templates->shop($data);
+    }
+
+
+    //show the user my_orders page
+    function my_orders() {
+        $this->auth->login_check();
+        $data['view_file'] = "my_orders";
+        $this->templates->shop($data);
+    }
 
 	function get($order_by) {
 		$this->load->model('user_model');
@@ -63,12 +81,8 @@ class User extends MX_Controller {
 
 
 	//get details of this user
-    private function fetch_data_from_db($id) {
-        //check the update_id
-        if(!is_numeric($id)) {
-            redirect('site_security/not_allowed');
-        }
-        //execute the query that retrieves the data of item with given id
+    private function fetch_user_data_from_db($id) {
+        //execute the query that retrieves the data of user with given id
         $query = $this->get_where($id);
         foreach($query->result() as $row) {
             $user['id'] = $row->id;
