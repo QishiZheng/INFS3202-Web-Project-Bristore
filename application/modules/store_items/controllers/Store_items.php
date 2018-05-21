@@ -350,16 +350,22 @@ class Store_items extends MX_Controller {
 	}
 
 	//view the item with the given id on its own product page
-    function view_item($update_id) {
-        //check the update_id
-        if(!is_numeric($update_id)) {
-            redirect('site_security/not_allowed');
+    function view_item($item_id) {
+        //check the update_id if its numeric and check if there is such item in db
+        if((!is_numeric($item_id)) || ($this->count_where('id', $item_id) == 0)) {
+            //set flash data
+            $flash_msg = "No Such Item Here, Please Go Back!";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            redirect('store_items', 'refresh');
         }
 
         //fetch the details of the item with given id from db
-        $data = $this->fetch_data_from_db($update_id);
+        $data = $this->fetch_data_from_db($item_id);
 
-        $data['update_id'] = $update_id;
+        $data['update_id'] = $item_id;
         //$data['flash'] = $this->session->flashdata('item');
         $data['view_file'] = "view_item";
         $this->load->module('templates');;
@@ -485,6 +491,56 @@ class Store_items extends MX_Controller {
         }
     }
 
+    //direct to all_items page
+    function all_items() {
+        $data['view_file'] = "all_items";
+        $this->load->module('templates');
+        $this->templates->shop($data);
+    }
+
+    //populate all_items page with item cards
+    function show_all_items() {
+        $output = '';
+
+        $query = $this->get("id");
+        //get all items that are in the cart of current user
+        foreach($query->result() as $row) {
+            $item_id = $row->id;
+            $item_title = $row->item_title;
+            $item_price = $row->item_price;
+            $item_desc = $row->item_description;
+            $short_item_desc = substr($item_desc, 0, 50)."...";
+            $item_pic = $row->item_pic;
+            if($item_pic == "") { $item_pic = "noImageFound.png"; }
+
+            $output .='
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <div style="width: 280px; height: 280px;">
+                            <img class="card-img-top img-thumbnail" src="'.base_url().'item_pics/'.$item_pic.'" alt="Card image cap" style="width: 100%; height: 100%;">
+                        </div>
+                        
+                        <div class="card-body">
+                            <h3>'.$item_title.'</h3>
+                            <p class="card-text caption">'.$short_item_desc.'</p>
+                            <h4 class="text-primary">Price: $'.$item_price.'</h4>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        <a href="'.base_url().'store_items/view_item/'.$item_id.'">View</a>
+                                    </button>
+                                    
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            ';
+        }
+        echo json_encode($output);
+    }
 
 	function get($order_by) {
 		$this->load->model('mdl_store_items');

@@ -73,8 +73,8 @@
                         <div class="col-md-10">
                             <form class="form-wrap mt-4">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <input type="text" placeholder="What are your looking for?" class="btn-group1">
-                                    <input type="text" placeholder="Auchenflower" class="btn-group2">
+                                    <input type="text" placeholder="What are your looking for?" class="btn-group">
+<!--                                    <input type="text" placeholder="Auchenflower" class="btn-group2">-->
                                     <button type="submit" class="btn-form"><span class="icon-magnifier search-icon"></span>SEARCH<i class="pe-7s-angle-right"></i></button>
                                 </div>
                             </form>
