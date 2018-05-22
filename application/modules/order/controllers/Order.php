@@ -135,19 +135,110 @@ class Order extends MX_Controller {
     }
 
 
-    //take the user to order_success page
-    private function order_success($order_id) {
+    //take the user to order_success page and show the user order invoice
+     function order_success($order_id) {
 	    $data['order_id'] = $order_id;
+
         $data['view_file'] = "order_success";
         $this->load->module('templates');
         $this->templates->shop($data);
     }
+
+
+    //populate invoice table
+    function show_invoice($order_id) {
+	    $this->load->model('order_items_model');
+
+	    $order_data = $this->get_order_where($order_id)->row();
+	    $address =  $order_data->shipping_address;
+        $time = $order_data->time;
+
+        $user_id = $order_data->user_id;
+
+        $user = $this->ion_auth->user($user_id)->row();
+        $full_name = $user->first_name." ".$user->last_name;
+        $phone_num = $user->phone;
+        $user_email = $user->email;
+
+        $total=0;
+
+        //populate user details
+        $output=' <tr class="top">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td class="title">
+                                        <h1>Bristore</h1>
+                                    </td>
+                                    <td>
+                                        Invoice #: '.$order_id.'<br>
+                                        Created: '.$time.'<br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="information">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td>Address: '.$address.'</td>
+                                    <td>
+                                        Name: '.$full_name.'<br>
+                                        Phone: '.$phone_num.'<br>
+                                        Email: '.$user_email.'
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr class="heading">
+                        <td>Item</td>
+                        <td>Price</td>
+                        <td>Qty</td>
+                        <td>Subtotal</td>
+                    </tr>';
+
+        //populate order items details
+        $query = $this->order_items_model->get_where($order_id);
+        //get all items that are in this order
+        foreach($query->result() as $row) {
+            $item_id = $row->item_id;
+            $qty = $row->qty;
+            $price = $row->price;
+            $item_details = $this->store_items->fetch_data_from_db($item_id);
+            $item_name = $item_details['item_title'];
+            $subtotal = $price * $qty;
+            $total += $subtotal;
+
+            $output .='
+                    <tr class="item">
+                        <td>'.$item_name.'</td>
+                        <td>'.$price.'</td>
+                        <td>'.$qty.'</td>
+                        <td> $'.$subtotal.'</td>
+                    </tr>
+            ';
+        }
+
+        //add total amount
+        $output .= '                    
+                    <tr class="total">
+                        <td></td>
+                        <td>Total: $'.$total.'</td>
+                    </tr>';
+        //send back to client
+        echo json_encode($output);
+    }
+
 
     //insert data to order table
     function _insert_order($data) {
         $this->load->model('order_model');
         $query = $this->order_model->_insert($data);
     }
+
+
     //insert data to order_items table
     function _insert_order_items($data) {
         $this->load->model('order_items_model');
