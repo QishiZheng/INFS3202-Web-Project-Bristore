@@ -1,11 +1,11 @@
 <?php
-class Email extends MX_Controller {
+class Email_helper extends MX_Controller {
 	function __construct() {
 		parent::__construct();
 	}
 
-    //test email server()
     //TODO: implenment fully working email service
+    //Send email
     function send_email($receiver, $subject, $message){
         $this->load->library('email');
 
