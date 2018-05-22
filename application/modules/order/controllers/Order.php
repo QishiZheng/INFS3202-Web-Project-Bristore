@@ -2,9 +2,7 @@
 class Order extends MX_Controller {
 	function __construct() {
 		parent::__construct();
-        $this->load->module('cart');
-        $this->load->module('auth');
-        $this->load->module('store_items');
+        $this->load->module(array('store_items', 'auth', 'templates', 'cart', 'email'));
         $this->load->library('ion_auth');
 	}
 
@@ -31,6 +29,7 @@ class Order extends MX_Controller {
         $user = $this->ion_auth->user($user_id)->row();
         $s_address = $user->address;
         $b_address = $user->address;
+        $receiver = $user->email;
 
         //create a new order
         $order_data = array(
@@ -65,7 +64,11 @@ class Order extends MX_Controller {
         //redirect user to order success page or order details page
         $this->order_success($order_id);
         //TODO: pdf file generation for receipt of this order
+
         //TODO: send user an email that contains receipt and pdf receipt
+        $subject = "Order Confirmation - Bristore(please do not response)";
+        $message = "<table>".$this->make_invoice($order_id)."</table>";
+        $this->email->send_email($receiver, $subject, $message);
     }
 
 
@@ -147,10 +150,17 @@ class Order extends MX_Controller {
 
     //populate invoice table
     function show_invoice($order_id) {
-	    $this->load->model('order_items_model');
+	    //make invoice table content
+        $output = $this->make_invoice($order_id);
+        echo json_encode($output);
+    }
 
-	    $order_data = $this->get_order_where($order_id)->row();
-	    $address =  $order_data->shipping_address;
+    //create a invoice table for this order
+    private function make_invoice($order_id){
+        $this->load->model('order_items_model');
+
+        $order_data = $this->get_order_where($order_id)->row();
+        $address =  $order_data->shipping_address;
         $time = $order_data->time;
 
         $user_id = $order_data->user_id;
@@ -227,10 +237,8 @@ class Order extends MX_Controller {
                         <td></td>
                         <td>Total: $'.$total.'</td>
                     </tr>';
-        //send back to client
-        echo json_encode($output);
+        return $output;
     }
-
 
     //insert data to order table
     function _insert_order($data) {
