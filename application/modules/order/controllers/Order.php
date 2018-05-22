@@ -2,7 +2,7 @@
 class Order extends MX_Controller {
 	function __construct() {
 		parent::__construct();
-        $this->load->module(array('store_items', 'auth', 'templates', 'cart', 'email'));
+        $this->load->module(array('store_items', 'auth', 'templates', 'cart', 'email_helper'));
         $this->load->library('ion_auth');
 	}
 
@@ -22,6 +22,8 @@ class Order extends MX_Controller {
 	    $this->all_stock_check();
 	    //check if the cart is empty
 	    $this->cart_item_number_check();
+	    //check if the user's address is empty
+	    $this->address_check();
 
 	    //get user_id
         $user_id = $this->ion_auth->get_user_id();
@@ -68,7 +70,7 @@ class Order extends MX_Controller {
         //TODO: send user an email that contains receipt and pdf receipt
         $subject = "Order Confirmation - Bristore(please do not response)";
         $message = "<table>".$this->make_invoice($order_id)."</table>";
-        $this->email->send_email($receiver, $subject, $message);
+        $this->email_helper->send_email($receiver, $subject, $message);
     }
 
 
@@ -113,6 +115,24 @@ class Order extends MX_Controller {
         if($num_of_items == 0) {
             //set flash data
             $flash_msg = "You shopping cart is empty!";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            // redirect them to the home page because they must be an administrator to view this
+            redirect('cart/check_out', 'refresh');
+        }
+    }
+
+    //check if the user's address is empty
+    function address_check() {
+        //get user_id
+        $user_id = $this->ion_auth->get_user_id();
+        //get number of items in this user's cart
+        $address = $this->ion_auth->user($user_id)->row()->address;
+        if($address==null || $address="") {
+            //set flash data
+            $flash_msg = "You Do No Have A Address! Please Update Your Address In Your Profile!";
             $value = '<div class="alert alert-dismissible alert-warning">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>'.$flash_msg.'</strong></div>';

@@ -22,6 +22,40 @@ class User extends MX_Controller {
         $this->templates->shop($data);
     }
 
+    //show profile page
+    function profile() {
+        $this->auth->login_check();
+        //get user_id
+        $user_id = $this->ion_auth->get_user_id();
+        $user = $this->ion_auth->user($user_id)->row();
+        echo json_encode($user);
+    }
+
+    //show update address page
+    function update_address(){
+        $this->auth->login_check();
+        $data['view_file'] = "update_address";
+        $this->templates->shop($data);
+    }
+
+    //save new address to db
+    function save_address() {
+        $this->auth->login_check();
+        //get user_id
+        $user_id = $this->ion_auth->get_user_id();
+        $address = $this->input->post('address');
+        $data = array('address' => $address);
+        $this->_update($user_id, $data);
+        //set flash data
+        $flash_msg = "Address Was Updated Successfully!";
+        $value = '<div class="alert alert-dismissible alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+        $this->session->set_flashdata('item', $value);
+        //redirect(base_url()."user/profile", "refresh");
+        echo 1;
+    }
+
 	function get($order_by) {
 		$this->load->model('user_model');
 		$query = $this->user_model->get($order_by);

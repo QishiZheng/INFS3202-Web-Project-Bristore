@@ -11,14 +11,36 @@
 
         <!-- start: Content -->
         <div id="content" class="span10" style="margin-left: 200px;">
-            <h2>This is Profile page</h2>
+            <h2>User Profile</h2>
+            <table class="table ">
+                <tbody>
+                <tr>
+                    <td>Name: </td>
+                    <td id="name"></td>
+                </tr>
+                <tr>
+                    <td>Email: </td>
+                    <td id="email"></td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td id="phone"></td>
+                </tr>
+                <tr>
+                    <td>Address: </td>
+                    <td id="address"></td>
+                </tr>
+                </tbody>
+            </table>
 
-
+            <!-- Button trigger modal -->
+            <a class="btn btn-info" href="<?= base_url()?>user/update_address">Update Address</a>
 
             <!-- end: Content -->
         </div><!--/#content.span10-->
     </div><!--/fluid-row-->
 </div>
+
 
 <!--//additional styling for side nav-->
 <style>
@@ -58,3 +80,27 @@
         .sidenav a {font-size: 18px;}
     }
 </style>
+
+<script>
+    //get user details from server
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: <?= json_encode(base_url().'user/profile/')?>,
+            dataType: "JSON",
+
+            success: function(data) {
+               $('#name').text(data.first_name + " " +data.last_name);
+               $('#email').text(data.email);
+               $('#phone').text(data.phone);
+               $('#address').text(data.address);
+                //console.log(data);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+    });
+
+</script>
