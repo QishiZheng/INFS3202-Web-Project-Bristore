@@ -2,7 +2,7 @@
 class Order extends MX_Controller {
 	function __construct() {
 		parent::__construct();
-        $this->load->module(array('store_items', 'auth', 'templates', 'cart', 'email_helper'));
+        $this->load->module(array('store_items', 'auth', 'templates', 'cart', 'email_helper', 'pdf_generator'));
         $this->load->library('ion_auth');
 	}
 
@@ -65,11 +65,15 @@ class Order extends MX_Controller {
         $this->cart->clear_cart();
         //redirect user to order success page or order details page
         $this->order_success($order_id);
-        //TODO: pdf file generation for receipt of this order
 
-        //TODO: send user an email that contains receipt and pdf receipt
+       //create invoice table content
+        $invoice_content = $this->make_invoice($order_id);
+        //pdf file generation for receipt of this order
+        $this->pdf_generator->generate_invoice($order_id, $invoice_content);
+
+        //send user an email that contains receipt and pdf receipt
         $subject = "Order Confirmation - Bristore(please do not respond)";
-        $message = "<table>".$this->make_invoice($order_id)."</table>";
+        $message = "<table>".$invoice_content."</table>";
         $this->email_helper->send_email($receiver, $subject, $message);
     }
 
@@ -161,8 +165,8 @@ class Order extends MX_Controller {
     //take the user to order_success page and show the user order invoice
      function order_success($order_id) {
 	    $data['order_id'] = $order_id;
-
         $data['view_file'] = "order_success";
+
         $this->load->module('templates');
         $this->templates->shop($data);
     }
@@ -194,13 +198,13 @@ class Order extends MX_Controller {
 
         //populate user details
         $output=' <tr class="top">
-                        <td colspan="2">
+                        <td>
                             <table>
                                 <tr>
                                     <td class="title">
                                         <h1>Bristore</h1>
                                     </td>
-                                    <td>
+                                    <td align="right">
                                         Invoice #: '.$order_id.'<br>
                                         Created: '.$time.'<br>
                                     </td>
@@ -208,8 +212,8 @@ class Order extends MX_Controller {
                             </table>
                         </td>
                     </tr>
-                    <tr class="information">
-                        <td colspan="2">
+                    <tr class="information" align="right">
+                        <td>
                             <table>
                                 <tr>
                                     <td>Address: '.$address.'</td>
@@ -223,12 +227,19 @@ class Order extends MX_Controller {
                         </td>
                     </tr>
                     <tr class="heading">
-                        <td>Item</td>
-                        <td>Price</td>
-                        <td>Qty</td>
-                        <td>Subtotal</td>
+                        <td>
+                        <table style="width: 80%" align="left">
+                            <tr>
+                                <td>Item</td>
+                                <td>Price</td>
+                                <td>Qty</td>
+                                <td>Subtotal</td>
+                            </tr>
+                        </table>
+                        </td>
                     </tr>';
 
+        $output.='<tr class="item"><td><table style="width: 80%" align="left">';
         //populate order items details
         $query = $this->order_items_model->get_where($order_id);
         //get all items that are in this order
@@ -242,23 +253,26 @@ class Order extends MX_Controller {
             $total += $subtotal;
 
             $output .='
-                    <tr class="item">
-                        <td>'.$item_name.'</td>
-                        <td>'.$price.'</td>
-                        <td>'.$qty.'</td>
-                        <td> $'.$subtotal.'</td>
-                    </tr>
+                            <tr>
+                                <td>'.$item_name.'</td>
+                                <td>'.$price.'</td>
+                                <td>'.$qty.'</td>
+                                <td> $'.$subtotal.'</td>
+                            </tr>
+                    
             ';
         }
-
         //add total amount
-        $output .= '                    
+        $output .= '</table></td></tr>           
                     <tr class="total">
-                        <td></td>
-                        <td>Total: $'.$total.'</td>
+                        <td>
+                            <table align="left"><tr><td><h2>Total: $'.$total.'</h2></td></tr></table>
+                        </td>
                     </tr>';
         return $output;
     }
+
+
 
     //insert data to order table
     function _insert_order($data) {

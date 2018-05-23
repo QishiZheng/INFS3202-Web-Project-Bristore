@@ -6,16 +6,17 @@ class Pdf_generator extends MX_Controller {
 
 
 	function index() {
-        // Require composer autoload
-        require_once '/Applications/XAMPP/xamppfiles/htdocs/bristore/vendor/autoload.php';
-        // Create an instance of the class:
-        $mpdf = new \Mpdf\Mpdf();
 
-        // Write some HTML code:
-        $mpdf->WriteHTML('Hello World');
+    }
 
-        // Output a PDF file directly to the browser
-        $mpdf->Output();
+    function generate_invoice($order_id, $content) {
+        $data['order_id'] = $order_id;
+
+        $data['html'] = '<h1>Order Invoice</h1><table width="100%" align="left">'.$content.'</table>';
+
+        //echo $data['html'];die();
+        $this->load->library('Pdf');
+        $this->load->view('invoice_pdf', $data);
     }
 
 }
