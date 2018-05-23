@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Order_Items_model extends CI_Model {
+class Order_items_model extends CI_Model {
 	function __construct() {
 		parent::__construct();
 	}

@@ -68,7 +68,7 @@ class Order extends MX_Controller {
         //TODO: pdf file generation for receipt of this order
 
         //TODO: send user an email that contains receipt and pdf receipt
-        $subject = "Order Confirmation - Bristore(please do not response)";
+        $subject = "Order Confirmation - Bristore(please do not respond)";
         $message = "<table>".$this->make_invoice($order_id)."</table>";
         $this->email_helper->send_email($receiver, $subject, $message);
     }

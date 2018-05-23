@@ -16,6 +16,7 @@ class Email_helper extends MX_Controller {
 
         $this->email->initialize($config);
 
+        $this->email->set_mailtype('html');
         $this->email->from('customer_service@bristore.com', 'Bristore');
         $this->email->to($receiver);
 
