@@ -74,7 +74,15 @@ class Order extends MX_Controller {
         //send user an email that contains receipt and pdf receipt
         $subject = "Order Confirmation - Bristore(please do not respond)";
         $message = "<table>".$invoice_content."</table>";
-        $this->email_helper->send_email($receiver, $subject, $message);
+        //TODO: Make it dynamic
+        $pdf_invoice = "/var/www/html/invoice_pdf/".$order_id."_invoice.pdf";
+        //attach pdf invoice if exist
+        if(file_exists($pdf_invoice)) {
+            $this->email_helper->send_email($receiver, $subject, $message, $pdf_invoice);
+        } else {
+            $this->email_helper->send_email($receiver, $subject, $message);
+        }
+
     }
 
 

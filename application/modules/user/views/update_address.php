@@ -1,7 +1,7 @@
 <div class="container-fluid-full">
     <div class="row-fluid">
         <!-- start: left sidebar menu -->
-        <div class="sidenav">
+        <div class="sidenav" style="position: absolute;">
             <a href="<?php echo base_url().'user';?>">Profile</a>
             <a href="<?php echo base_url().'user/my_orders';?>">Orders</a>
         </div>
@@ -10,8 +10,8 @@
         <!-- end: Main Menu -->
 
         <!-- start: Content -->
-        <div id="content" class="span10">
-            <h2>Update Address</h2>
+        <div id="content" class="span10"  style="margin-left:10%;">
+            <h2  style="margin-left:10%;">Update Address</h2>
             <div id="locationField" style="margin: 50px; padding-left: 30%;">
                 <input id="autocomplete" placeholder="Enter your address"
                        onFocus="geolocate()" type="text" style="width: 50%;">

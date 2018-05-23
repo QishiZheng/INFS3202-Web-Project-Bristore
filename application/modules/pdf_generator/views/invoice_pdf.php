@@ -1,4 +1,5 @@
 <?php
+//generate a pdf file for invoice
 $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
 $pdf->SetTitle('Order No.'.$order_id.' Invoice');
 $pdf->SetHeaderMargin(30);
@@ -12,5 +13,7 @@ $pdf->AddPage();
 
 $pdf->writeHTML($html, true, false, true, false, 'left');
 $file_name = $order_id."_invoice";
+
+//TODO: make it dynamic
 $path = '/Applications/XAMPP/xamppfiles/htdocs/bristore/invoice_pdf/';
 $pdf->Output($path.$file_name.'.pdf', 'F');
