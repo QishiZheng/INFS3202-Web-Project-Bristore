@@ -14,6 +14,6 @@ $pdf->AddPage();
 $pdf->writeHTML($html, true, false, true, false, 'left');
 $file_name = $order_id."_invoice";
 
-//TODO: make it dynamic
+//TODO: make it dynamic, This PATH ONLY WORKS AT LOCAL
 $path = '/Applications/XAMPP/xamppfiles/htdocs/bristore/invoice_pdf/';
 $pdf->Output($path.$file_name.'.pdf', 'F');

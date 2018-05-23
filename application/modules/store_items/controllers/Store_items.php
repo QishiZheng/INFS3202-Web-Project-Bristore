@@ -522,13 +522,12 @@ class Store_items extends MX_Controller {
                         
                         <div class="card-body">
                             <h3>'.$item_title.'</h3>
-                            <p class="card-text caption">'.$short_item_desc.'</p>
+                            <p class="card-text caption" style="height:100px;">'.$short_item_desc.'</p>
                             <h4 class="text-primary">Price: $'.$item_price.'</h4>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">
-                                        <a href="'.base_url().'store_items/view_item/'.$item_id.'">View</a>
-                                    </button>                                   
+                                <div class="btn-group">                                    
+                                        <a href="'.base_url().'store_items/view_item/'.$item_id.'" class="btn btn-md btn-secondary">View</a>
+                                                                   
                                 </div>                            
                             </div>
                         </div>
