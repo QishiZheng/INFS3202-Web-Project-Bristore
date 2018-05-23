@@ -11,10 +11,25 @@
 
         <!-- start: Content -->
         <div id="content" class="span10" style="margin-left: 200px;">
-            <h2>This is My Orders page</h2>
-
-
-
+            <h2>This is My Orders page</h2><br />
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Order#</th>
+                    <th scope="col">No. of Item</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>5</td>
+                    <td>$100</td>
+                    <td>View</td>
+                </tr>
+                </tbody>
+            </table>
             <!-- end: Content -->
         </div><!--/#content.span10-->
     </div><!--/fluid-row-->
@@ -25,7 +40,6 @@
     body {
         font-family: "Lato", sans-serif;
     }
-
     .sidenav {
         height: 100%;
         width: 200px;
@@ -51,10 +65,28 @@
         color: #f1f1f1;
     }
 
-
-
     @media screen and (max-height: 450px) {
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
     }
 </style>
+
+<script>
+    //populate order history table
+    $(document).ready(function() {
+        $.ajax({
+            type: "POST",
+            url: <?= json_encode(base_url().'')?>,
+            dataType: "JSON",
+
+            success: function(data) {
+                // $('#item_table').html(data);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+
+    });
+</script>
