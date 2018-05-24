@@ -48,7 +48,8 @@
                 </div>
                 <br/>
                 <button class="btn btn-info btn-lg" id="addToCart">
-                    <i class="icon icon-shopping-cart"></i>Add to Cart
+<!--                    <i class="icon icon-shopping-cart"></i>-->
+                    Add to Cart
                 </button>
 
             </div>

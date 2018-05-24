@@ -63,7 +63,7 @@
 <!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
 <!--            </form>-->
             <a data-toggle="modal" href="#modalCart" id="cart" class="btn btn-info btn-md">
-                <i class="icon-shopping-cart"></i>CART
+                CART
             </a>
             <!-- start: User Dropdown -->
 

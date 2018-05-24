@@ -506,7 +506,6 @@ class Store_items extends MX_Controller {
         echo json_encode($output);
     }
 
-
     //show the user search result page
     function search(){
         $this->load->helper(array('form', 'url'));
