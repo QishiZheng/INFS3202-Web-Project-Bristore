@@ -122,7 +122,7 @@
                     list($file_name, $file_extension) = explode(".", $item_pic);
                     $item_thumb_path = $file_name."_thumb.".$file_extension;
                     ?>
-                    <img src="<?= base_url()?>item_pics/<?= $item_thumb_path?>" class="img-fluid">;
+                    <img src="<?= base_url()?>item_pics/<?= $item_thumb_path?>" class="img-fluid">
                 </div>
             </div><!--/span-->
 
