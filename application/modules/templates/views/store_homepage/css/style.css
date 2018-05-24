@@ -476,6 +476,25 @@ p {
   width: 64px;
   height: 64px; }
 
+.accessories {
+    width:60px;
+    height:70px;
+    position:relative;
+    display:inline-block;
+}
+.accessories.img-top {
+    display:none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99; 
+}
+.accessories:hover .img-top{
+    display:inline;
+}
+    
+}
+
 /* ==============================================================
    FOOTER
    ============================================================== */
