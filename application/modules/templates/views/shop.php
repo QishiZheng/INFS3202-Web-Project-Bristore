@@ -12,11 +12,6 @@
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet">
 
-<!--    <link href="--><?php //echo base_url(); ?><!--assets/adminfiles/css/bootstrap.min.css" rel="stylesheet">-->
-
-<!--    <!-- Custom styles for this template -->
-<!--    <link href="--><?php //echo base_url(); ?><!--dist/css/jumbotron.css" rel="stylesheet">-->
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="<?php echo base_url()."assets/js/jquery-3.3.1.js"; ?>" ></script>
@@ -37,31 +32,26 @@
             <li class="nav-item active">
                 <a class="nav-link" href="<?= base_url()."store_items/index"?>">Home <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= base_url()."store_items/all_items"?>">All Items</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
 
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Home & Garden</a>
-                    <a class="dropdown-item" href="#">Books & Magazines</a>
-                    <a class="dropdown-item" href="#">Accessories</a>
-                    <a class="dropdown-item" href="#">Bags & Luggage</a>
-                    <a class="dropdown-item" href="#">Clothes</a>
-                    <a class="dropdown-item" href="#">Appliances</a>
-                    <a class="dropdown-item" href="#">Vehicles</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/1'?>">Home & Garden</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/2'?>">Appliances</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/3'?>">Books & Magazines</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/4'?>">Clothing</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/5'?>">Bags & Luggage</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/6'?>">Vehicles</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/8'?>">Electronics</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/7'?>">Accessories</a>
+                    <a class="dropdown-item" href="<?= base_url().'store_items/category/9'?>">Others</a>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= base_url()."store_items/all_items"?>">All Items</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
             </li>
         </ul>
         <ul class="nav pull-right">
-<!--            <form class="form-inline my-2 my-lg-0">-->
-<!--                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
-<!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--            </form>-->
             <a data-toggle="modal" href="#modalCart" id="cart" class="btn btn-info btn-md">
                 CART
             </a>
@@ -120,8 +110,9 @@
 
 </main>
 
-<footer class="container">
+<footer class="footer-copyright text-center" >
     <p>&copy; Bristore 2018</p>
+    <p>Email: vincezheng4265@gmail.com</p>
 </footer>
 
 
@@ -181,8 +172,6 @@
                 $('#total_amount').text("$ " + total);
                 $('#'+item_subtotal_id).text("$"+subtotal);
 
-                //Removing row from HTML Table
-                //$('#cart_modal').modal('show');
             },
             error: function(error){
                 console.log(error);

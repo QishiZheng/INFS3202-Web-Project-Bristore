@@ -6,6 +6,7 @@ class Store_items extends MX_Controller {
 		$this->load->library('session');
 		$this->load->library('form_validation');
         $this->load->model('mdl_store_items');
+        $this->load->model('item_category_model');
 //		$this->form_validation->CI =& $this;
 	}
 
@@ -543,7 +544,6 @@ class Store_items extends MX_Controller {
 
     //get the item details of the item with given item_id and return in array format
     function get_item_detail_array($item_id) {
-
         $item_data = $this->mdl_store_items->get_where($item_id)->row();
         if ($item_data->item_pic == "") {
             $item_pic = base_url().'item_pics/noImageFound.png';
@@ -599,6 +599,22 @@ class Store_items extends MX_Controller {
             ';
         }
         return $output;
+    }
+
+    //show the category page depends on the given category id
+    function category($cat_id){
+        $data['category_id'] = $cat_id;
+	    $data['category_name'] = $this->item_category_model->get_where($cat_id)->row()->cat_name;
+	    $data['view_file'] = "category";
+        $this->load->module('templates');
+        $this->templates->shop($data);
+    }
+
+    //populate category items pages
+    function category_items($cat_id) {
+        $query = $this->get_where_custom('item_category', $cat_id);
+        $output = $this->make_item_card($query);
+        echo json_encode($output);
     }
 
 
@@ -700,7 +716,6 @@ class Store_items extends MX_Controller {
     }
 
 
-
     //return the category name of the item with given item_id
     function get_item_cat_name($item_id){
 	    $this->load->model('item_category_model');
@@ -715,40 +730,8 @@ class Store_items extends MX_Controller {
         }
 	}
 
-
-
-//	//check if the user is logged in,redirect to login page if no admin
-//	private function login_check() {
-//        $this ->load->module('auth');
-//        if (!$this->ion_auth->logged_in())
-//        {
-//            $flash_msg = "You have to log in to view this page";
-//            $value = '<div class="alert alert-dismissible alert-warning">
-//                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-//                    <strong>'.$flash_msg.'</strong></div>';
-//            $this->session->set_flashdata('item', $value);
-//            // redirect them to the login page
-//            redirect('auth/login', 'refresh');
-//        }
-//    }
-//
-//
-//    //check if the user is admin, redirect to home page if no admin
-//	private function admin_check() {
-//        $this ->load->module('auth');
-//        if (!$this->ion_auth->is_admin())
-//        {
-//            //set flash data
-//            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
-//            $value = '<div class="alert alert-dismissible alert-warning">
-//                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-//                    <strong>'.$flash_msg.'</strong></div>';
-//            $this->session->set_flashdata('item', $value);
-//            // redirect them to the home page because they must be an administrator to view this
-//            redirect('store_items/index', 'refresh');
-//        }
-//    }
-
-
-
+	//count the number of items in the category with given id
+	function count_cat_items($cat_id) {
+	    return $this->mdl_store_model->count_where('item_category', $cat_id);
+    }
 }
