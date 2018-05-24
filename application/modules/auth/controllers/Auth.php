@@ -43,15 +43,6 @@ class Auth extends MX_Controller
         $this->login_check();
         $this->admin_check();
         $this->manage();
-            //set the template name
-//        $data['view_file'] = "account_manage";
-//        //load template
-//        $this->load->module('templates');
-//
-//        //send info back to super template [admin]
-//        $this->templates->admin($data);
-			//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $data);
-//		}
 	}
 
     //show the accounts management page
@@ -63,19 +54,6 @@ class Auth extends MX_Controller
 
         // set the flash data error message if there is one
         $data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
-//        //check if the user is admin
-//        if (!$this->ion_auth->is_admin())
-//        {
-//            //set flash data
-//            $flash_msg = "You shall not pass to Manage page! Only Admin is allowed to be here.";
-//            $value = '<div class="alert alert-dismissible alert-warning">
-//                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-//                    <strong>'.$flash_msg.'</strong></div>';
-//            $this->session->set_flashdata('item', $value);
-//            // redirect them to the home page because they must be an administrator to view this
-//            redirect('store_items/index', 'refresh');
-//        }
 
         //list the users
         $data['users'] = $this->ion_auth->users()->result();
@@ -95,7 +73,6 @@ class Auth extends MX_Controller
 	 */
 	public function login()
 	{
-
 	    //might need this to check if the user already logged in
 //        //security check
 //        $this->login_check();
