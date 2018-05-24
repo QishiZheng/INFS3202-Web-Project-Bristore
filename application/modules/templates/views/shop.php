@@ -134,7 +134,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <table class="table table-active">
+                <table class="table table-active" id="modal_cart_table">
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -212,7 +212,7 @@
         });
 
         //send the item_id to server and delete this item in cart
-        $("table").delegate("button", "click", function() {
+        $("#modal_cart_table").delegate("button", "click", function() {
             if (confirm("Are you sure you want to delete this item?")) {
                 var el = this;
                 var id = $(this).attr('id');
