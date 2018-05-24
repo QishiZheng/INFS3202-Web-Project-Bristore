@@ -389,7 +389,7 @@ class Store_items extends MX_Controller {
     }
 
 
-    //populate item table on item manage page with all item data in db
+    //populate item table on ADMIN item manage page with all item data in db
     function show_items() {
         $this->load->model('mdl_store_items');
         $output = '';
@@ -564,7 +564,6 @@ class Store_items extends MX_Controller {
         return $item;
     }
 
-
     //create a series of item cards that the input query contains
     private function make_item_card($query){
         $output = "";
@@ -575,13 +574,19 @@ class Store_items extends MX_Controller {
             $item_desc = $row->item_description;
             $short_item_desc = substr($item_desc, 0, 50)."...";
             $item_pic = $row->item_pic;
-            if($item_pic == "") { $item_pic = "noImageFound.png"; }
+            //get the thumbnail of this item_pic for faster loading
+            if($item_pic != "" || $item_pic != null) {
+                list($file_name, $file_extension) = explode(".", $item_pic);
+                $item_thumb = $file_name."_thumb.".$file_extension;
+            }else{
+                $item_thumb = "noImageFound.png";
+                }
 
             $output .='
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <div style="width: 100%; height:250px ;">
-                            <img class="card-img-top img-thumbnail" src="'.base_url().'item_pics/'.$item_pic.'" alt="Card image cap" style="width: 100%; height: 100%;">
+                            <img class="card-img-top img-thumbnail" src="'.base_url().'item_pics/'.$item_thumb.'" alt="Card image cap" style="width: 100%; height: 100%;">
                         </div>
                         
                         <div class="card-body">
@@ -734,4 +739,5 @@ class Store_items extends MX_Controller {
 	function count_cat_items($cat_id) {
 	    return $this->mdl_store_model->count_where('item_category', $cat_id);
     }
+
 }
