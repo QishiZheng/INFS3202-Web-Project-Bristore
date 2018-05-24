@@ -71,11 +71,14 @@
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-md-10">
-                            <form class="form-wrap mt-4">
+                            <?php echo validation_errors(); ?>
+
+                            <?php echo form_open(base_url().'store_items/search'); ?>
+<!--                            <form class="form-wrap mt-4" method="GET" action="--><?//=base_url().'store_items/search' ?><!--">-->
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <input type="text" placeholder="What are your looking for?" class="btn-group">
+                                    <input type="text" name="search_term" id="search_term" placeholder="What are your looking for?" class="btn-group">
 <!--                                    <input type="text" placeholder="Auchenflower" class="btn-group2">-->
-                                    <button type="submit" class="btn-form"><span class="icon-magnifier search-icon"></span>SEARCH<i class="pe-7s-angle-right"></i></button>
+                                    <button type="submit" value="Search" class="btn-form">SEARCH</button>
                                 </div>
                             </form>
                             <div class="slider-link">
@@ -485,3 +488,25 @@
         });
     </script>
 <!--</body>-->
+
+
+<script>
+    //function search() {
+    //    var search_term = $.trim($('#search_term').val());
+    //    if(search_term != null && search_term.trim() != "") {
+    //        $.ajax({
+    //            url: <?//= json_encode(base_url().'store_items/search')?>//,
+    //            type: 'GET',
+    //            data: { search_term: search_term },
+    //            dataType: 'JSON',
+    //            success: function(response){
+    //                console.log(response);
+    //
+    //            },
+    //            error: function(error){
+    //                console.log(error);
+    //            }
+    //        });
+    //    }
+    //}
+</script>

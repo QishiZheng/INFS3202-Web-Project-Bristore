@@ -5,6 +5,7 @@ class Store_items extends MX_Controller {
 		$this->load->module('auth');
 		$this->load->library('session');
 		$this->load->library('form_validation');
+        $this->load->model('mdl_store_items');
 //		$this->form_validation->CI =& $this;
 	}
 
@@ -370,7 +371,6 @@ class Store_items extends MX_Controller {
         $data['view_file'] = "view_item";
         $this->load->module('templates');;
         $this->templates->shop($data);
-
     }
 
 
@@ -500,11 +500,76 @@ class Store_items extends MX_Controller {
 
     //populate all_items page with item cards
     function show_all_items() {
-        $output = '';
-
         $query = $this->get("id");
-        //get all items that are in the cart of current user
-        foreach($query->result() as $row) {
+        //populate all item cards
+        $output = $this->make_item_card($query);
+        echo json_encode($output);
+    }
+
+
+    //show the user search result page
+    function search(){
+        $this->load->helper(array('form', 'url'));
+
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('search_term', 'Search Term', 'required');
+
+        if ($this->form_validation->run() != FALSE)
+        {
+            $data['search_term'] = $_POST['search_term'];
+            $data['view_file'] = "search_result";
+            $this->load->module('templates');
+            $this->templates->shop($data);
+        } else{
+            //set flash data
+            $flash_msg = "Please Enter A Valid Search Term!";
+            $value = '<div class="alert alert-dismissible alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>'.$flash_msg.'</strong></div>';
+            $this->session->set_flashdata('item', $value);
+            redirect(base_url().'store_items','refresh');
+        }
+    }
+
+    //populate the search results page
+    function search_result() {
+        $search_term = $_POST['search_term'];
+        $query = $this->mdl_store_items->search_item($search_term);
+        //populate item cards
+        $output = $this->make_item_card($query);
+
+        echo json_encode($output);
+    }
+
+
+    //get the item details of the item with given item_id and return in array format
+    function get_item_detail_array($item_id) {
+
+        $item_data = $this->mdl_store_items->get_where($item_id)->row();
+        if ($item_data->item_pic == "") {
+            $item_pic = base_url().'item_pics/noImageFound.png';
+        } else {
+            $item_pic =  base_url().'item_pics/'.$item_data->item_pic;
+        }
+        $item = array(
+            'item_id' => $item_data->id,
+            'item_url' => $item_data->item_url,
+            'item_title' => $item_data->item_title,
+            'item_price' => $item_data->item_price,
+            'item_stock' => $item_data->item_stock,
+            'item_category' => $item_data->item_category,
+            'item_description' => $item_data->item_description,
+            'item_pic' => $item_pic,
+            'item_created_at' => $item_data->item_created_at,
+            );
+        return $item;
+    }
+
+
+    //create a series of item cards that the input query contains
+    private function make_item_card($query){
+        $output = "";
+	    foreach($query->result() as $row) {
             $item_id = $row->id;
             $item_title = $row->item_title;
             $item_price = $row->item_price;
@@ -526,8 +591,7 @@ class Store_items extends MX_Controller {
                             <h4 class="text-primary">Price: $'.$item_price.'</h4>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">                                    
-                                        <a href="'.base_url().'store_items/view_item/'.$item_id.'" class="btn btn-md btn-secondary">View</a>
-                                                                   
+                                        <a href="'.base_url().'store_items/view_item/'.$item_id.'" class="btn btn-md btn-secondary">View</a>                        
                                 </div>                            
                             </div>
                         </div>
@@ -535,8 +599,9 @@ class Store_items extends MX_Controller {
                 </div>
             ';
         }
-        echo json_encode($output);
+        return $output;
     }
+
 
 	function get($order_by) {
 		$this->load->model('mdl_store_items');

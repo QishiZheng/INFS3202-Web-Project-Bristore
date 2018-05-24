@@ -84,4 +84,13 @@ class Mdl_store_items extends CI_Model {
 		$query = $this->db->query($mysql_query);
 		return $query;
 	}
+
+	//search item table to check if there is any item has teh search_term in title and description
+	function search_item($search_term){
+        $table = $this->get_table();
+        $this->db->like('item_title', $search_term);
+        $this->db->or_like('item_description', $search_term);
+        $query = $this->db->get($table);
+        return $query;
+    }
 }
