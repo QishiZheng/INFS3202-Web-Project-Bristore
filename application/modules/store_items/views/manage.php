@@ -17,7 +17,7 @@ $create_item_url = base_url()."store_items/create";
             <h2>Item Inventory</h2>
         </div>
         <div class="box-content">
-            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable" id="item_table">
                 <thead>
                 <tr>
                     <th>Item ID</th>
@@ -105,7 +105,7 @@ $create_item_url = base_url()."store_items/create";
     });
 
     // Delete the item in the manage table using AJAX
-    $("table").delegate(".btnDelete", "click", function() {
+    $("#item_table").delegate(".btnDelete", "click", function() {
         if (confirm("Are you sure you want to delete this item?")) {
             var el = this;
             var id = this.id;

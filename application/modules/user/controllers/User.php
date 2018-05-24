@@ -3,7 +3,7 @@ class User extends MX_Controller {
 	function __construct() {
 		parent::__construct();
 
-        $this->load->module(array('store_items', 'auth', 'templates'));
+        $this->load->module(array('store_items', 'auth', 'templates', 'order'));
         $this->load->library(array('ion_auth'));
 	}
 
@@ -14,13 +14,6 @@ class User extends MX_Controller {
         $this->templates->shop($data);
     }
 
-
-    //show the user my_orders page
-    function my_orders() {
-        $this->auth->login_check();
-        $data['view_file'] = "my_orders";
-        $this->templates->shop($data);
-    }
 
     //show profile page
     function profile() {
@@ -54,6 +47,45 @@ class User extends MX_Controller {
         $this->session->set_flashdata('item', $value);
         //redirect(base_url()."user/profile", "refresh");
         echo 1;
+    }
+
+    //show the user my_orders page
+    function my_orders() {
+        $this->auth->login_check();
+        $data['view_file'] = "my_orders";
+        $this->templates->shop($data);
+    }
+
+    //get all orders that the user has
+    function get_my_orders(){
+        $this->auth->login_check();
+        $user_id = $this->ion_auth->get_user_id();
+        $my_orders = array();
+
+        $query = $this->order->get_order_where_custom('user_id', $user_id);
+        foreach ($query->result() as $row) {
+            $order = array(
+                'order_id' => $row->id,
+                'num_of_items' => $this->order->count_order_items_where('order_id',  $row->id),
+                'total' => number_format($this->order->get_order_total_amount($row->id), 2),
+            );
+            array_push($my_orders, $order);
+        }
+        echo json_encode($my_orders);
+
+    }
+
+    //show the order page with given order_id
+    function user_order($order_id) {
+        $this->auth->login_check();
+        $user_id = $this->ion_auth->get_user_id();
+        $data['user_details'] = $this->ion_auth->user($user_id)->row();
+
+        $data['order_id'] = $order_id;
+        $data['order_details'] = $this->order->get_order_where($order_id)->row();
+
+        $data['view_file'] = "user_order";
+        $this->templates->shop($data);
     }
 
 	function get($order_by) {

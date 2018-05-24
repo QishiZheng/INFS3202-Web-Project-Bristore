@@ -25,9 +25,8 @@ class Order extends MX_Controller {
 	    //check if the user's address is empty
 	    $this->address_check();
 
-	    //get user_id
+	    //get user data
         $user_id = $this->ion_auth->get_user_id();
-
         $user = $this->ion_auth->user($user_id)->row();
         $s_address = $user->address;
         $b_address = $user->address;
@@ -76,7 +75,7 @@ class Order extends MX_Controller {
         $message = "<table>".$invoice_content."</table>";
         //TODO: Make it dynamic
         $pdf_invoice = "/var/www/html/invoice_pdf/".$order_id."_invoice.pdf";
-        //attach pdf invoice if exist
+        //attach pdf invoice to email if exist
         if(file_exists($pdf_invoice)) {
             $this->email_helper->send_email($receiver, $subject, $message, $pdf_invoice);
         } else {
@@ -281,6 +280,23 @@ class Order extends MX_Controller {
     }
 
 
+    //get all item in this order, return in json object
+    function get_order_items_json($order_id){
+        $order_items = array();
+
+        $query = $this->get_order_items_where_custom('order_id', $order_id);
+        foreach ($query->result() as $row) {
+            $item = array(
+                'item_id' => $row->item_id,
+                'item_title' => $this->store_items->get_where($row->item_id)->row()->item_title,
+                'qty' => $row->qty,
+                'price' => $row->price,
+                'subtotal'=> number_format(($row->qty)*($row->price), 2),
+            );
+            array_push($order_items, $item);
+        }
+        echo json_encode($order_items);
+    }
 
     //insert data to order table
     function _insert_order($data) {
@@ -344,6 +360,17 @@ class Order extends MX_Controller {
         return $query;
     }
 
+    //get the total amount of the order with gievn order_id
+    function get_order_total_amount($order_id){
+	    $total = 0;
+	    $query = $this->get_order_items_where($order_id);
+	    foreach ($query->result() as $row) {
+	        $subtotal = ($row->price)*($row->qty);
+            $total += $subtotal;
+        }
+        return $total;
+    }
+
     //update the order with given order_id and input data
 	function _update_order($id, $data) {
 		$this->load->model('order_model');
@@ -369,8 +396,8 @@ class Order extends MX_Controller {
      * was set to onDelete cascade
      * */
     function _delete_order_items($order_id) {
-        $this->load->model('order_model');
-        $query = $this->order_model->_delete($order_id);
+        $this->load->model('order_items_model');
+        $query = $this->order_items_model->_delete($order_id);
     }
 
     //count the number of rows with given condition in order table
@@ -382,8 +409,8 @@ class Order extends MX_Controller {
 
     //count the number of rows with given condition in order_items table
     function count_order_items_where($col, $value) {
-        $this->load->model('order_model');
-        $count = $this->order_model->count_where($col, $value);
+        $this->load->model('order_items_model');
+        $count = $this->order_items_model->count_where($col, $value);
         return $count;
     }
 
