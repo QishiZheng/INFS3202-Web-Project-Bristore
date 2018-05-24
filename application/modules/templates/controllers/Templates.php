@@ -10,6 +10,7 @@
             $this->admin($data);
         }
 
+        //load shop template page and transfer data to this view page
         function shop($data) {
             //if view_module is not set, then set it as the first segment of url
             if(!isset($data['view_module'])) {
@@ -27,7 +28,7 @@
             $this->load->view('public_jqm', $data);
         }
 
-        //load the admin page
+        //load admin template page and transfer data to this view page
         function admin($data) {
             //if view_module is not set, then set it as the first segment of url
             if(!isset($data['view_module'])) {
@@ -45,14 +46,4 @@
             $this->load->view('store', $data);
         }
 
-
-//        //load account manage template from site_security/views/account_manage.php
-//        function account_manage(){
-//
-//            if(!isset($data['view_module'])) {
-//                $data['view_module'] = $this->uri->segment(1);
-//            }
-//
-//            $this->load->view('account_manage', $data);
-//        }
     }

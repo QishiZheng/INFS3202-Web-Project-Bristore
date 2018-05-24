@@ -110,12 +110,6 @@
 
 </main>
 
-<footer class="footer-copyright text-center" >
-    <p>&copy; Bristore 2018</p>
-    <p>Email: vincezheng4265@gmail.com</p>
-</footer>
-
-
 <!-- Modal for shopping cart-->
 <div class="modal fade" id="cart_modal" >
     <div class="modal-dialog modal-lg" >
@@ -232,5 +226,10 @@
 
     });
 </script>
-</html>
 
+<div class="footer-copyright text-center" style="color:white; background-color: #3D3D3D;width: 100%;margin-top:20px">
+    <p>&copy; Bristore 2018</p>
+    <p>Email: vincezheng4265@gmail.com</p>
+</div>
+
+</html>
