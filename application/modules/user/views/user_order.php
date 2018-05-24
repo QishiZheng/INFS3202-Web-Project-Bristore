@@ -50,6 +50,8 @@
 
                 </tbody>
             </table>
+            <hr />
+            <h3 id="total">Total: $ </h3>
             <!-- end: Content -->
         </div><!--/#content.span10-->
     </div><!--/fluid-row-->
@@ -102,14 +104,18 @@
             success: function(data) {
                 //populate the item table with the json array from server
                 var trHTML = '';
+                var total = 0;
                 $.each(data, function (i, item) {
                     trHTML +='<tr><th scope="row">'+item.item_id+
                         '</th><td><a href="<?=base_url()."store_items/view_item/"?>'+item.item_id+'">'+item.item_title+
                         '</a></td><td>'+item.qty+
                         '</td><td>'+item.price+
                         '</td><td>'+item.subtotal;
+                        var subtotal = item.subtotal.replace(",", "");
+                        total += parseFloat(subtotal);
                 });
                 $('#order_item_table').append(trHTML);
+                $('#total').append(total);
             },
             error: function(error) {
                 console.log(error);
