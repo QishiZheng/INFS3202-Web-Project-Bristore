@@ -1,3 +1,4 @@
+<h2>All Items</h2>
 <div class="album py-5 bg-light">
     <div class="container">
         <div class="row" id="item_card">

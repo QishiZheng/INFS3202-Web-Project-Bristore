@@ -1,4 +1,4 @@
-<h2>Search result for: "<?= $search_term?>"</h2>
+<h2>Search results for: "<?= $search_term?>"</h2>
 <div class="album py-5 bg-light">
     <div class="container">
         <div class="row" id="item_card">
