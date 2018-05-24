@@ -143,7 +143,7 @@ class Order extends MX_Controller {
         $address = $this->ion_auth->user($user_id)->row()->address;
         if($address==null || $address="") {
             //set flash data
-            $flash_msg = "You Do No Have A Address! Please Update Your Address In Your Profile!";
+            $flash_msg = "You Do Not Have A Address! Please Update Your Address In Your Profile!";
             $value = '<div class="alert alert-dismissible alert-warning">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong>'.$flash_msg.'</strong></div>';

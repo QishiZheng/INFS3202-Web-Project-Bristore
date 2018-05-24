@@ -11,7 +11,7 @@
 
         <!-- start: Content -->
         <div id="content" class="span10" style="margin-left: 200px;">
-            <h2>User Profile</h2>
+            <h2>My Profile</h2>
             <table class="table ">
                 <tbody>
                 <tr>
