@@ -17,7 +17,7 @@ $create_item_url = base_url()."store_items/create";
             <h2>Item Inventory</h2>
         </div>
         <div class="box-content">
-            <table class="table table-striped table-bordered bootstrap-datatable datatable" id="item_table">
+            <table class="table table-striped table-bordered bootstrap-datatable datatable">
                 <thead>
                 <tr>
                     <th>Item ID</th>
