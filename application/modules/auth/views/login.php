@@ -21,11 +21,11 @@
         <?php echo form_checkbox('remember', '1', FALSE, 'id="remember"');?>
     </p>
 
-    <a class="btn btn-primary btn-md">
+    <a class="btn">
         <?php echo form_submit('submit', lang('login_submit_btn'));?>
     </a>
     <?php echo form_close();?>
-    <a class='btn btn-info btn-lg' href='<?= base_url()."auth/register" ?>'>
+    <a class='btn btn-info' href='<?= base_url()."auth/register" ?>'>
         Register
     </a>
 
